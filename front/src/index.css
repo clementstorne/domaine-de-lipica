@@ -1,3 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-body font-normal text-base;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-heading text-center;
+  }
+
+  h1 {
+    @apply font-black text-5xl tracking-wide
+    md:text-md-5xl md:tracking-wider;
+  }
+
+  h2 {
+    @apply font-bold text-4xl
+    md:text-md-4xl md:tracking-wide;
+  }
+
+  h3 {
+    @apply font-semibold text-3xl
+    md:text-md-3xl;
+  }
+
+  h4 {
+    @apply font-semibold text-2xl
+    md:text-md-2xl;
+  }
+  h5 {
+    @apply font-semibold text-xl
+    md:text-md-xl;
+  }
+}
+
+@layer utilities {
+  .blue-gradient {
+    background: linear-gradient(
+      45deg,
+      rgba(0, 75, 121, 1) 0%,
+      rgba(0, 48, 81, 1) 100%
+    );
+  }
+}

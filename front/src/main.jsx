@@ -1,10 +1,75 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+import App from "./pages/App.jsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/presentation",
+    element: <App />,
+  },
+  {
+    path: "/:ecurieId",
+    element: <App />,
+  },
+  {
+    path: "/concours",
+    element: <App />,
+  },
+  {
+    path: "/concours/:concoursId",
+    element: <App />,
+  },
+  {
+    path: "/partenaires",
+    element: <App />,
+  },
+  {
+    path: "/contact",
+    element: <App />,
+  },
+  {
+    path: "/administration/login",
+    element: <App />,
+  },
+  {
+    path: "/administration/dashboard",
+    element: <App />,
+  },
+  {
+    path: "/administration/concours",
+    element: <App />,
+  },
+  {
+    path: "/administration/concours/:concoursId",
+    element: <App />,
+  },
+  {
+    path: "/administration/partenaires",
+    element: <App />,
+  },
+  {
+    path: "/administration/partenaires/:partenaireId",
+    element: <App />,
+  },
+  {
+    path: "/administration/ecuries",
+    element: <App />,
+  },
+  {
+    path: "/administration/ecuries/:ecurieId",
+    element: <App />,
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);

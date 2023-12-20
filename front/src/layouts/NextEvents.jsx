@@ -15,15 +15,17 @@ export default function NextEvents() {
   return (
     <section className="home-section blue-gradient">
       <h2>Prochains concours</h2>
-      {nextEvents.map((event) => (
-        <EventCard
-          key={event.id}
-          debut={event.debut}
-          fin={event.fin}
-          discipline={event.discipline}
-          niveau={event.niveau}
-        />
-      ))}
+      <div className="lg:grid lg:grid-cols-3 lg:gap-x-12">
+        {nextEvents.map((event) => (
+          <EventCard
+            key={event.id}
+            debut={event.debut}
+            fin={event.fin}
+            discipline={event.discipline}
+            niveau={event.niveau}
+          />
+        ))}
+      </div>
     </section>
   );
 }

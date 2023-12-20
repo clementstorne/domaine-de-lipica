@@ -28,13 +28,13 @@
     background-repeat: no-repeat;
     @apply w-full h-52 mb-8 px-4 flex flex-row flex-nowrap justify-center items-center 
     font-black text-5xl tracking-wide uppercase text-blue-900
-    md:text-md-5xl md:tracking-wider;
+    md:h-112 md:mb-16 md:px-8 md:text-md-5xl md:tracking-wider;
   }
 
   h2 {
     @apply mb-4
     font-bold text-4xl uppercase
-    md:text-md-4xl md:tracking-wide;
+    md:mb-12 md:text-md-4xl md:tracking-wide;
   }
 
   h3 {
@@ -52,7 +52,7 @@
   }
 
   p {
-    @apply pb-4;
+    @apply mb-4 md:mb-0;
   }
 }
 
@@ -60,6 +60,7 @@
   .button {
     border-radius: 60px;
     @apply px-4 py-1 flex flex-row flex-nowrap justify-center items-center
+    md:px-12 md:py-2
     bg-sun-400 text-gray-950 drop-shadow-base outline-none
     text-xl md:text-md-xl font-bold
     hover:py-0 hover:px-3 hover:bg-gray-50 hover:border-4 hover:border-sun-400
@@ -69,19 +70,22 @@
   .discipline-tag {
     border-radius: 20px;
     @apply w-20 h-5 flex flex-row flex-nowrap justify-center items-center
-    text-sm text-gray-50 font-semibold;
+    text-sm text-gray-50 font-semibold
+    md:w-24 md:h-6;
   }
 
   .event-card {
     border-radius: 5px;
-    @apply w-full h-52 mb-4 p-4 flex flex-col flex-nowrap justify-between items-center
-    bg-gray-50 text-gray-950 drop-shadow-base;
+    @apply w-full max-w-80 h-52 mb-4 p-4 flex flex-col flex-nowrap justify-between items-center
+    bg-gray-50 text-gray-950 drop-shadow-base
+    md:h-96 md:p-12;
   }
 
   .home-section {
     border-radius: 10px;
     @apply m-4 p-4 flex flex-col flex-nowrap justify-center items-center
-    text-gray-50;
+    text-gray-50
+    md:m-16 md:p-12;
   }
 }
 

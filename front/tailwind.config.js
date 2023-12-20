@@ -11,15 +11,15 @@ export default {
       base: "1rem",
       xl: "1.125rem",
       "2xl": "1.266rem",
-      "3xl": "1.424rem",
+      "3xl": ["1.424rem", "1.424rem"],
       "4xl": "1.602rem",
       "5xl": "1.802rem",
-      "md-sm": "0.750rem",
-      "md-xl": "1.333rem",
-      "md-2xl": "1.777rem",
-      "md-3xl": "2.369rem",
-      "md-4xl": "3.158rem",
-      "md-5xl": "4.210rem",
+      "md-sm": "0.800rem",
+      "md-xl": "1.250rem",
+      "md-2xl": "1.563rem",
+      "md-3xl": ["1.954rem", "1.954rem"],
+      "md-4xl": "2.442rem",
+      "md-5xl": "3.053rem",
     },
     colors: {
       white: "#ffffff",
@@ -70,7 +70,14 @@ export default {
     dropShadow: {
       base: "4px 4px 4px rgba(0, 0, 0, 0.25)",
     },
-    extend: {},
+    extend: {
+      spacing: {
+        112: "448px",
+      },
+      maxWidth: {
+        80: "320px",
+      },
+    },
   },
   plugins: [],
 };

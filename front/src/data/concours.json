@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "debut": "2024-05-19",
+    "fin": "2024-05-20",
+    "discipline": "dressage",
+    "niveau": "Club - Poneys",
+    "horaires": "",
+    "lienWinJump": ""
+  },
+  {
+    "id": 2,
+    "debut": "2024-06-21",
+    "fin": "2024-06-23",
+    "discipline": "cso",
+    "niveau": "Amateur - Pro - Cycles Libres",
+    "horaires": "",
+    "lienWinJump": ""
+  },
+  {
+    "id": 3,
+    "debut": "2024-06-08",
+    "fin": "2024-06-09",
+    "discipline": "voltige",
+    "niveau": "Club - Poneys",
+    "horaires": "",
+    "lienWinJump": ""
+  }
+]

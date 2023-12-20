@@ -22,6 +22,7 @@ export default {
       "md-5xl": "4.210rem",
     },
     colors: {
+      white: "#ffffff",
       cso: "#732F7B",
       dressage: "#043D79",
       hunter: "#A95A1B",
@@ -65,6 +66,9 @@ export default {
         900: "#353d44",
         950: "#20262c",
       },
+    },
+    dropShadow: {
+      base: "4px 4px 4px rgba(0, 0, 0, 0.25)",
     },
     extend: {},
   },

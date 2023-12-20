@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply font-body font-normal text-base;
+    @apply font-body font-normal text-base text-gray-950;
   }
 
   h1,
@@ -18,34 +18,79 @@
   }
 
   h1 {
-    @apply font-black text-5xl tracking-wide
+    background-image: linear-gradient(
+        rgba(250, 253, 254, 0.5),
+        rgba(250, 253, 254, 0.6)
+      ),
+      url(../title-background.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    @apply w-full h-52 mb-8 px-4 flex flex-row flex-nowrap justify-center items-center 
+    font-black text-5xl tracking-wide uppercase text-blue-900
     md:text-md-5xl md:tracking-wider;
   }
 
   h2 {
-    @apply font-bold text-4xl
+    @apply mb-4
+    font-bold text-4xl uppercase
     md:text-md-4xl md:tracking-wide;
   }
 
   h3 {
-    @apply font-semibold text-3xl
+    @apply mb-4
+    font-semibold text-3xl uppercase
     md:text-md-3xl;
   }
 
   h4 {
-    @apply font-semibold text-2xl
+    @apply mb-4
+    font-semibold text-2xl
     md:text-md-2xl;
   }
   h5 {
     @apply font-semibold text-xl
     md:text-md-xl;
   }
+
+  p {
+    @apply pb-4;
+  }
+}
+
+@layer components {
+  .button {
+    border-radius: 60px;
+    @apply px-4 py-1 flex flex-row flex-nowrap justify-center items-center
+    bg-sun-400 text-gray-950 drop-shadow-base outline-none
+    text-xl md:text-md-xl font-bold
+    hover:py-0 hover:px-3 hover:bg-gray-50 hover:border-4 hover:border-sun-400
+    focus:py-0 focus:px-3 focus:bg-gray-50 focus:border-4 focus:border-sun-400;
+  }
+
+  .discipline-tag {
+    border-radius: 20px;
+    @apply w-20 h-5 mb-4 flex flex-row flex-nowrap justify-center items-center
+    text-sm text-gray-50 font-semibold;
+  }
+
+  .event-card {
+    border-radius: 5px;
+    @apply w-full mb-4 p-4 flex flex-col flex-nowrap justify-center items-center
+    bg-gray-50 text-gray-950 drop-shadow-base;
+  }
+
+  .home-section {
+    border-radius: 10px;
+    @apply m-4 p-4 flex flex-col flex-nowrap justify-center items-center
+    text-gray-50;
+  }
 }
 
 @layer utilities {
   .blue-gradient {
     background: linear-gradient(
-      45deg,
+      180deg,
       rgba(0, 75, 121, 1) 0%,
       rgba(0, 48, 81, 1) 100%
     );

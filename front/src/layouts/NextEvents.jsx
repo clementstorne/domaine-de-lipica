@@ -1,5 +1,3 @@
-import "../index.css";
-
 import events from "../data/concours.json";
 
 import EventCard from "./EventCard";

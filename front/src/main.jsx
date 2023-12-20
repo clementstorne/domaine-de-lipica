@@ -67,6 +67,14 @@ const router = createBrowserRouter([
     path: "/administration/ecuries/:ecurieId",
     element: <App />,
   },
+  {
+    path: "/mentions-legales",
+    element: <App />,
+  },
+  {
+    path: "/plan-du-site",
+    element: <App />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

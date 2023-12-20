@@ -1,5 +1,6 @@
 import NextEvents from "../layouts/NextEvents";
 import LinkButton from "../layouts/LinkButton";
+import Footer from "../layouts/Footer";
 
 export default function Home() {
   return (
@@ -50,6 +51,8 @@ export default function Home() {
         </p>
         <LinkButton link="" label="Voir les engagés et les résultats" />
       </section>
+
+      <Footer />
     </>
   );
 }

@@ -7,6 +7,7 @@ export default {
       body: ['"Exo 2"', "sans-serif"],
     },
     fontSize: {
+      xs: "0.790rem",
       sm: "0.889rem",
       base: "1rem",
       xl: "1.125rem",
@@ -14,6 +15,7 @@ export default {
       "3xl": ["1.424rem", "1.424rem"],
       "4xl": "1.602rem",
       "5xl": "1.802rem",
+      "md-xs": "0.640rem",
       "md-sm": "0.800rem",
       "md-xl": "1.250rem",
       "md-2xl": "1.563rem",

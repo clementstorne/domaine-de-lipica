@@ -4,8 +4,14 @@ import events from "../data/concours.json";
 
 import EventCard from "./EventCard";
 
-function NextEvents() {
-  const nextEvents = events.slice(0, 3);
+import { isInFuture } from "../utils/dateUtils";
+
+export default function NextEvents() {
+  const futureEvents = events.filter((event) => isInFuture(event.debut));
+  const futureEventsSorted = futureEvents.sort((a, b) =>
+    a.debut < b.debut ? -1 : a.debut > b.debut ? 1 : 0
+  );
+  const nextEvents = futureEventsSorted.slice(0, 3);
   return (
     <section className="home-section blue-gradient">
       <h2>Prochains concours</h2>
@@ -21,5 +27,3 @@ function NextEvents() {
     </section>
   );
 }
-
-export default NextEvents;

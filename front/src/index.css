@@ -38,14 +38,12 @@
   }
 
   h3 {
-    @apply mb-4
-    font-semibold text-3xl uppercase
+    @apply font-semibold text-3xl uppercase
     md:text-md-3xl;
   }
 
   h4 {
-    @apply mb-4
-    font-semibold text-2xl
+    @apply font-semibold text-2xl
     md:text-md-2xl;
   }
   h5 {
@@ -70,13 +68,13 @@
 
   .discipline-tag {
     border-radius: 20px;
-    @apply w-20 h-5 mb-4 flex flex-row flex-nowrap justify-center items-center
+    @apply w-20 h-5 flex flex-row flex-nowrap justify-center items-center
     text-sm text-gray-50 font-semibold;
   }
 
   .event-card {
     border-radius: 5px;
-    @apply w-full mb-4 p-4 flex flex-col flex-nowrap justify-center items-center
+    @apply w-full h-52 mb-4 p-4 flex flex-col flex-nowrap justify-between items-center
     bg-gray-50 text-gray-950 drop-shadow-base;
   }
 

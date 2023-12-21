@@ -51,10 +51,6 @@
     md:text-md-xl;
   }
 
-  p {
-    @apply mb-4 md:mb-0;
-  }
-
   footer {
     @apply w-full h-14 pr-6 uppercase bg-white text-blue-900
     md:h-24;
@@ -66,14 +62,16 @@
 }
 
 @layer components {
-  .button {
+  .big-button {
     border-radius: 60px;
-    @apply px-4 py-1 flex flex-row flex-nowrap justify-center items-center
-    md:px-12 md:py-2 md:hover:px-11 md:hover:py-1 md:focus:px-11 md:focus:py-1
-    bg-sun-400 text-gray-950 drop-shadow-base outline-none
-    text-xl md:text-md-xl font-bold
-    hover:py-0 hover:px-3 hover:bg-gray-50 hover:border-4 hover:border-sun-400
-    focus:py-0 focus:px-3 focus:bg-gray-50 focus:border-4 focus:border-sun-400;
+    @apply text-xl md:text-md-xl font-bold
+    md:px-12 md:py-2 md:hover:px-11 md:hover:py-1 md:focus:px-11 md:focus:py-1;
+  }
+
+  .small-button {
+    border-radius: 35px;
+    @apply text-sm md:text-md-sm font-bold
+    md:px-3 md:py-2 md:hover:px-2 md:hover:py-1 md:focus:px-2 md:focus:py-1;
   }
 
   .discipline-tag {
@@ -83,7 +81,7 @@
     md:w-24 md:h-6;
   }
 
-  .event-card {
+  .next-event-card {
     border-radius: 5px;
     @apply w-full max-w-80 h-52 mb-4 p-4 flex flex-col flex-nowrap justify-between items-center
     bg-gray-50 text-gray-950 drop-shadow-base
@@ -96,6 +94,15 @@
     text-gray-50
     md:m-16 md:p-12;
   }
+
+  .table-header {
+    @apply hidden md:w-full md:h-12 md:grid md:grid-cols-4 md:items-center md:text-2xl md:font-semibold md:text-gray-50 md:text-center md:uppercase;
+  }
+
+  .event-card {
+    @apply w-full h-40  mb-4 p-4 flex flex-col flex-nowrap justify-between items-center
+    md:h-20 md:mb-0 md:grid md:grid-cols-4;
+  }
 }
 
 @layer utilities {
@@ -105,5 +112,22 @@
       rgba(0, 75, 121, 1) 0%,
       rgba(0, 48, 81, 1) 100%
     );
+  }
+
+  .paragraph {
+    @apply mb-4 md:mb-0 md:text-xl;
+  }
+
+  .button {
+    border-radius: 60px;
+    @apply px-4 py-1 flex flex-row flex-nowrap justify-center items-center
+    bg-sun-400 text-gray-950 drop-shadow-base outline-none
+    hover:py-0 hover:px-3 hover:bg-gray-50 hover:border-4 hover:border-sun-400
+    focus:py-0 focus:px-3 focus:bg-gray-50 focus:border-4 focus:border-sun-400;
+  }
+
+  .disabled {
+    @apply bg-gray-800 text-gray-50 pointer-events-none
+    focus:py-0 focus:px-3 focus:bg-gray-800 focus:border-4 focus:border-gray-800;
   }
 }

@@ -1,6 +1,6 @@
 import events from "../data/concours.json";
 
-import EventCard from "./EventCard";
+import NextEventCard from "./NextEventCard";
 
 import { isInFuture } from "../utils/dateUtils";
 
@@ -15,7 +15,7 @@ export default function NextEvents() {
       <h2>Prochains concours</h2>
       <div className="lg:grid lg:grid-cols-3 lg:gap-x-12">
         {nextEvents.map((event) => (
-          <EventCard
+          <NextEventCard
             key={event.id}
             debut={event.debut}
             fin={event.fin}

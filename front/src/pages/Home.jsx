@@ -8,7 +8,7 @@ export default function Home() {
       <h1>Bienvenue au Centre Équestre du Domaine de Lipica !</h1>
       <main className="px-4 md:px-16">
         <div className="md:mb-8 md:grid md:grid-cols-5 md:gap-x-8 md:items-center">
-          <p className="md:col-span-3 md:text-xl">
+          <p className="paragraph md:col-span-3">
             Situé à Ozoir la Ferrière (77), à seulement 25 km à l&apos;est de
             Paris, notre centre offre une gamme complète d&apos;activités
             équestres, allant du Poney Club à plusieurs écuries de
@@ -17,18 +17,18 @@ export default function Home() {
             moniteurs expérimentés. Nous proposons également la vente et la
             location de poneys et chevaux.
           </p>
-          <img src="/img1.jpg" alt="" className="md:col-span-2" />
+          <img src="/img1.jpg" alt="" className="mb-4 md:col-span-2" />
         </div>
-        <p className="md:mb-8 md:text-xl">
+        <p className="paragraph md:mb-8 ">
           Idéalement situé à proximité de la forêt domaniale
           d&apos;Armainvilliers et des principales voies de circulation, le
           Domaine de Lipica offre un équilibre parfait entre la tranquillité de
           la nature et la facilité d&apos;accès depuis Paris.
         </p>
         <div className="md:mb-8 md:grid md:grid-cols-5 md:gap-x-8 md:items-center">
-          <img src="img2.jpg" alt="" className="md:col-span-2" />
+          <img src="img2.jpg" alt="" className="mb-4 md:col-span-2" />
           <div className="md:col-span-3 md:text-xl">
-            <p className="md:mb-8">
+            <p className="paragraph md:mb-8">
               Pour les passionnés de compétition, notre centre offre un accès
               exclusif à des événements équestres, des stages de
               perfectionnement, et l&apos;organisation de manifestations.

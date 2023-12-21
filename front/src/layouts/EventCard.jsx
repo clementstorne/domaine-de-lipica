@@ -19,7 +19,7 @@ export default function EventCard(props) {
             label="Horaires"
             size="small"
             disabled={props.horaires === ""}
-            className="mr-4 "
+            className="mr-4"
           />
         )}
 
@@ -28,7 +28,6 @@ export default function EventCard(props) {
           label={`${isInFuture(props.debut) ? "Live" : "Résultats"}`}
           size="small"
           disabled={props.lienWinJump === ""}
-          className={`${isInFuture(props.debut) ? "disabled" : ""}`}
         />
       </div>
     </div>

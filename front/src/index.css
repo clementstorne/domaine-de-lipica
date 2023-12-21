@@ -96,7 +96,7 @@
   }
 
   .table-header {
-    @apply hidden md:w-full md:h-12 md:grid md:grid-cols-4 md:items-center md:text-2xl md:font-semibold md:text-gray-50 md:text-center md:uppercase;
+    @apply hidden md:w-full md:h-12 md:px-4 md:grid md:grid-cols-4 md:items-center md:text-2xl md:font-semibold md:text-gray-50 md:text-center md:uppercase;
   }
 
   .event-card {

@@ -6,6 +6,7 @@ import "./index.css";
 import App from "./pages/App.jsx";
 import Home from "./pages/Home.jsx";
 import Concours from "./pages/Concours.jsx";
+import Horaires from "./pages/Horaires.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/concours/:concoursId",
-    element: <App />,
+    element: <Horaires />,
   },
   {
     path: "/partenaires",

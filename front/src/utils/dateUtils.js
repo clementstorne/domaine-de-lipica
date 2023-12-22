@@ -22,4 +22,18 @@ const eventDates = (debut, fin) => {
   }
 };
 
-export { formatDate, isInFuture, eventDates };
+const singleEventDates = (debut, fin) => {
+  const dateDebut = moment(debut);
+  const dateFin = moment(fin);
+  if (dateDebut.diff(dateFin, "days") === 0) {
+    return `du ${dateDebut.format("D MMMM YYYY")}`;
+  } else if (dateDebut.month() === dateFin.month()) {
+    return `du ${dateDebut.format("D")} au ${dateFin.format("D MMMM YYYY")}`;
+  } else {
+    return `du ${dateDebut.format("D MMMM")} au ${dateFin.format(
+      "D MMMM YYYY"
+    )}`;
+  }
+};
+
+export { formatDate, isInFuture, eventDates, singleEventDates };

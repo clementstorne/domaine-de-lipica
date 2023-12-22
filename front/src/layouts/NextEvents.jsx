@@ -1,6 +1,7 @@
 import events from "../data/concours.json";
 
 import NextEventCard from "./NextEventCard";
+import LinkButton from "./LinkButton";
 
 import { isInFuture } from "../utils/dateUtils";
 
@@ -24,6 +25,11 @@ export default function NextEvents() {
           />
         ))}
       </div>
+      <LinkButton
+        link={"/concours"}
+        label="Voir tous les concours à venir"
+        className="mt-4 md:mt-8"
+      />
     </section>
   );
 }

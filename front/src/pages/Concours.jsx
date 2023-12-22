@@ -19,7 +19,7 @@ export default function Concours() {
   return (
     <>
       <h1>Concours</h1>
-      <section className="mb-8 md:mb-16 px-4 md:px-16">
+      <section className="mb-8 md:mb-16">
         <h2 className="text-blue-900">Concours à venir</h2>
 
         <div className="table-header blue-gradient">
@@ -36,7 +36,7 @@ export default function Concours() {
           />
         ))}
       </section>
-      <section className="mb-8 md:mb-16 px-4 md:px-16">
+      <section className="mb-8 md:mb-16">
         <h2 className="text-blue-900">Concours passés</h2>
         <div className="table-header blue-gradient">
           <p>Dates</p>

@@ -49,7 +49,10 @@ export default function Home() {
           Retrouvez les listes de départ et les résultats de tous les concours
           organisés au domaine de Lipica
         </p>
-        <LinkButton link="" label="Voir les engagés et les résultats" />
+        <LinkButton
+          link="https://ozoir.winjump.fr/"
+          label="Voir les engagés et les résultats"
+        />
       </section>
 
       <Footer />

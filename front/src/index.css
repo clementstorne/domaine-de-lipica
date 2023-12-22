@@ -32,7 +32,7 @@
   }
 
   h2 {
-    @apply mb-4
+    @apply mb-4 
     font-bold text-4xl uppercase
     md:mb-12 md:text-md-4xl md:tracking-wide;
   }
@@ -49,6 +49,11 @@
   h5 {
     @apply font-semibold text-xl
     md:text-md-xl;
+  }
+
+  section,
+  main {
+    @apply m-4 md:m-16;
   }
 
   footer {
@@ -70,7 +75,7 @@
 
   .small-button {
     border-radius: 35px;
-    @apply text-sm md:text-md-sm font-bold
+    @apply text-sm md:text-base font-bold
     md:px-3 md:py-2 md:hover:px-2 md:hover:py-1 md:focus:px-2 md:focus:py-1;
   }
 
@@ -85,7 +90,7 @@
     border-radius: 5px;
     @apply w-full max-w-80 h-52 mb-4 p-4 flex flex-col flex-nowrap justify-between items-center
     bg-gray-50 text-gray-950 drop-shadow-base
-    md:h-96 md:p-12;
+    md:h-80 md:p-12;
   }
 
   .home-section {
@@ -102,6 +107,11 @@
   .event-card {
     @apply w-full h-40  mb-4 p-4 flex flex-col flex-nowrap justify-between items-center
     md:h-20 md:mb-0 md:grid md:grid-cols-4;
+  }
+
+  .bloc {
+    border-radius: 10px;
+    @apply p-2 blue-gradient text-sm md:text-base text-gray-50;
   }
 }
 

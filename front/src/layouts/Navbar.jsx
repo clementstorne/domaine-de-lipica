@@ -52,7 +52,7 @@ export default function Navbar() {
           className="fixed right-4 outline-blue-900 outline-offset-8 cursor-pointer"
           tabIndex="0"
           onClick={toggleMenu}
-          onKeyPress={(e) => e.key === "Enter" && toggleMenu()}
+          onKeyDown={(e) => e.key === "Enter" && toggleMenu()}
           role="button"
         >
           <div
@@ -90,7 +90,12 @@ export default function Navbar() {
             <Link to="/presentation">Présentation</Link>
           </li>
           <li className="navlink relative">
-            <span onClick={toggleSubMenu} className="cursor-pointer">
+            <span
+              onClick={toggleSubMenu}
+              tabIndex="0"
+              onKeyDown={(e) => e.key === "Enter" && toggleSubMenu()}
+              className="cursor-pointer"
+            >
               Centre équestre
             </span>
             {isSubMenuOpen && (

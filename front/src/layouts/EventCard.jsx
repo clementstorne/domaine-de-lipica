@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 import DisciplineTag from "./DisciplineTag";
 import LinkButton from "./LinkButton";
 

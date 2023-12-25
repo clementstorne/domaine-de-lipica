@@ -79,6 +79,9 @@ export default {
       maxWidth: {
         80: "320px",
       },
+      aspectRatio: {
+        "4/3": "4 / 3",
+      },
     },
   },
   plugins: [],

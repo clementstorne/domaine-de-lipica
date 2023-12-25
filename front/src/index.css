@@ -62,7 +62,7 @@
   }
 
   a {
-    @apply outline-blue-900;
+    @apply outline-blue-900 outline-offset-2;
   }
 }
 
@@ -73,9 +73,14 @@
     md:h-24;
   }
 
+  .submenu {
+    @apply w-60 flex flex-col flex-nowrap justify-center items-center bg-white 
+    absolute top-10 left-1/2 -translate-x-1/2;
+  }
+
   .navlist {
     @apply flex flex-col flex-nowrap justify-center items-center text-xs uppercase text-center
-    md:flex-row md:justify-between;
+    md:flex-row md:justify-between md:text-base;
   }
 
   .navlink {

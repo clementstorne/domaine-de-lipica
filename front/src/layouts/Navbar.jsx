@@ -1,12 +1,21 @@
+import stables from "../data/ecuries.json";
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isSubMenuOpen, setSubMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const breakpoint = 1024;
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
+  };
+
+  const toggleSubMenu = () => {
+    setSubMenuOpen(!isSubMenuOpen);
   };
 
   useEffect(() => {
@@ -38,9 +47,9 @@ export default function Navbar() {
         />
       </Link>
 
-      {windowWidth < 768 && (
+      {windowWidth < breakpoint && (
         <div
-          className="fixed right-4 outline-blue-900 cursor-pointer"
+          className="fixed right-4 outline-blue-900 outline-offset-8 cursor-pointer"
           tabIndex="0"
           onClick={toggleMenu}
           onKeyPress={(e) => e.key === "Enter" && toggleMenu()}
@@ -66,7 +75,7 @@ export default function Navbar() {
 
       <nav
         className={`${
-          windowWidth >= 768
+          windowWidth >= breakpoint
             ? "ml-32 w-full"
             : isMenuOpen
             ? "fixed w-full top-14 flex flex-col flex-nowrap justify-center items-center bg-white text-blue-900"
@@ -80,8 +89,19 @@ export default function Navbar() {
           <li className="navlink">
             <Link to="/presentation">Présentation</Link>
           </li>
-          <li className="navlink">
-            <Link to="/">Centre équestre</Link>
+          <li className="navlink relative">
+            <span onClick={toggleSubMenu} className="cursor-pointer">
+              Centre équestre
+            </span>
+            {isSubMenuOpen && (
+              <ul className="submenu">
+                {stables.map((stable) => (
+                  <li key={stable.id} className="navlink">
+                    <Link to="/sous-menu-1">{stable.nom}</Link>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
           <li className="navlink">
             <Link to="/concours">Concours</Link>

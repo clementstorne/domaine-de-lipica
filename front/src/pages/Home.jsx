@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <Navbar />
       <h1>Bienvenue au Centre Équestre du Domaine de Lipica !</h1>
-      <main className="px-4 md:px-16">
+      <main className="px-4 md:px-0">
         <div className="md:mb-8 md:grid md:grid-cols-5 md:gap-x-8 md:items-center">
           <p className="paragraph md:col-span-3">
             Situé à Ozoir la Ferrière (77), à seulement 25 km à l&apos;est de

@@ -1,3 +1,4 @@
+import Navbar from "../layouts/Navbar";
 import NextEvents from "../layouts/NextEvents";
 import LinkButton from "../layouts/LinkButton";
 import Footer from "../layouts/Footer";
@@ -5,6 +6,7 @@ import Footer from "../layouts/Footer";
 export default function Home() {
   return (
     <>
+      <Navbar />
       <h1>Bienvenue au Centre Équestre du Domaine de Lipica !</h1>
       <main className="px-4 md:px-16">
         <div className="md:mb-8 md:grid md:grid-cols-5 md:gap-x-8 md:items-center">

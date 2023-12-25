@@ -26,9 +26,9 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    @apply w-full h-52 mb-8 px-4 flex flex-row flex-nowrap justify-center items-center 
+    @apply w-full h-52 mt-14 mb-8 px-4 flex flex-row flex-nowrap justify-center items-center 
     font-black text-5xl tracking-wide uppercase text-blue-900
-    md:h-112 md:mb-16 md:px-8 md:text-md-5xl md:tracking-wider;
+    md:h-112 md:mt-24 md:mb-16 md:px-8 md:text-md-5xl md:tracking-wider;
   }
 
   h2 {
@@ -67,6 +67,23 @@
 }
 
 @layer components {
+  .navbar {
+    @apply w-full h-14 pr-4 flex flex-row flex-nowrap justify-between items-center bg-white
+    fixed z-10 top-0 
+    md:h-24;
+  }
+
+  .navlist {
+    @apply flex flex-col flex-nowrap justify-center items-center text-xs uppercase text-center
+    md:flex-row md:justify-between;
+  }
+
+  .navlink {
+    @apply inline-block mt-3 mb-3.5 text-blue-900
+    md:mx-2 md:font-semibold
+    hover:mb-3 hover:border-b-2 hover:border-blue-900;
+  }
+
   .big-button {
     border-radius: 60px;
     @apply text-xl md:text-md-xl font-bold

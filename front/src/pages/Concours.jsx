@@ -2,8 +2,9 @@ import events from "../data/concours.json";
 
 import { isInFuture } from "../utils/dateUtils";
 
-import Footer from "../layouts/Footer";
+import Navbar from "../layouts/Navbar";
 import EventCard from "../layouts/EventCard";
+import Footer from "../layouts/Footer";
 
 export default function Concours() {
   const futureEvents = events.filter((event) => isInFuture(event.debut));
@@ -18,6 +19,7 @@ export default function Concours() {
 
   return (
     <>
+      <Navbar />
       <h1>Concours</h1>
       <section className="mb-8 md:mb-16">
         <h2 className="text-blue-900">Concours à venir</h2>

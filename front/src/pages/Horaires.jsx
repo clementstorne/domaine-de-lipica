@@ -1,5 +1,6 @@
 import events from "../data/concours.json";
 
+import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 
 import { singleEventDates } from "../utils/dateUtils";
@@ -17,6 +18,7 @@ export default function Horaires() {
 
   return (
     <>
+      <Navbar />
       <h1>{title}</h1>
 
       <section className="bloc">

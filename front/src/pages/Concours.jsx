@@ -9,12 +9,12 @@ import Footer from "../layouts/Footer";
 export default function Concours() {
   const futureEvents = events.filter((event) => isInFuture(event.debut));
   const futureEventsSorted = futureEvents.sort((a, b) =>
-    a.debut < b.debut ? -1 : a.debut > b.debut ? 1 : 0
+    a.debut < b.debut ? -1 : a.debut > b.debut ? 1 : 0,
   );
 
   const pastEvents = events.filter((event) => !isInFuture(event.debut));
   const pastEventsSorted = pastEvents.sort((a, b) =>
-    a.debut < b.debut ? 1 : a.debut > b.debut ? -1 : 0
+    a.debut < b.debut ? 1 : a.debut > b.debut ? -1 : 0,
   );
 
   return (

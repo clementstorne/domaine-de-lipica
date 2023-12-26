@@ -6,6 +6,61 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 export default function Carousel(props) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const breakpoint = 768;
+  const minNumberPreviews = 5;
+  const maxnNumberPreviews = 7;
+
+  const shiftArrayToIndex = (arr, startIndex) => {
+    const length = arr.length;
+
+    if (startIndex < 0 || startIndex >= length) {
+      return arr;
+    }
+
+    return arr.slice(startIndex).concat(arr.slice(0, startIndex));
+  };
+
+  const rotateToMiddle = (arr) => {
+    const middle = Math.floor(arr.length / 2);
+    const leftPart = arr.splice(0, middle);
+    arr.push(...leftPart);
+    return arr;
+  };
+
+  const getDesiredLengthArray = (arr, desiredLength) => {
+    const rotatedArr = rotateToMiddle(arr);
+
+    const middleIndex = Math.floor(arr.length / 2);
+
+    if (desiredLength % 2 === 0) {
+      return rotatedArr.slice(
+        middleIndex - Math.floor(desiredLength / 2),
+        middleIndex + Math.floor(desiredLength / 2),
+      );
+    } else {
+      return rotatedArr.slice(
+        middleIndex - Math.floor(desiredLength / 2),
+        middleIndex + Math.floor(desiredLength / 2) + 1,
+      );
+    }
+  };
+
+  const getPreviewImages = (images, currentSlide, screenSize, breakpoint) => {
+    if (images.length < 1) {
+      return [];
+    } else if (images.length <= 2) {
+      return images;
+    } else {
+      const shiftedArray = shiftArrayToIndex(images, currentSlide);
+      if (screenSize < breakpoint) {
+        return getDesiredLengthArray(shiftedArray, minNumberPreviews);
+      } else {
+        return getDesiredLengthArray(shiftedArray, maxnNumberPreviews);
+      }
+    }
+  };
 
   const handleSlideChange = (newSlide) => {
     setCurrentSlide(newSlide);
@@ -49,8 +104,14 @@ export default function Carousel(props) {
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
+      window.removeEventListener("resize", handleResize);
     };
   }, [currentSlide]);
 
@@ -68,7 +129,7 @@ export default function Carousel(props) {
         {props.images.map((image, index) => (
           <div
             key={index}
-            className={`w-full aspect-4/3 overflow-hidden ${
+            className={`aspect-4/3 w-full overflow-hidden ${
               index !== currentSlide ? "hidden" : ""
             }`}
           >
@@ -76,7 +137,7 @@ export default function Carousel(props) {
             <img
               src={image.src}
               alt={image.alt}
-              className="w-full aspect-4/3"
+              className="aspect-4/3 w-full"
             />
           </div>
         ))}
@@ -91,18 +152,23 @@ export default function Carousel(props) {
       </div>
 
       {props.preview && (
-        <div className="mt-2 flex flex-row flex-nowrap justify-center items-center">
-          {props.images.map((image, index) => (
+        <div className="mt-2 flex flex-row flex-nowrap items-center justify-center">
+          {getPreviewImages(
+            props.images,
+            currentSlide,
+            windowWidth,
+            breakpoint,
+          ).map((image) => (
             <img
-              key={index}
+              key={image.id}
               src={image.src}
               alt={image.alt}
-              className={`h-8 mx-1 cursor-pointer ${
-                index === currentSlide
+              className={`mx-1 h-8 cursor-pointer ${
+                image.id === currentSlide
                   ? "border-4 border-blue-900 "
                   : "border-2 border-gray-50"
               }`}
-              onClick={() => handleSlideChange(index)}
+              onClick={() => handleSlideChange(image.id)}
             />
           ))}
         </div>

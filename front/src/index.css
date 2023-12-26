@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply font-body font-normal text-base text-gray-950;
+    @apply font-body text-base font-normal text-gray-950;
   }
 
   h1,
@@ -14,7 +14,7 @@
   h3,
   h4,
   h5 {
-    @apply font-heading text-center;
+    @apply text-center font-heading;
   }
 
   h1 {
@@ -26,28 +26,28 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    @apply w-full h-52 mt-14 mb-8 px-4 flex flex-row flex-nowrap justify-center items-center 
-    font-black text-5xl tracking-wide uppercase text-blue-900
-    md:h-112 md:mt-24 md:mb-16 md:px-8 md:text-md-5xl md:tracking-wider;
+    @apply mb-8 mt-14 flex h-52 w-full flex-row flex-nowrap items-center justify-center px-4 
+    text-5xl font-black uppercase tracking-wide text-blue-900
+    md:mb-16 md:mt-24 md:h-112 md:px-8 md:text-md-5xl md:tracking-wider;
   }
 
   h2 {
     @apply mb-4 
-    font-bold text-4xl uppercase
+    text-4xl font-bold uppercase
     md:mb-12 md:text-md-4xl md:tracking-wide;
   }
 
   h3 {
-    @apply font-semibold text-3xl uppercase
+    @apply text-3xl font-semibold uppercase
     md:text-md-3xl;
   }
 
   h4 {
-    @apply font-semibold text-2xl
+    @apply text-2xl font-semibold
     md:text-md-2xl;
   }
   h5 {
-    @apply font-semibold text-xl
+    @apply text-xl font-semibold
     md:text-md-xl;
   }
 
@@ -57,88 +57,88 @@
   }
 
   footer {
-    @apply w-full h-14 pr-6 uppercase bg-white text-blue-900
+    @apply h-14 w-full bg-white pr-6 uppercase text-blue-900
     md:h-24;
   }
 
   a {
-    @apply outline-blue-900 outline-offset-2;
+    @apply outline-offset-2 outline-blue-900;
   }
 }
 
 @layer components {
   .navbar {
-    @apply w-full h-14 pr-4 flex flex-row flex-nowrap justify-between items-center bg-white
-    fixed z-10 top-0 
+    @apply fixed top-0 z-10 flex h-14 w-full flex-row flex-nowrap items-center
+    justify-between bg-white pr-4 
     md:h-24;
   }
 
   .submenu {
-    @apply w-60 flex flex-col flex-nowrap justify-center items-center bg-white 
-    absolute top-10 left-1/2 -translate-x-1/2;
+    @apply absolute left-1/2 top-10 flex w-60 -translate-x-1/2 flex-col 
+    flex-nowrap items-center justify-center bg-white;
   }
 
   .navlist {
-    @apply flex flex-col flex-nowrap justify-center items-center text-xs uppercase text-center
+    @apply flex flex-col flex-nowrap items-center justify-center text-center text-xs uppercase
     md:flex-row md:justify-between md:text-base;
   }
 
   .navlink {
-    @apply inline-block mt-3 mb-3.5 text-blue-900
-    md:mx-2 md:font-semibold
-    hover:mb-3 hover:border-b-2 hover:border-blue-900;
+    @apply mb-3.5 mt-3 inline-block text-blue-900
+    hover:mb-3 hover:border-b-2
+    hover:border-blue-900 md:mx-2 md:font-semibold;
   }
 
   .big-button {
     border-radius: 60px;
-    @apply text-xl md:text-md-xl font-bold
-    md:px-12 md:py-2 md:hover:px-11 md:hover:py-1 md:focus:px-11 md:focus:py-1;
+    @apply text-xl font-bold md:px-12
+    md:py-2 md:text-md-xl md:hover:px-11 md:hover:py-1 md:focus:px-11 md:focus:py-1;
   }
 
   .small-button {
     border-radius: 35px;
-    @apply text-sm md:text-base font-bold
-    md:px-3 md:py-2 md:hover:px-2 md:hover:py-1 md:focus:px-2 md:focus:py-1;
+    @apply text-sm font-bold md:px-3
+    md:py-2 md:text-base md:hover:px-2 md:hover:py-1 md:focus:px-2 md:focus:py-1;
   }
 
   .discipline-tag {
     border-radius: 20px;
-    @apply w-20 h-5 flex flex-row flex-nowrap justify-center items-center
-    text-sm text-gray-50 font-semibold
-    md:w-24 md:h-6;
+    @apply flex h-5 w-20 flex-row flex-nowrap items-center justify-center
+    text-sm font-semibold text-gray-50
+    md:h-6 md:w-24;
   }
 
   .next-event-card {
     border-radius: 5px;
-    @apply w-full max-w-80 h-52 mb-4 p-4 flex flex-col flex-nowrap justify-between items-center
-    bg-gray-50 text-gray-950 drop-shadow-base
+    @apply mb-4 flex h-52 w-full max-w-80 flex-col flex-nowrap items-center justify-between bg-gray-50
+    p-4 text-gray-950 drop-shadow-base
     md:h-80 md:p-12;
   }
 
   .home-section {
     border-radius: 10px;
-    @apply m-4 p-4 flex flex-col flex-nowrap justify-center items-center
+    @apply m-4 flex flex-col flex-nowrap items-center justify-center p-4
     text-gray-50
     md:m-16 md:p-12;
   }
 
   .table-header {
-    @apply hidden md:w-full md:h-12 md:px-4 md:grid md:grid-cols-4 md:items-center md:text-2xl md:font-semibold md:text-gray-50 md:text-center md:uppercase;
+    @apply hidden md:grid md:h-12 md:w-full md:grid-cols-4 md:items-center md:px-4 md:text-center md:text-2xl md:font-semibold md:uppercase md:text-gray-50;
   }
 
   .event-card {
-    @apply w-full h-40  mb-4 p-4 flex flex-col flex-nowrap justify-between items-center
-    md:h-20 md:mb-0 md:grid md:grid-cols-4;
+    @apply mb-4 flex  h-40 w-full flex-col flex-nowrap items-center justify-between p-4
+    md:mb-0 md:grid md:h-20 md:grid-cols-4;
   }
 
   .bloc {
     border-radius: 10px;
-    @apply p-2 blue-gradient text-sm md:text-base text-gray-50;
+    @apply blue-gradient p-2 text-sm text-gray-50 md:text-base;
   }
 
   .carousel-arrow {
-    @apply absolute z-10 top-1/2 -translate-x-1/2
-    p-1 bg-blue-900 text-gray-50 rounded-full;
+    @apply absolute top-1/2 z-10 -translate-x-1/2
+    rounded-full bg-blue-900 p-1 text-gray-50;
   }
 }
 
@@ -157,14 +157,14 @@
 
   .button {
     border-radius: 60px;
-    @apply px-4 py-1 flex flex-row flex-nowrap justify-center items-center
-    bg-sun-400 text-gray-950 drop-shadow-base outline-none
-    hover:py-0 hover:px-3 hover:bg-gray-50 hover:border-4 hover:border-sun-400
-    focus:py-0 focus:px-3 focus:bg-gray-50 focus:border-4 focus:border-sun-400;
+    @apply flex flex-row flex-nowrap items-center justify-center bg-sun-400 px-4
+    py-1 text-gray-950 outline-none drop-shadow-base
+    hover:border-4 hover:border-sun-400 hover:bg-gray-50 hover:px-3 hover:py-0
+    focus:border-4 focus:border-sun-400 focus:bg-gray-50 focus:px-3 focus:py-0;
   }
 
   .disabled {
-    @apply bg-gray-800 text-gray-50 pointer-events-none
-    focus:py-0 focus:px-3 focus:bg-gray-800 focus:border-4 focus:border-gray-800;
+    @apply pointer-events-none bg-gray-800 text-gray-50
+    focus:border-4 focus:border-gray-800 focus:bg-gray-800 focus:px-3 focus:py-0;
   }
 }

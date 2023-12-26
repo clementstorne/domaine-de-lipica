@@ -43,31 +43,31 @@ export default function Navbar() {
         <img
           src="/logo.png"
           alt="Logo du domaine de Lipica"
-          className="h-14 md:h-24 w-auto"
+          className="h-14 w-auto md:h-24"
         />
       </Link>
 
       {windowWidth < breakpoint && (
         <div
-          className="fixed right-4 outline-blue-900 outline-offset-8 cursor-pointer"
+          className="fixed right-4 cursor-pointer outline-offset-8 outline-blue-900"
           tabIndex="0"
           onClick={toggleMenu}
           onKeyDown={(e) => e.key === "Enter" && toggleMenu()}
           role="button"
         >
           <div
-            className={`bg-blue-900 w-6 h-1 ${
-              isMenuOpen ? "rotate-45 translate-y-2" : ""
+            className={`h-1 w-6 bg-blue-900 ${
+              isMenuOpen ? "translate-y-2 rotate-45" : ""
             }`}
           ></div>
           <div
-            className={`bg-blue-900 w-6 h-1 my-1 ${
+            className={`my-1 h-1 w-6 bg-blue-900 ${
               isMenuOpen ? "opacity-0" : ""
             }`}
           ></div>
           <div
-            className={`bg-blue-900 w-6 h-1 ${
-              isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+            className={`h-1 w-6 bg-blue-900 ${
+              isMenuOpen ? "-translate-y-2 -rotate-45" : ""
             }`}
           ></div>
         </div>
@@ -78,8 +78,8 @@ export default function Navbar() {
           windowWidth >= breakpoint
             ? "ml-32 w-full"
             : isMenuOpen
-            ? "fixed w-full top-14 flex flex-col flex-nowrap justify-center items-center bg-white text-blue-900"
-            : "hidden"
+              ? "fixed top-14 flex w-full flex-col flex-nowrap items-center justify-center bg-white text-blue-900"
+              : "hidden"
         }`}
       >
         <ul className="navlist">

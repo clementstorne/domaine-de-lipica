@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-row flex-nowrap justify-between items-center">
+    <footer className="flex flex-row flex-nowrap items-center justify-between">
       <Link to="/">
         <img
           src="/logo.png"
@@ -10,8 +10,8 @@ export default function Footer() {
           className="h-14 md:h-24"
         />
       </Link>
-      <nav className="md:w-7/12 text-xs md:text-md-xl md:font-semibold leading-4 text-center">
-        <ul className="md:flex flex-row flex-nowrap justify-between">
+      <nav className="text-center text-xs leading-4 md:w-7/12 md:text-md-xl md:font-semibold">
+        <ul className="flex-row flex-nowrap justify-between md:flex">
           <li className="mb-0.5 hover:mb-0 hover:border-b-2 hover:border-blue-900">
             <Link to="/mentions-legales">Mentions légales</Link>
           </li>
@@ -23,13 +23,13 @@ export default function Footer() {
           </li>
         </ul>
       </nav>
-      <div className="text-center text-[8px] md:text-md-xs leading-3">
+      <div className="text-center text-[8px] leading-3 md:text-md-xs">
         <p className="m-0">Designed by</p>
         <a
           href="https://clementstorne.dev"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[10px] md:text-md-sm font-medium"
+          className="text-[10px] font-medium md:text-md-sm"
         >
           Clément <br />
           Storne

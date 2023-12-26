@@ -8,7 +8,7 @@ import { isInFuture } from "../utils/dateUtils";
 export default function NextEvents() {
   const futureEvents = events.filter((event) => isInFuture(event.debut));
   const futureEventsSorted = futureEvents.sort((a, b) =>
-    a.debut < b.debut ? -1 : a.debut > b.debut ? 1 : 0
+    a.debut < b.debut ? -1 : a.debut > b.debut ? 1 : 0,
   );
   const nextEvents = futureEventsSorted.slice(0, 3);
   return (

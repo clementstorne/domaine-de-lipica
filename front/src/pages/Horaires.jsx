@@ -10,7 +10,7 @@ export default function Horaires() {
   const event = events.filter((event) => event.id === parseInt(eventId))[0];
   const title = `${event.discipline} ${event.niveau} ${singleEventDates(
     event.debut,
-    event.fin
+    event.fin,
   )}`;
   const schedules = event.horaires
     .split("\n\n")

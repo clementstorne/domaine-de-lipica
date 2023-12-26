@@ -9,11 +9,11 @@ export default function EventCard(props) {
   return (
     <div className={`${props.className} event-card`}>
       <p className="text-center">{eventDates(props.debut, props.fin)}</p>
-      <div className="md:flex md:flex-row md:flex-nowrap md:justify-center md:items-center">
+      <div className="md:flex md:flex-row md:flex-nowrap md:items-center md:justify-center">
         <DisciplineTag name={props.discipline} />
       </div>
       <p className="text-center">{props.niveau}</p>
-      <div className="flex flex-row flex-nowrap justify-center items-center">
+      <div className="flex flex-row flex-nowrap items-center justify-center">
         {isInFuture(props.debut) && (
           <LinkButton
             link={"/concours/" + props.id}

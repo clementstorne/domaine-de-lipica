@@ -11,7 +11,7 @@ export default function Footer() {
         />
       </Link>
       <nav className="text-center text-xs leading-4 md:w-7/12 md:text-md-xl md:font-semibold">
-        <ul className="flex-row flex-nowrap justify-between md:flex">
+        <ul className="flex-row flex-nowrap items-center justify-between md:flex">
           <li className="mb-0.5 hover:mb-0 hover:border-b-2 hover:border-blue-900">
             <Link to="/mentions-legales">Mentions légales</Link>
           </li>

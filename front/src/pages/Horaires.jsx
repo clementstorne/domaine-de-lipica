@@ -1,4 +1,5 @@
 import events from "../data/concours.json";
+import partners from "../data/partenaires.json";
 
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
@@ -20,6 +21,21 @@ export default function Horaires() {
     <>
       <Navbar />
       <h1>{title}</h1>
+
+      <div className="m-4 flex  flex-row flex-wrap justify-center md:m-16">
+        {partners.map((partner) => (
+          <div
+            key={partner.id}
+            className="mb-2 mr-2 flex h-12 w-12 items-center justify-center bg-white md:mb-4 md:mr-4 md:h-24 md:w-24"
+          >
+            <img
+              src={`/logos/${partner.logo}`}
+              alt={`Logo de ${partner.nom}`}
+              className="object-fill"
+            />
+          </div>
+        ))}
+      </div>
 
       <section className="bloc">
         <p className="mb-4">

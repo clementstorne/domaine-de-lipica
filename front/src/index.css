@@ -80,7 +80,7 @@
 
   .navlist {
     @apply flex flex-col flex-nowrap items-center justify-center text-center text-xs uppercase
-    md:flex-row md:justify-between md:text-base;
+    md:justify-between md:text-base lg:flex-row;
   }
 
   .navlink {
@@ -132,8 +132,7 @@
   }
 
   .bloc {
-    border-radius: 10px;
-    @apply blue-gradient p-2 text-sm text-gray-50 md:text-base;
+    @apply rounded-10 blue-gradient p-2 text-sm text-gray-50 md:text-base;
   }
 
   .carousel-arrow {

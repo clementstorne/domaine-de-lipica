@@ -64,9 +64,11 @@ export default function Ecurie() {
       <Navbar />
       <h1>{stable.nom}</h1>
 
-      <section>
+      <section className="mb-8 md:mb-16">
         <p className="mb-4">{stable.informations}</p>
-        <Carousel images={images} />
+        <div className="mx-auto md:w-3/4 lg:w-1/2">
+          <Carousel images={images} />
+        </div>
       </section>
 
       <Footer />

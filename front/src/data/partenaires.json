@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nom": "Ville d'Ozoir-la-Ferrière",
+    "logo": "ozoir.png",
+    "informations": "Hôtel de ville d'Ozoir-la-Ferrière\n45, avenue du Général de Gaulle\nBP 149\n77834 OZOIR-LA-FERRIERE CEDEX\nTél. : 01 64 43 35 35\nFax : 01 64 40 33 13"
+  },
+  {
+    "id": 2,
+    "nom": "Destrier",
+    "logo": "destrier.svg",
+    "informations": "INZO°\nBP 19\n02402 CHATEAU-THIERRY CEDEX\nTél. : 03 23 84 80 00\nFax : 03 23 83 39 27"
+  },
+  {
+    "id": 3,
+    "nom": "J.P. Veroul Opticien Krys",
+    "logo": "krys.svg",
+    "informations": "139, avenue de la République\n77340 PONTAULT COMBAULT\nTél. : 01 64 40 84 89"
+  },
+  {
+    "id": 4,
+    "nom": "Picardie Obstacles",
+    "logo": "picardie-obstacles.jpg",
+    "informations": "286, rue de la Vallée\n60162 ANTHEUIL PORTES\nTél. : 03 44 42 64 45\nFax : 03 44 42 37 17"
+  },
+  {
+    "id": 5,
+    "nom": "MMA Ozoir-la-Ferrière",
+    "logo": "mma.jpg",
+    "informations": "9, Ter Avenue du Général Leclerc\n77330 OZOIR-LA-FERRIERE\nTél. : 01 64 40 06 15"
+  }
+]

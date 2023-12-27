@@ -6,8 +6,12 @@ const replaceAccents = (str) => {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 };
 
-function stringToUrl(str) {
+const stringToUrl = (str) => {
   return transformSpecialChars(replaceAccents(str.toLowerCase()));
-}
+};
 
-export { stringToUrl };
+const newlineToBreakTag = (str) => {
+  return str.split("\n").join("<br />");
+};
+
+export { stringToUrl, newlineToBreakTag };

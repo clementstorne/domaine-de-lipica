@@ -74,10 +74,17 @@ export default {
     },
     extend: {
       spacing: {
+        88: "352px",
         112: "448px",
       },
       maxWidth: {
         80: "320px",
+        88: "352px",
+        112: "448px",
+        128: "512px",
+      },
+      borderRadius: {
+        10: "10px",
       },
       aspectRatio: {
         "4/3": "4 / 3",

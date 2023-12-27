@@ -9,6 +9,7 @@ import Presentation from "./pages/Presentation.jsx";
 import Ecurie from "./pages/Ecurie.jsx";
 import Concours from "./pages/Concours.jsx";
 import Horaires from "./pages/Horaires.jsx";
+import Partenaires from "./pages/Partenaires.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/partenaires",
-    element: <App />,
+    element: <Partenaires />,
   },
   {
     path: "/contact",

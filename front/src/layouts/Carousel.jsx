@@ -133,7 +133,9 @@ export default function Carousel(props) {
               index !== currentSlide ? "hidden" : ""
             }`}
           >
-            <p className="mb-2 text-center">{image.legend}</p>
+            {props.preview && (
+              <p className="mb-2 text-center">{image.legend}</p>
+            )}
             <img
               src={image.src}
               alt={image.alt}

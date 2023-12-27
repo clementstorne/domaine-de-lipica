@@ -8,7 +8,8 @@ export default function Navbar() {
   const [isSubMenuOpen, setSubMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  const breakpoint = 1024;
+  const breakpointLg = 1024;
+  const breakpointMd = 768;
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -47,7 +48,7 @@ export default function Navbar() {
         />
       </Link>
 
-      {windowWidth < breakpoint && (
+      {windowWidth < breakpointLg && (
         <div
           className="fixed right-4 cursor-pointer outline-offset-8 outline-blue-900"
           tabIndex="0"
@@ -75,7 +76,7 @@ export default function Navbar() {
 
       <nav
         className={`${
-          windowWidth >= breakpoint
+          windowWidth >= breakpointLg
             ? "ml-32 w-full"
             : isMenuOpen
               ? "fixed top-14 flex w-full flex-col flex-nowrap items-center justify-center bg-white text-blue-900"
@@ -98,16 +99,25 @@ export default function Navbar() {
             >
               Centre équestre
             </span>
-            {isSubMenuOpen && (
+            {isSubMenuOpen && windowWidth > breakpointMd && (
               <ul className="submenu">
                 {stables.map((stable) => (
                   <li key={stable.id} className="navlink">
-                    <Link to="/sous-menu-1">{stable.nom}</Link>
+                    <Link to={`/${stable.url}`}>{stable.nom}</Link>
                   </li>
                 ))}
               </ul>
             )}
           </li>
+          {isSubMenuOpen && windowWidth < breakpointMd && (
+            <>
+              {stables.map((stable) => (
+                <li key={stable.id} className="navlink">
+                  <Link to={`/${stable.url}`}>{stable.nom}</Link>
+                </li>
+              ))}
+            </>
+          )}
           <li className="navlink">
             <Link to="/concours">Concours</Link>
           </li>

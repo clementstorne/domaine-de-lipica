@@ -1,7 +1,7 @@
 import partners from "../data/partenaires.json";
 
 import Navbar from "../layouts/Navbar";
-import PartnerCard from "../layouts/PartnerCard";
+import PartnerCard from "../components/PartnerCard";
 import Footer from "../layouts/Footer";
 
 export default function Partenaires() {

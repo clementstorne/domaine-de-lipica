@@ -1,7 +1,7 @@
 import events from "../data/concours.json";
 
 import NextEventCard from "./NextEventCard";
-import LinkButton from "./LinkButton";
+import LinkButton from "../layouts/LinkButton";
 
 import { isInFuture } from "../utils/dateUtils";
 

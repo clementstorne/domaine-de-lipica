@@ -3,7 +3,7 @@ import events from "../data/concours.json";
 import { isInFuture } from "../utils/dateUtils";
 
 import Navbar from "../layouts/Navbar";
-import EventCard from "../layouts/EventCard";
+import EventCard from "../components/EventCard";
 import Footer from "../layouts/Footer";
 
 export default function Concours() {

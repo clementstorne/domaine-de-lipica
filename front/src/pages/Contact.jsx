@@ -1,4 +1,5 @@
 import Navbar from "../layouts/Navbar";
+import ContactForm from "../components/ContactForm";
 import Footer from "../layouts/Footer";
 
 export default function Contact() {
@@ -28,8 +29,9 @@ export default function Contact() {
         </p>
       </section>
 
-      <main className="px-4 md:px-0">
+      <main className="flex flex-col items-center px-4 md:px-0">
         <h2 className="text-blue-900">Contactez-nous</h2>
+        <ContactForm />
       </main>
 
       <Footer />

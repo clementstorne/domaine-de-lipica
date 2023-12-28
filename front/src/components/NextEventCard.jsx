@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import DisciplineTag from "./DisciplineTag";
+import DisciplineTag from "../layouts/DisciplineTag";
 
 import { eventDates } from "../utils/dateUtils";
 

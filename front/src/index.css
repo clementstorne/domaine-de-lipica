@@ -132,12 +132,20 @@
   }
 
   .bloc {
-    @apply rounded-10 blue-gradient p-2 text-sm text-gray-50 md:text-base;
+    @apply blue-gradient rounded-10 p-2 text-sm text-gray-50 md:text-base;
   }
 
   .carousel-arrow {
     @apply absolute top-1/2 z-10 -translate-x-1/2
     rounded-full bg-blue-900 p-1 text-gray-50;
+  }
+
+  .form-label {
+    @apply ml-3 font-semibold md:text-xl;
+  }
+
+  .form-input {
+    @apply max-w-144 mb-4 mt-1 block h-10 w-full rounded-10 border-2 border-blue-900 p-4 outline-none focus:border-4;
   }
 }
 
@@ -165,5 +173,28 @@
   .disabled {
     @apply pointer-events-none bg-gray-800 text-gray-50
     focus:border-4 focus:border-gray-800 focus:bg-gray-800 focus:px-3 focus:py-0;
+  }
+
+  .error {
+    @apply border-red;
+  }
+
+  .error-message {
+    @apply text-red -mt-4 mb-5 text-sm;
+  }
+
+  .slinde-in {
+    animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
 }

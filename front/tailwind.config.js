@@ -25,6 +25,7 @@ export default {
     },
     colors: {
       white: "#ffffff",
+      red: "#CE2C31",
       cso: "#732F7B",
       dressage: "#043D79",
       hunter: "#A95A1B",

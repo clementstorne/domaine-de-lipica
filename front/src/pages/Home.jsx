@@ -1,5 +1,5 @@
 import Navbar from "../layouts/Navbar";
-import NextEvents from "../layouts/NextEvents";
+import NextEvents from "../components/NextEvents";
 import LinkButton from "../layouts/LinkButton";
 import Footer from "../layouts/Footer";
 

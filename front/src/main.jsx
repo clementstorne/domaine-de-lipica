@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
-import App from "./pages/App.jsx";
+import App from "./App.jsx";
 import Home from "./pages/Home.jsx";
 import Presentation from "./pages/Presentation.jsx";
 import Ecurie from "./pages/Ecurie.jsx";

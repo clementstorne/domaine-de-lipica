@@ -2,11 +2,14 @@ import PropTypes from "prop-types";
 
 import { useEffect, useState } from "react";
 
+import { useSwipeable } from "react-swipeable";
+
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 export default function Carousel(props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [paused, setPaused] = useState(false);
 
   const breakpoint = 768;
   const minNumberPreviews = 5;
@@ -66,41 +69,44 @@ export default function Carousel(props) {
     setCurrentSlide(newSlide);
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "ArrowLeft" && currentSlide > 0) {
-      setCurrentSlide(currentSlide - 1);
-    } else if (e.key === "ArrowLeft" && currentSlide == 0) {
-      setCurrentSlide(props.images.length - 1);
-    } else if (
-      e.key === "ArrowRight" &&
-      currentSlide < props.images.length - 1
-    ) {
+  const nextSlide = () => {
+    if (currentSlide < props.images.length - 1) {
       setCurrentSlide(currentSlide + 1);
-    } else if (
-      e.key === "ArrowRight" &&
-      currentSlide === props.images.length - 1
-    ) {
+    } else if (currentSlide === props.images.length - 1) {
       setCurrentSlide(0);
     }
   };
 
-  const handleArrowClick = (direction) => {
-    if (direction === "left" && currentSlide > 0) {
+  const previousSlide = () => {
+    if (currentSlide > 0) {
       setCurrentSlide(currentSlide - 1);
-    } else if (direction === "left" && currentSlide === 0) {
+    } else if (currentSlide == 0) {
       setCurrentSlide(props.images.length - 1);
-    } else if (
-      direction === "right" &&
-      currentSlide < props.images.length - 1
-    ) {
-      setCurrentSlide(currentSlide + 1);
-    } else if (
-      direction === "right" &&
-      currentSlide === props.images.length - 1
-    ) {
-      setCurrentSlide(0);
     }
   };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "ArrowLeft") {
+      previousSlide();
+    } else if (e.key === "ArrowRight") {
+      nextSlide();
+    }
+  };
+
+  const handleArrowClick = (direction) => {
+    if (direction === "left") {
+      previousSlide();
+    } else if (direction === "right") {
+      nextSlide();
+    }
+  };
+
+  const handlers = useSwipeable({
+    onSwipedLeft: () => previousSlide(),
+    onSwipedRight: () => nextSlide(),
+    preventScrollOnSwipe: true,
+    trackMouse: true,
+  });
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
@@ -109,9 +115,18 @@ export default function Carousel(props) {
     };
     window.addEventListener("resize", handleResize);
 
+    const interval = setInterval(() => {
+      if (!paused) {
+        nextSlide();
+      }
+    }, 3000);
+
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
       window.removeEventListener("resize", handleResize);
+      if (interval) {
+        clearInterval(interval);
+      }
     };
   }, [currentSlide]);
 
@@ -137,9 +152,12 @@ export default function Carousel(props) {
               <p className="mb-2 text-center">{image.legend}</p>
             )}
             <img
+              {...handlers}
               src={image.src}
               alt={image.alt}
               className="aspect-4/3 w-full"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
             />
           </div>
         ))}

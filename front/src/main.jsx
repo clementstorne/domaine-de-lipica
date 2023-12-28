@@ -10,6 +10,7 @@ import Ecurie from "./pages/Ecurie.jsx";
 import Concours from "./pages/Concours.jsx";
 import Horaires from "./pages/Horaires.jsx";
 import Partenaires from "./pages/Partenaires.jsx";
+import Contact from "./pages/Contact.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/contact",
-    element: <App />,
+    element: <Contact />,
   },
   {
     path: "/administration/login",

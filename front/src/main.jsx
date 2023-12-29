@@ -11,6 +11,7 @@ import Concours from "./pages/Concours.jsx";
 import Horaires from "./pages/Horaires.jsx";
 import Partenaires from "./pages/Partenaires.jsx";
 import Contact from "./pages/Contact.jsx";
+import SiteMap from "./pages/SiteMap.jsx";
 
 const router = createBrowserRouter([
   {
@@ -79,7 +80,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/plan-du-site",
-    element: <App />,
+    element: <SiteMap />,
   },
 ]);
 

@@ -16,7 +16,7 @@ export default function Footer() {
             <Link to="/mentions-legales">Mentions légales</Link>
           </li>
           <li className="mb-0.5 hover:mb-0 hover:border-b-2 hover:border-blue-900">
-            <Link to="/mentions-legales">Plan du site</Link>
+            <Link to="/plan-du-site">Plan du site</Link>
           </li>
           <li className="mb-0.5 hover:mb-0 hover:border-b-2 hover:border-blue-900">
             <Link to="/mentions-legales">Administration</Link>

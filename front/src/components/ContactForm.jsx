@@ -2,8 +2,6 @@ import { useForm, Controller } from "react-hook-form";
 
 import emailjs from "@emailjs/browser";
 
-import { useState } from "react";
-
 export default function ContactForm() {
   const { control, handleSubmit, reset } = useForm();
 
@@ -16,7 +14,6 @@ export default function ContactForm() {
       organization: data.organization,
       message: data.message,
     };
-    setIsToastOpen(true);
     // emailjs.send(
     //   import.meta.env.VITE_EMAILJS_SERVICE_ID,
     //   import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
@@ -30,9 +27,9 @@ export default function ContactForm() {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="max-w-144 flex w-full flex-col flex-nowrap items-center justify-center"
+        className="flex w-full max-w-144 flex-col flex-nowrap items-center justify-center"
       >
-        <div className="max-w-144 w-full">
+        <div className="w-full max-w-144">
           <label htmlFor="lastname" className="form-label">
             Nom
           </label>
@@ -64,7 +61,7 @@ export default function ContactForm() {
           />
         </div>
 
-        <div className="max-w-144 w-full">
+        <div className="w-full max-w-144">
           <label htmlFor="firstname" className="form-label">
             Prénom
           </label>
@@ -163,7 +160,7 @@ export default function ContactForm() {
           />
         </div>
 
-        <div className="max-w-144 w-full">
+        <div className="w-full max-w-144">
           <label htmlFor="organization" className="form-label">
             Société
           </label>

@@ -12,6 +12,7 @@ import Horaires from "./pages/Horaires.jsx";
 import Partenaires from "./pages/Partenaires.jsx";
 import Contact from "./pages/Contact.jsx";
 import SiteMap from "./pages/SiteMap.jsx";
+import MentionsLegales from "./pages/MentionsLegales.jsx";
 
 const router = createBrowserRouter([
   {
@@ -76,7 +77,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/mentions-legales",
-    element: <App />,
+    element: <MentionsLegales />,
   },
   {
     path: "/plan-du-site",

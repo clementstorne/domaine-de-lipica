@@ -14,22 +14,41 @@ export default function EventCard(props) {
       </div>
       <p className="text-center">{props.niveau}</p>
       <div className="flex flex-row flex-nowrap items-center justify-center">
-        {isInFuture(props.debut) && (
-          <LinkButton
-            link={"/concours/" + props.id}
-            label="Horaires"
-            size="small"
-            disabled={props.horaires === ""}
-            className="mr-4"
-          />
-        )}
+        {props.admin ? (
+          <>
+            <LinkButton
+              link={"/administration/concours/" + props.id}
+              label="Modifier"
+              size="small"
+              className="mr-4"
+            />
+            <LinkButton
+              link={"/administration/concours/" + props.id}
+              label="Supprimer"
+              size="small"
+              className="mr-4"
+            />
+          </>
+        ) : (
+          <>
+            {isInFuture(props.debut) && (
+              <LinkButton
+                link={"/concours/" + props.id}
+                label="Horaires"
+                size="small"
+                disabled={props.horaires === ""}
+                className="mr-4"
+              />
+            )}
 
-        <LinkButton
-          link={props.lienWinJump}
-          label={`${isInFuture(props.debut) ? "Live" : "Résultats"}`}
-          size="small"
-          disabled={props.lienWinJump === ""}
-        />
+            <LinkButton
+              link={props.lienWinJump}
+              label={`${isInFuture(props.debut) ? "Live" : "Résultats"}`}
+              size="small"
+              disabled={props.lienWinJump === ""}
+            />
+          </>
+        )}
       </div>
     </div>
   );
@@ -44,4 +63,5 @@ EventCard.propTypes = {
   horaires: PropTypes.string,
   lienWinJump: PropTypes.string,
   className: PropTypes.string,
+  admin: PropTypes.bool,
 };

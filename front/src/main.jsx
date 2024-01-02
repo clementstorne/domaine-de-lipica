@@ -11,8 +11,13 @@ import Concours from "./pages/Concours.jsx";
 import Horaires from "./pages/Horaires.jsx";
 import Partenaires from "./pages/Partenaires.jsx";
 import Contact from "./pages/Contact.jsx";
-import SiteMap from "./pages/SiteMap.jsx";
+import Login from "./pages/Login.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 import MentionsLegales from "./pages/MentionsLegales.jsx";
+import SiteMap from "./pages/SiteMap.jsx";
+import AdminConcours from "./pages/AdminConcours.jsx";
+import AdminConcoursCreate from "./pages/AdminConcoursCreate.jsx";
+import AdminConcoursUpdate from "./pages/AdminConcoursUpdate.jsx";
 
 const router = createBrowserRouter([
   {
@@ -45,19 +50,23 @@ const router = createBrowserRouter([
   },
   {
     path: "/administration/login",
-    element: <App />,
+    element: <Login />,
   },
   {
     path: "/administration/dashboard",
-    element: <App />,
+    element: <Dashboard />,
   },
   {
     path: "/administration/concours",
-    element: <App />,
+    element: <AdminConcours />,
+  },
+  {
+    path: "/administration/ajouter-concours",
+    element: <AdminConcoursCreate />,
   },
   {
     path: "/administration/concours/:concoursId",
-    element: <App />,
+    element: <AdminConcoursUpdate />,
   },
   {
     path: "/administration/partenaires",

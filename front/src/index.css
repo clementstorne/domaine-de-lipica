@@ -90,15 +90,11 @@
   }
 
   .big-button {
-    border-radius: 60px;
-    @apply text-xl font-bold md:px-12
-    md:py-2 md:text-md-xl md:hover:px-11 md:hover:py-1 md:focus:px-11 md:focus:py-1;
+    @apply text-xl md:px-12 md:text-md-xl md:hover:px-11 md:focus:px-11;
   }
 
   .small-button {
-    border-radius: 35px;
-    @apply text-sm font-bold md:px-3
-    md:py-2 md:text-base md:hover:px-2 md:hover:py-1 md:focus:px-2 md:focus:py-1;
+    @apply text-sm md:px-3 md:text-base md:hover:px-2 md:focus:px-2;
   }
 
   .discipline-tag {
@@ -145,7 +141,11 @@
   }
 
   .form-input {
-    @apply max-w-144 mb-4 mt-1 block h-10 w-full rounded-10 border-2 border-blue-900 p-4 outline-none focus:border-4;
+    @apply mb-4 mt-1 block h-10 w-full max-w-144 rounded-10 border-2 border-blue-900 p-4 outline-none focus:border-4;
+  }
+
+  .form-fieldset {
+    @apply mb-4 mt-1 rounded-10 border-2 border-blue-900 px-4 py-2 outline-none focus:border-4;
   }
 }
 
@@ -164,10 +164,11 @@
 
   .button {
     border-radius: 60px;
-    @apply flex flex-row flex-nowrap items-center justify-center bg-sun-400 px-4
-    py-1 text-gray-950 outline-none drop-shadow-base
-    hover:border-4 hover:border-sun-400 hover:bg-gray-50 hover:px-3 hover:py-0
-    focus:border-4 focus:border-sun-400 focus:bg-gray-50 focus:px-3 focus:py-0;
+    @apply flex flex-row flex-nowrap items-center justify-center bg-sun-400 px-4 py-1
+    font-bold text-gray-950 outline-none
+    drop-shadow-base hover:border-4 hover:border-sun-400 hover:bg-gray-50
+    hover:px-3 hover:py-0 focus:border-4 focus:border-sun-400 focus:bg-gray-50
+    focus:px-3 focus:py-0 md:py-2 md:hover:py-1 md:focus:py-1;
   }
 
   .disabled {
@@ -180,7 +181,7 @@
   }
 
   .error-message {
-    @apply text-red -mt-4 mb-5 text-sm;
+    @apply -mt-4 mb-5 text-sm text-red;
   }
 
   .slinde-in {

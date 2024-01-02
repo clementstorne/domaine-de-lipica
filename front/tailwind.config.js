@@ -84,6 +84,7 @@ export default {
         112: "448px",
         128: "512px",
         144: "576px",
+        288: "1152px",
       },
       borderRadius: {
         10: "10px",

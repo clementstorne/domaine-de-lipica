@@ -10,8 +10,8 @@ export default function Home() {
       <Navbar />
       <h1>Plan du site</h1>
 
-      <main className="flex flex-col justify-between lg:flex-row">
-        <section className="px-4 md:px-0">
+      <main className="max-w-288 mx-auto flex flex-col justify-between lg:flex-row">
+        <section className="mx-0 my-4 md:mx-4">
           <h2 className="text-blue-900">Domaine de Lipica</h2>
           <nav className="flex flex-col items-center justify-between">
             <LinkButton
@@ -47,7 +47,7 @@ export default function Home() {
           </nav>
         </section>
 
-        <section className="px-4 md:px-0">
+        <section className="mx-0 my-4 md:mx-4">
           <h2 className="text-blue-900">Centre équestre</h2>
           <nav className="flex flex-col items-center justify-between">
             {stables.map((stable) => (
@@ -64,7 +64,7 @@ export default function Home() {
           <ul className="flex flex-col items-center"></ul>
         </section>
 
-        <section className="px-4 md:px-0">
+        <section className="mx-0 my-4 md:mx-4">
           <h2 className="text-blue-900">Concours</h2>
           <nav className="flex flex-col items-center justify-between">
             <LinkButton

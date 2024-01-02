@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 
 import { newlineToBreakTag } from "../utils/strUtils";
 
-export default function PartnerCard(props) {
+export default function CardPartner(props) {
   return (
-    <div className="rounded-10 blue-gradient max-w-88 md:max-w-112 mb-8 flex w-full flex-col flex-nowrap items-center justify-start p-4 text-gray-50 md:mx-2">
+    <div className="blue-gradient mb-8 flex w-full max-w-88 flex-col flex-nowrap items-center justify-start rounded-10 p-4 text-gray-50 md:mx-2 md:max-w-112">
       <h3>{props.nom}</h3>
       <div className="flex w-full flex-col items-center justify-center md:flex-row md:justify-start">
         <div
@@ -32,7 +32,7 @@ export default function PartnerCard(props) {
   );
 }
 
-PartnerCard.propTypes = {
+CardPartner.propTypes = {
   nom: PropTypes.string.isRequired,
   logo: PropTypes.string,
   informations: PropTypes.string.isRequired,

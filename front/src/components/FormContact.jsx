@@ -2,7 +2,7 @@ import { useForm, Controller } from "react-hook-form";
 
 import emailjs from "@emailjs/browser";
 
-export default function ContactForm() {
+export default function FormContact() {
   const { control, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
@@ -210,7 +210,7 @@ export default function ContactForm() {
                   }`}
                   {...field}
                   placeholder="Votre message"
-                ></textarea>
+                />
                 {fieldState?.error && (
                   <p className="error-message">{fieldState.error.message}</p>
                 )}

@@ -3,7 +3,7 @@ import events from "../data/concours.json";
 import { isInFuture } from "../utils/dateUtils";
 
 import Navbar from "../layouts/Navbar";
-import EventCard from "../components/EventCard";
+import CardEvent from "../components/CardEvent";
 import Footer from "../layouts/Footer";
 
 export default function Concours() {
@@ -31,7 +31,7 @@ export default function Concours() {
           <p>Liens</p>
         </div>
         {futureEventsSorted.map((event, index) => (
-          <EventCard
+          <CardEvent
             key={event.id}
             {...event}
             className={`${index % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}`}
@@ -47,7 +47,7 @@ export default function Concours() {
           <p>Liens</p>
         </div>
         {pastEventsSorted.map((event, index) => (
-          <EventCard
+          <CardEvent
             key={event.id}
             {...event}
             className={`${index % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}`}

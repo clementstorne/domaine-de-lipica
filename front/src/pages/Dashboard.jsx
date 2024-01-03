@@ -8,12 +8,12 @@ export default function Dahsboard() {
       <Navbar />
       <h1>Administration du site</h1>
 
-      <main className="max-w-288 mx-auto flex flex-col justify-between px-8 lg:flex-row">
+      <main className="mx-auto flex max-w-288 flex-col justify-between px-8 lg:flex-row">
         <section className="mx-0 my-4">
           <h2 className="text-blue-900">Concours</h2>
           <nav className="flex flex-col items-center justify-between">
             <LinkButton
-              link="/administration/ajouter-concours"
+              link="/administration/concours/nouveau"
               label="Ajouter un concours"
               className="mb-2"
               size="small"
@@ -31,7 +31,7 @@ export default function Dahsboard() {
           <h2 className="text-blue-900">Partenaires</h2>
           <nav className="flex flex-col items-center justify-between">
             <LinkButton
-              link="/"
+              link="/administration/partenaires/nouveau"
               label="Ajouter un partenaire"
               className="mb-2"
               size="small"
@@ -49,7 +49,7 @@ export default function Dahsboard() {
           <h2 className="text-blue-900">Écuries</h2>
           <nav className="flex flex-col items-center justify-between">
             <LinkButton
-              link="/"
+              link="/administration/ecuries/nouveau"
               label="Ajouter une écurie"
               className="mb-2"
               size="small"

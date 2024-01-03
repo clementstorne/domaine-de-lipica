@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 
+import LinkButton from "../layouts/LinkButton";
+
 import { newlineToBreakTag } from "../utils/strUtils";
 
 export default function CardPartner(props) {
@@ -8,7 +10,7 @@ export default function CardPartner(props) {
       <h3>{props.nom}</h3>
       <div className="flex w-full flex-col items-center justify-center md:flex-row md:justify-start">
         <div
-          className={`my-4 flex h-40 w-40 items-center justify-center object-fill md:mr-4 ${
+          className={`my-4 flex h-40 w-40 items-center justify-center md:mr-4 ${
             props.logo ? "bg-white" : "bg-gray-400"
           }`}
         >
@@ -28,12 +30,30 @@ export default function CardPartner(props) {
           }}
         />
       </div>
+      {props.admin && (
+        <div className="mt-4 flex flex-row">
+          <LinkButton
+            link={"/administration/partenaires/" + props.id}
+            label="Modifier"
+            size="small"
+            className="mr-4"
+          />
+          <LinkButton
+            link={"/administration/partenaires/" + props.id}
+            label="Supprimer"
+            size="small"
+            className="mr-4"
+          />
+        </div>
+      )}
     </div>
   );
 }
 
 CardPartner.propTypes = {
+  id: PropTypes.number.isRequired,
   nom: PropTypes.string.isRequired,
   logo: PropTypes.string,
   informations: PropTypes.string.isRequired,
+  admin: PropTypes.bool,
 };

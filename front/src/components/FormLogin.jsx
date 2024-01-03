@@ -7,7 +7,7 @@ export default function FormLogin() {
   const { control, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    console.log({ email: data.email, password: data.password });
+    console.log(data);
     setIsAuth(true);
     reset();
   };

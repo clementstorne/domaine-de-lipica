@@ -13,11 +13,14 @@ import Partenaires from "./pages/Partenaires.jsx";
 import Contact from "./pages/Contact.jsx";
 import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
-import MentionsLegales from "./pages/MentionsLegales.jsx";
-import SiteMap from "./pages/SiteMap.jsx";
 import AdminConcours from "./pages/AdminConcours.jsx";
 import AdminConcoursCreate from "./pages/AdminConcoursCreate.jsx";
 import AdminConcoursUpdate from "./pages/AdminConcoursUpdate.jsx";
+import AdminPartenaires from "./pages/AdminPartenaires.jsx";
+import AdminPartenaireCreate from "./pages/AdminPartenairesCreate.jsx";
+import MentionsLegales from "./pages/MentionsLegales.jsx";
+import SiteMap from "./pages/SiteMap.jsx";
+import AdminPartenaireUpdate from "./pages/AdminPartenaireUpdate.jsx";
 
 const router = createBrowserRouter([
   {
@@ -61,7 +64,7 @@ const router = createBrowserRouter([
     element: <AdminConcours />,
   },
   {
-    path: "/administration/ajouter-concours",
+    path: "/administration/concours/nouveau",
     element: <AdminConcoursCreate />,
   },
   {
@@ -70,11 +73,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/administration/partenaires",
-    element: <App />,
+    element: <AdminPartenaires />,
+  },
+  {
+    path: "/administration/partenaires/nouveau",
+    element: <AdminPartenaireCreate />,
   },
   {
     path: "/administration/partenaires/:partenaireId",
-    element: <App />,
+    element: <AdminPartenaireUpdate />,
   },
   {
     path: "/administration/ecuries",

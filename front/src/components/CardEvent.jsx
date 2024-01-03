@@ -5,7 +5,7 @@ import LinkButton from "../layouts/LinkButton";
 
 import { eventDates, isInFuture } from "../utils/dateUtils";
 
-export default function EventCard(props) {
+export default function CardEvent(props) {
   return (
     <div className={`${props.className} event-card`}>
       <p className="text-center">{eventDates(props.debut, props.fin)}</p>
@@ -54,7 +54,7 @@ export default function EventCard(props) {
   );
 }
 
-EventCard.propTypes = {
+CardEvent.propTypes = {
   id: PropTypes.number.isRequired,
   debut: PropTypes.string.isRequired,
   fin: PropTypes.string.isRequired,

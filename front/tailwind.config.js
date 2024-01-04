@@ -77,6 +77,7 @@ export default {
       spacing: {
         88: "352px",
         112: "448px",
+        128: "512px",
       },
       maxWidth: {
         80: "320px",
@@ -91,6 +92,10 @@ export default {
       },
       aspectRatio: {
         "4/3": "4 / 3",
+      },
+      gridAutoRows: {
+        16: "64px",
+        32: "128px",
       },
     },
   },

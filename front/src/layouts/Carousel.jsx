@@ -132,47 +132,8 @@ export default function Carousel(props) {
 
   return (
     <div className="relative w-full overflow-hidden">
-      <div
-        className="carousel-arrow left-6"
-        onClick={() => handleArrowClick("left")}
-        tabIndex="0"
-        onKeyDown={(e) => e.key === "Enter" && handleArrowClick("left")}
-      >
-        <FaAngleLeft />
-      </div>
-      <div className="flex transition-transform duration-500 ease-in-out">
-        {props.images.map((image, index) => (
-          <div
-            key={index}
-            className={`aspect-4/3 w-full overflow-hidden ${
-              index !== currentSlide ? "hidden" : ""
-            }`}
-          >
-            {props.preview && (
-              <p className="mb-2 text-center">{image.legend}</p>
-            )}
-            <img
-              {...handlers}
-              src={image.src}
-              alt={image.alt}
-              className="aspect-4/3 w-full"
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => setPaused(false)}
-            />
-          </div>
-        ))}
-      </div>
-      <div
-        className="carousel-arrow right-0"
-        onClick={() => handleArrowClick("right")}
-        tabIndex="0"
-        onKeyDown={(e) => e.key === "Enter" && handleArrowClick("right")}
-      >
-        <FaAngleRight />
-      </div>
-
       {props.preview && (
-        <div className="mt-2 flex flex-row flex-nowrap items-center justify-center">
+        <div className="my-2 flex flex-row flex-nowrap items-center justify-center">
           {getPreviewImages(
             props.images,
             currentSlide,
@@ -193,6 +154,45 @@ export default function Carousel(props) {
           ))}
         </div>
       )}
+
+      <div
+        className="carousel-arrow left-6"
+        onClick={() => handleArrowClick("left")}
+        tabIndex="0"
+        onKeyDown={(e) => e.key === "Enter" && handleArrowClick("left")}
+      >
+        <FaAngleLeft />
+      </div>
+      <div className="md:h-128 flex h-96 transition-transform duration-500 ease-in-out">
+        {props.images.map((image, index) => (
+          <div
+            key={index}
+            className={`flex w-full flex-col items-center justify-center overflow-hidden ${
+              index !== currentSlide ? "hidden" : ""
+            }`}
+          >
+            <img
+              {...handlers}
+              src={image.src || image}
+              alt={image.alt}
+              className="max-h-full max-w-full self-center justify-self-center object-fill"
+              onMouseEnter={() => setPaused(true)}
+              onMouseLeave={() => setPaused(false)}
+            />
+            {props.preview && (
+              <p className="mb-8 text-center">{image.legend}</p>
+            )}
+          </div>
+        ))}
+      </div>
+      <div
+        className="carousel-arrow right-0"
+        onClick={() => handleArrowClick("right")}
+        tabIndex="0"
+        onKeyDown={(e) => e.key === "Enter" && handleArrowClick("right")}
+      >
+        <FaAngleRight />
+      </div>
     </div>
   );
 }

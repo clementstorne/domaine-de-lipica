@@ -22,7 +22,7 @@
         rgba(250, 253, 254, 0.5),
         rgba(250, 253, 254, 0.6)
       ),
-      url(../title-background.jpg);
+      url(/title-background.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

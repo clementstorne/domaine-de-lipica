@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
-import App from "./App.jsx";
 import Home from "./pages/Home.jsx";
 import Presentation from "./pages/Presentation.jsx";
 import Ecurie from "./pages/Ecurie.jsx";
@@ -17,10 +16,13 @@ import AdminConcours from "./pages/AdminConcours.jsx";
 import AdminConcoursCreate from "./pages/AdminConcoursCreate.jsx";
 import AdminConcoursUpdate from "./pages/AdminConcoursUpdate.jsx";
 import AdminPartenaires from "./pages/AdminPartenaires.jsx";
-import AdminPartenaireCreate from "./pages/AdminPartenairesCreate.jsx";
+import AdminPartenaireCreate from "./pages/AdminPartenaireCreate.jsx";
+import AdminPartenaireUpdate from "./pages/AdminPartenaireUpdate.jsx";
+import AdminEcuries from "./pages/AdminEcuries.jsx";
+import AdminEcurieCreate from "./pages/AdminEcurieCreate.jsx";
+import AdminEcurieUpdate from "./pages/AdminEcurieUpdate.jsx";
 import MentionsLegales from "./pages/MentionsLegales.jsx";
 import SiteMap from "./pages/SiteMap.jsx";
-import AdminPartenaireUpdate from "./pages/AdminPartenaireUpdate.jsx";
 
 const router = createBrowserRouter([
   {
@@ -85,11 +87,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/administration/ecuries",
-    element: <App />,
+    element: <AdminEcuries />,
+  },
+  {
+    path: "/administration/ecuries/nouveau",
+    element: <AdminEcurieCreate />,
   },
   {
     path: "/administration/ecuries/:ecurieId",
-    element: <App />,
+    element: <AdminEcurieUpdate />,
   },
   {
     path: "/mentions-legales",

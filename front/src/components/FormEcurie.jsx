@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Navigate } from "react-router-dom";
 
-export default function FormPartenaire(props) {
-  const [isFormSent, setIsFormSent] = useState(false);
+export default function FormEcurie(props) {
+  const [images, setImages] = useState([]);
   const [imageBase64url, setImageBase64url] = useState("");
   const [imageFile, setImageFile] = useState(null);
 
@@ -18,40 +17,38 @@ export default function FormPartenaire(props) {
 
   const handleImageInput = (e) => {
     setImageFile(e.target.files[0]);
+    console.log(e.target.files);
     const fileReader = new FileReader();
     fileReader.readAsDataURL(e.target.files[0]);
     fileReader.addEventListener("load", () => {
       setImageBase64url(fileReader.result);
     });
+    setImages((images) => [...images, imageBase64url]);
   };
 
   const onSubmit = (data) => {
     if (props.type === "create") {
-      const formData = new FormData();
-      formData.append("partner", JSON.stringify(data));
-      formData.append("logo", imageFile);
-      console.log(formData);
-      // setIsFormSent(true);
+      console.log("Partenaire créé", { ...data });
+      // setImageBase64url("");
+      // reset();
     } else {
       console.log("Partenaire modifié", { ...data });
-      setImageBase64url("");
-      reset();
+      // setImageBase64url("");
+      // reset();
     }
   };
 
   useEffect(() => {
-    if (props.partner) {
-      setValue("nom", props.partner.nom);
-      setValue("informations", props.partner.informations);
-      setImageBase64url(`/logos/${props.partner.logo}`);
+    if (props.stable) {
+      setValue("nom", props.stable.nom);
+      setValue("informations", props.stable.informations);
+      // console.log(props.stable.images);
+      setImages(props.stable.images);
     }
   }, []);
 
   return (
     <>
-      {isFormSent && (
-        <Navigate to="/administration/partenaires" replace={true} />
-      )}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex w-full max-w-144 flex-col flex-nowrap items-center justify-center"
@@ -94,22 +91,33 @@ export default function FormPartenaire(props) {
           />
         </div>
 
-        {imageBase64url && (
-          <div className="flex h-40 w-40 items-center justify-center bg-white">
-            <img
-              src={imageBase64url}
-              alt=""
-              className="max-h-40 max-w-40 object-fill"
-            />
+        {images.length > 0 && (
+          <div className="auto-rows-32 grid w-full grid-cols-3 items-center gap-2">
+            {images.map((image, index) => (
+              <img
+                key={index}
+                src={`/${image}`}
+                alt=""
+                className="max-h-full max-w-full self-center justify-self-center object-fill"
+              />
+            ))}
+            {imageBase64url && (
+              <img
+                src={imageBase64url}
+                alt=""
+                className="max-h-full max-w-full self-center justify-self-center object-fill"
+              />
+            )}
           </div>
         )}
 
         <input
-          {...register("logo")}
+          {...register("images")}
           type="file"
-          id="logo"
+          multiple
+          id="images"
           className="hidden"
-          aria-describedby="logo-label"
+          aria-describedby="images-label"
           accept="image/png, image/jpg, image/jpeg"
           ref={hiddenFileInput}
           onChange={handleImageInput}
@@ -118,22 +126,20 @@ export default function FormPartenaire(props) {
           className="button big-button mt-4"
           onClick={handleUploadButtonClick}
         >
-          <label htmlFor="logo" id="logo-label">
-            {imageBase64url ? "Modifier le logo" : "Ajouter un logo"}
+          <label htmlFor="images" id="images-label">
+            {imageBase64url ? "Modifier les images" : "Ajouter une image"}
           </label>
         </button>
 
         <button type="submit" className="button big-button mt-4">
-          {props.type == "create"
-            ? "Ajouter le partneiare"
-            : "Modifier le partenaire"}
+          {props.type == "create" ? "Ajouter l'écurie" : "Modifier l'écurie'"}
         </button>
       </form>
     </>
   );
 }
 
-FormPartenaire.propTypes = {
+FormEcurie.propTypes = {
   type: PropTypes.oneOf(["create", "update"]),
-  partner: PropTypes.object,
+  stable: PropTypes.object,
 };

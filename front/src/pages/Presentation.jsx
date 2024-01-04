@@ -61,7 +61,9 @@ export default function Presentation() {
 
       <section className="mb-8 md:mb-16">
         <h2 className="text-blue-900">Installations</h2>
-        <Carousel images={images} preview={true} />
+        <div className="lg:w-19/12 mx-auto md:w-3/4">
+          <Carousel images={images} preview={true} />
+        </div>
       </section>
 
       <section className="mb-8 md:mb-16">

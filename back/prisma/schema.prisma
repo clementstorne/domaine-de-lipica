@@ -1,0 +1,45 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique(map: "email") @db.VarChar(100)
+  password String @db.VarChar(64)
+}
+
+model Event {
+  id          String @id @default(uuid())
+  debut       String @db.VarChar(10)
+  fin         String @db.VarChar(10)
+  discipline  String @db.VarChar(50)
+  niveau      String @db.VarChar(100)
+  horaires    String @db.MediumText
+  lienWinJump String @db.VarChar(100)
+}
+
+model Partner {
+  id           String @id @default(uuid())
+  nom          String @db.VarChar(100)
+  logo         String @db.VarChar(100)
+  informations String @db.MediumText
+}
+
+model Stable {
+  id           String   @id @default(uuid())
+  nom          String   @db.VarChar(100)
+  url          String   @db.VarChar(100)
+  informations String   @db.MediumText
+  images       Images[]
+}
+
+model Images {
+  url      String @id
+  stable   Stable @relation(fields: [stableId], references: [id])
+  stableId String
+}

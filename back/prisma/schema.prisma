@@ -15,8 +15,8 @@ model User {
 
 model Event {
   id          String @id @default(uuid())
-  debut       String @db.VarChar(10)
-  fin         String @db.VarChar(10)
+  debut       String @db.VarChar(20)
+  fin         String @db.VarChar(20)
   discipline  String @db.VarChar(50)
   niveau      String @db.VarChar(100)
   horaires    String @db.MediumText

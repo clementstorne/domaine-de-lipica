@@ -5,6 +5,7 @@ import path from "path";
 import { PrismaClient } from "@prisma/client";
 
 import authRoutes from "./routes/authRoutes.js";
+import eventsRoutes from "./routes/eventsRoutes.js";
 
 const app = express();
 const corsOptions = {
@@ -21,6 +22,7 @@ app.get("/", (_, res) => {
 });
 
 app.use("/auth", authRoutes);
+app.use("/events", eventsRoutes);
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 

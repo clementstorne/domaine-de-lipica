@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const EventController = {
+const EventsController = {
   createEvent: async (req, res) => {
     const { debut, fin, discipline, niveau, horaires, lienWinJump } = req.body;
 
@@ -187,4 +187,4 @@ const EventController = {
   },
 };
 
-export default EventController;
+export default EventsController;

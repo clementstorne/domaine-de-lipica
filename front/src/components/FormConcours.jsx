@@ -1,33 +1,37 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
+import { unformatDate } from "../utils/dateUtils";
+import EventService from "../services/EventService";
 
 export default function FormConcours(props) {
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     setValue,
     register,
     formState: { errors },
     control,
-    reset,
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (props.type === "create") {
       const niveau = data.niveau.join(" - ");
-      console.log("Concours créé", { ...data, niveau });
-      reset();
+      await EventService.createEvent({ ...data, niveau });
+      navigate("/administration/concours");
     } else {
       const niveau = data.niveau.join(" - ");
-      console.log("Concours modifié", { ...data, niveau });
-      reset();
+      await EventService.updateEvent(props.event.id, { ...data, niveau });
+      navigate("/administration/concours");
     }
   };
 
   useEffect(() => {
     if (props.event) {
-      setValue("debut", props.event.debut);
-      setValue("fin", props.event.fin);
+      setValue("debut", unformatDate(props.event.debut));
+      setValue("fin", unformatDate(props.event.fin));
       setValue("discipline", props.event.discipline);
       setValue("niveau", props.event.niveau.split(" - "));
       setValue("horaires", props.event.horaires);

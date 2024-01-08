@@ -1,22 +1,43 @@
-import events from "../data/concours.json";
-
-import { isInFuture } from "../utils/dateUtils";
+import { useEffect, useState } from "react";
+import EventService from "../services/EventService";
+import {
+  filterFutureEvents,
+  filterPastEvents,
+  sortEvents,
+} from "../utils/eventsUtils";
 
 import Navbar from "../layouts/Navbar";
 import CardEvent from "../components/CardEvent";
 import Footer from "../layouts/Footer";
 
 export default function Concours() {
-  const futureEvents = events.filter((event) => isInFuture(event.debut));
-  const futureEventsSorted = futureEvents.sort((a, b) =>
-    a.debut < b.debut ? -1 : a.debut > b.debut ? 1 : 0,
-  );
+  const [events, setEvents] = useState([]);
+  const [futureEvents, setFutureEvents] = useState([]);
+  const [pastEvents, setPastEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const pastEvents = events.filter((event) => !isInFuture(event.debut));
-  const pastEventsSorted = pastEvents.sort((a, b) =>
-    a.debut < b.debut ? 1 : a.debut > b.debut ? -1 : 0,
-  );
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await EventService.getAllEvents();
+        setEvents(res.data.events);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
+  useEffect(() => {
+    setFutureEvents(filterFutureEvents(sortEvents(events)));
+    setPastEvents(sortEvents(filterPastEvents(events)));
+  }, [events]);
+
+  if (events.length === 0 || isLoading) {
+    return <p>Chargement…</p>;
+  }
   return (
     <>
       <Navbar />
@@ -30,7 +51,7 @@ export default function Concours() {
           <p>Niveau</p>
           <p>Liens</p>
         </div>
-        {futureEventsSorted.map((event, index) => (
+        {futureEvents.map((event, index) => (
           <CardEvent
             key={event.id}
             {...event}
@@ -46,7 +67,7 @@ export default function Concours() {
           <p>Niveau</p>
           <p>Liens</p>
         </div>
-        {pastEventsSorted.map((event, index) => (
+        {pastEvents.map((event, index) => (
           <CardEvent
             key={event.id}
             {...event}

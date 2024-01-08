@@ -10,7 +10,7 @@ import partnersRoutes from "./routes/partnersRoutes.js";
 
 const app = express();
 const corsOptions = {
-  origin: "http://localhost:8080",
+  origin: "http://localhost:5173",
 };
 app.use(cors(corsOptions));
 app.use(express.json());

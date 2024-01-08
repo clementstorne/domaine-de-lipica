@@ -1,11 +1,17 @@
 import PropTypes from "prop-types";
 
 import DisciplineTag from "../layouts/DisciplineTag";
+import Button from "../layouts/Button";
 import LinkButton from "../layouts/LinkButton";
 
 import { eventDates, isInFuture } from "../utils/dateUtils";
+import EventService from "../services/EventService";
 
 export default function CardEvent(props) {
+  const handleDeleteClick = async () => {
+    await EventService.deleteEvent(props.id);
+  };
+
   return (
     <div className={`${props.className} event-card`}>
       <p className="text-center">{eventDates(props.debut, props.fin)}</p>
@@ -22,8 +28,8 @@ export default function CardEvent(props) {
               size="small"
               className="mr-4"
             />
-            <LinkButton
-              link={"/administration/concours/" + props.id}
+            <Button
+              onClick={handleDeleteClick}
               label="Supprimer"
               size="small"
               className="mr-4"
@@ -55,7 +61,7 @@ export default function CardEvent(props) {
 }
 
 CardEvent.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   debut: PropTypes.string.isRequired,
   fin: PropTypes.string.isRequired,
   discipline: PropTypes.string.isRequired,

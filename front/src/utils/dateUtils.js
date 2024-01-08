@@ -6,6 +6,10 @@ const formatDate = (dateStr) => {
   return moment(dateStr).format("DD/MM/YYYY");
 };
 
+const unformatDate = (dateStr) => {
+  return moment(dateStr).add(2, "h").toDate().toISOString().split("T")[0];
+};
+
 const isInFuture = (dateStr) => {
   return moment(dateStr).diff(moment(), "days") >= 0;
 };
@@ -31,9 +35,9 @@ const singleEventDates = (debut, fin) => {
     return `du ${dateDebut.format("D")} au ${dateFin.format("D MMMM YYYY")}`;
   } else {
     return `du ${dateDebut.format("D MMMM")} au ${dateFin.format(
-      "D MMMM YYYY"
+      "D MMMM YYYY",
     )}`;
   }
 };
 
-export { formatDate, isInFuture, eventDates, singleEventDates };
+export { formatDate, unformatDate, isInFuture, eventDates, singleEventDates };

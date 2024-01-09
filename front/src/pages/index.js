@@ -18,3 +18,4 @@ export { default as MentionsLegales } from "./MentionsLegales";
 export { default as Partenaires } from "./Partenaires";
 export { default as Presentation } from "./Presentation";
 export { default as SiteMap } from "./SiteMap";
+export { default as ErrorPage } from "./ErrorPage";

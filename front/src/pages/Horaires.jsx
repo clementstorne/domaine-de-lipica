@@ -1,22 +1,41 @@
-import events from "../data/concours.json";
 import partners from "../data/partenaires.json";
+
+import { useSelector, useDispatch } from "react-redux";
+import { getSingleEvent } from "../store/eventSlice";
 
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
+import ErrorPage from "./ErrorPage";
 
 import { singleEventDates } from "../utils/dateUtils";
+import { useEffect } from "react";
 
 export default function Horaires() {
-  const eventId = window.location.pathname.split("concours/")[1];
-  const event = events.filter((event) => event.id === parseInt(eventId))[0];
-  const title = `${event.discipline} ${event.niveau} ${singleEventDates(
-    event.debut,
-    event.fin,
-  )}`;
-  const schedules = event.horaires
-    .split("\n\n")
-    .map((schedule) => schedule.split("\n").join("<br />"));
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    const eventId = window.location.pathname.split("concours/")[1];
+    dispatch(getSingleEvent({ id: eventId }));
+  }, []);
+
+  const event = useSelector((state) => state.events.event);
+  const error = useSelector((state) => state.events.error);
+
+  const title = event
+    ? `${event.discipline} ${event.niveau} ${singleEventDates(
+        event.debut,
+        event.fin,
+      )}`
+    : "";
+  const schedules = event
+    ? event.horaires
+        .split("\n\n")
+        .map((schedule) => schedule.split("\n").join("<br />"))
+    : "";
+
+  if (error) {
+    return <ErrorPage />;
+  }
   return (
     <>
       <Navbar />
@@ -53,13 +72,14 @@ export default function Horaires() {
         <h2 className="text-blue-900">
           Horaires approximatifs de début d&apos;épreuve
         </h2>
-        {schedules.map((schedule, index) => (
-          <p
-            key={index}
-            className="mb-4"
-            dangerouslySetInnerHTML={{ __html: `${schedule}` }}
-          />
-        ))}
+        {event &&
+          schedules.map((schedule, index) => (
+            <p
+              key={index}
+              className="mb-4"
+              dangerouslySetInnerHTML={{ __html: `${schedule}` }}
+            />
+          ))}
       </main>
 
       <section className="bloc">

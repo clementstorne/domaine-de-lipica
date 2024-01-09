@@ -8,6 +8,7 @@ import {
 } from "../utils/eventsUtils";
 
 const initialState = {
+  event: null,
   eventsList: [],
   pastEventsList: [],
   futureEventsList: [],
@@ -48,8 +49,25 @@ export const getAllEvents = createAsyncThunk(
   },
 );
 
+export const getSingleEvent = createAsyncThunk(
+  "events/getSingleEvent",
+  async (credentials, thunkAPI) => {
+    const eventId = credentials.id;
+    try {
+      const res = await EventService.getSingleEvent(eventId);
+      if (res.status >= 200 && res.status <= 209) {
+        return res.data;
+      } else {
+        return thunkAPI.rejectWithValue(res.errorr);
+      }
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
 export const updateEvent = createAsyncThunk(
-  "events/updateEVent",
+  "events/updateEvent",
   async (credentials, thunkAPI) => {
     const eventId = credentials.id;
     try {
@@ -113,6 +131,19 @@ const eventSlice = createSlice({
         state.nextEvents = state.futureEventsList.slice(0, 3);
       })
       .addCase(getAllEvents.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(getSingleEvent.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getSingleEvent.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.event = action.payload.event;
+      })
+      .addCase(getSingleEvent.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })

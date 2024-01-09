@@ -4,6 +4,7 @@ import { getAllEvents } from "../store/eventSlice";
 import Navbar from "../layouts/Navbar";
 import CardEvent from "../components/CardEvent";
 import Footer from "../layouts/Footer";
+import ErrorPage from "./ErrorPage";
 
 import { useEffect } from "react";
 
@@ -16,7 +17,11 @@ export default function AdminConcours() {
 
   const pastEvents = useSelector((state) => state.events.pastEventsList);
   const futureEvents = useSelector((state) => state.events.futureEventsList);
+  const error = useSelector((state) => state.events.error);
 
+  if (error) {
+    return <ErrorPage />;
+  }
   return (
     <>
       <Navbar />

@@ -1,16 +1,40 @@
 import PropTypes from "prop-types";
 
+import { useEffect, useState } from "react";
+import { eventDates, isInFuture } from "../utils/dateUtils";
+
+import { useDispatch } from "react-redux";
+import { deleteEvent } from "../store/eventSlice";
+
+import { FaTrash, FaPen } from "react-icons/fa6";
+
 import DisciplineTag from "../layouts/DisciplineTag";
 import Button from "../layouts/Button";
 import LinkButton from "../layouts/LinkButton";
 
-import { eventDates, isInFuture } from "../utils/dateUtils";
-import EventService from "../services/EventService";
-
 export default function CardEvent(props) {
-  const handleDeleteClick = async () => {
-    await EventService.deleteEvent(props.id);
-  };
+  const dispatch = useDispatch();
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const lg = 1024;
+  const md = 768;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handleDeleteClick = () => dispatch(deleteEvent({ id: props.id }));
+  // const handleDeleteClick = async () => {
+  //   await EventService.deleteEvent(props.id);
+  // };
 
   return (
     <div className={`${props.className} event-card`}>
@@ -24,13 +48,17 @@ export default function CardEvent(props) {
           <>
             <LinkButton
               link={"/administration/concours/" + props.id}
-              label="Modifier"
+              label={
+                windowWidth > md && windowWidth < lg ? <FaPen /> : "Modifier"
+              }
               size="small"
               className="mr-4"
             />
             <Button
               onClick={handleDeleteClick}
-              label="Supprimer"
+              label={
+                windowWidth > md && windowWidth < lg ? <FaTrash /> : "Supprimer"
+              }
               size="small"
               className="mr-4"
             />

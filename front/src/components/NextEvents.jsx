@@ -1,37 +1,22 @@
-import { useEffect, useState } from "react";
-import EventService from "../services/EventService";
-import { filterFutureEvents, sortEvents } from "../utils/eventsUtils";
+import { useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { getAllEvents } from "../store/eventSlice";
 
 import CardNextEvent from "./CardNextEvent";
 import LinkButton from "../layouts/LinkButton";
 
 export default function NextEvents() {
-  const [events, setEvents] = useState([]);
-  const [futureEvents, setFutureEvents] = useState([]);
-  const [nextEvents, setNextEvents] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await EventService.getAllEvents();
-        setEvents(res.data.events);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
+    dispatch(getAllEvents());
   }, []);
 
-  useEffect(() => {
-    setFutureEvents(filterFutureEvents(sortEvents(events)));
-    setNextEvents(futureEvents.slice(0, 3));
-  }, [events, futureEvents]);
+  const nextEvents = useSelector((state) => state.events.nextEvents);
 
-  if (events.length === 0 || isLoading) {
-    return <p>Chargement…</p>;
+  if (nextEvents.length === 0) {
+    return <></>;
   }
   return (
     <section className="home-section blue-gradient">

@@ -1,80 +1,67 @@
-import { useEffect, useState } from "react";
-import EventService from "../services/EventService";
-import {
-  filterFutureEvents,
-  filterPastEvents,
-  sortEvents,
-} from "../utils/eventsUtils";
+import { useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { getAllEvents } from "../store/eventSlice";
 
 import Navbar from "../layouts/Navbar";
 import CardEvent from "../components/CardEvent";
 import Footer from "../layouts/Footer";
 
 export default function Concours() {
-  const [events, setEvents] = useState([]);
-  const [futureEvents, setFutureEvents] = useState([]);
-  const [pastEvents, setPastEvents] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await EventService.getAllEvents();
-        setEvents(res.data.events);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
+    dispatch(getAllEvents());
   }, []);
 
-  useEffect(() => {
-    setFutureEvents(filterFutureEvents(sortEvents(events)));
-    setPastEvents(sortEvents(filterPastEvents(events)));
-  }, [events]);
+  const pastEvents = useSelector((state) => state.events.pastEventsList);
+  const futureEvents = useSelector((state) => state.events.futureEventsList);
 
-  if (events.length === 0 || isLoading) {
-    return <p>Chargement…</p>;
-  }
   return (
     <>
       <Navbar />
       <h1>Concours</h1>
-      <section className="mb-8 md:mb-16">
-        <h2 className="text-blue-900">Concours à venir</h2>
+      {futureEvents.length === 0 ? (
+        <></>
+      ) : (
+        <section className="mb-8 md:mb-16">
+          <h2 className="text-blue-900">Concours à venir</h2>
 
-        <div className="table-header blue-gradient">
-          <p>Dates</p>
-          <p>Discipline</p>
-          <p>Niveau</p>
-          <p>Liens</p>
-        </div>
-        {futureEvents.map((event, index) => (
-          <CardEvent
-            key={event.id}
-            {...event}
-            className={`${index % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}`}
-          />
-        ))}
-      </section>
-      <section className="mb-8 md:mb-16">
-        <h2 className="text-blue-900">Concours passés</h2>
-        <div className="table-header blue-gradient">
-          <p>Dates</p>
-          <p>Discipline</p>
-          <p>Niveau</p>
-          <p>Liens</p>
-        </div>
-        {pastEvents.map((event, index) => (
-          <CardEvent
-            key={event.id}
-            {...event}
-            className={`${index % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}`}
-          />
-        ))}
-      </section>
+          <div className="table-header blue-gradient">
+            <p>Dates</p>
+            <p>Discipline</p>
+            <p>Niveau</p>
+            <p>Liens</p>
+          </div>
+          {futureEvents.map((event, index) => (
+            <CardEvent
+              key={event.id}
+              {...event}
+              className={`${index % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}`}
+            />
+          ))}
+        </section>
+      )}
+      {pastEvents.length === 0 ? (
+        <></>
+      ) : (
+        <section className="mb-8 md:mb-16">
+          <h2 className="text-blue-900">Concours passés</h2>
+          <div className="table-header blue-gradient">
+            <p>Dates</p>
+            <p>Discipline</p>
+            <p>Niveau</p>
+            <p>Liens</p>
+          </div>
+          {pastEvents.map((event, index) => (
+            <CardEvent
+              key={event.id}
+              {...event}
+              className={`${index % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}`}
+            />
+          ))}
+        </section>
+      )}
 
       <Footer />
     </>

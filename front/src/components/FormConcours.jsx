@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createEvent, updateEvent } from "../store/eventSlice";
 import { useForm, Controller } from "react-hook-form";
 import { unformatDate } from "../utils/dateUtils";
-import EventService from "../services/EventService";
 
 export default function FormConcours(props) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const {
@@ -19,11 +21,11 @@ export default function FormConcours(props) {
   const onSubmit = async (data) => {
     if (props.type === "create") {
       const niveau = data.niveau.join(" - ");
-      await EventService.createEvent({ ...data, niveau });
+      dispatch(createEvent({ ...data, niveau }));
       navigate("/administration/concours");
     } else {
       const niveau = data.niveau.join(" - ");
-      await EventService.updateEvent(props.event.id, { ...data, niveau });
+      dispatch(updateEvent({ ...data, niveau, id: props.event.id }));
       navigate("/administration/concours");
     }
   };

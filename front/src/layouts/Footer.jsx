@@ -34,7 +34,7 @@ export default function Footer() {
           Clément <br />
           Storne
         </a>
-        <p className="m-0 font-light normal-case">© 2023</p>
+        <p className="m-0 font-light normal-case">© 2024</p>
       </div>
     </footer>
   );

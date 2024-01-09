@@ -42,7 +42,6 @@ export default function FormEcurie(props) {
     if (props.stable) {
       setValue("nom", props.stable.nom);
       setValue("informations", props.stable.informations);
-      // console.log(props.stable.images);
       setImages(props.stable.images);
     }
   }, []);
@@ -92,7 +91,7 @@ export default function FormEcurie(props) {
         </div>
 
         {images.length > 0 && (
-          <div className="auto-rows-32 grid w-full grid-cols-3 items-center gap-2">
+          <div className="grid w-full auto-rows-32 grid-cols-3 items-center gap-2">
             {images.map((image, index) => (
               <img
                 key={index}

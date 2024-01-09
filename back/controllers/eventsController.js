@@ -170,13 +170,15 @@ const EventsController = {
     }
 
     try {
-      const deletedEvent = await prisma.event.delete({
+      await prisma.event.delete({
         where: {
           id: eventId,
         },
       });
 
-      return res.status(204);
+      return res
+        .status(204)
+        .json({ message: "Event was deleted successfully." });
     } catch (error) {
       console.error(error);
       return res.status(500).json({

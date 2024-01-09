@@ -43,8 +43,8 @@ export default function LinkButton(props) {
 
 LinkButton.propTypes = {
   link: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   className: PropTypes.string,
   disabled: PropTypes.bool,
-  size: PropTypes.oneOf(["small"]),
+  size: PropTypes.oneOf(["small", "extra-small"]),
 };

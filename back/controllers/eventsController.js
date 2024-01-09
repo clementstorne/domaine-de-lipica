@@ -176,9 +176,7 @@ const EventsController = {
         },
       });
 
-      return res
-        .status(204)
-        .json({ message: "Event was deleted successfully." });
+      return res.status(204).send();
     } catch (error) {
       console.error(error);
       return res.status(500).json({

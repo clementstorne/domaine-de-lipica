@@ -1,18 +1,24 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createPartner, updatePartner } from "../store/partnerSlice";
 import { useForm, Controller } from "react-hook-form";
-import { Navigate } from "react-router-dom";
 
 export default function FormPartenaire(props) {
-  const [isFormSent, setIsFormSent] = useState(false);
-  const [imageBase64url, setImageBase64url] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [imageBase64url, setImageBase64url] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
-  const { handleSubmit, setValue, register, control, reset } = useForm();
+  const { handleSubmit, setValue, register, control } = useForm();
 
   const hiddenFileInput = useRef(null);
 
-  const handleUploadButtonClick = () => {
+  const handleUploadButtonClick = (e) => {
+    e.preventDefault();
+    // e.stopPropagation();
     hiddenFileInput.current.click();
   };
 
@@ -25,17 +31,29 @@ export default function FormPartenaire(props) {
     });
   };
 
+  const createFormData = (data, imageFile, id) => {
+    const formData = new FormData();
+    if (id) {
+      formData.append("id", id);
+    }
+    formData.append("nom", data.nom);
+    formData.append("informations", data.informations);
+    if (imageFile) {
+      formData.append("image", imageFile);
+    }
+    return formData;
+  };
+
   const onSubmit = (data) => {
     if (props.type === "create") {
-      const formData = new FormData();
-      formData.append("partner", JSON.stringify(data));
-      formData.append("logo", imageFile);
-      console.log(formData);
-      // setIsFormSent(true);
+      const formData = createFormData(data, imageFile);
+      dispatch(createPartner(formData));
+      navigate("/administration/partenaires");
     } else {
-      console.log("Partenaire modifié", { ...data });
       setImageBase64url("");
-      reset();
+      const formData = createFormData(data, imageFile, props.partner.id);
+      dispatch(updatePartner(formData));
+      navigate("/administration/partenaires");
     }
   };
 
@@ -43,15 +61,13 @@ export default function FormPartenaire(props) {
     if (props.partner) {
       setValue("nom", props.partner.nom);
       setValue("informations", props.partner.informations);
-      setImageBase64url(`/logos/${props.partner.logo}`);
+      setImageBase64url(`${props.partner.logo}`);
+      setImageBase64url(`${props.partner.logo}`);
     }
   }, []);
 
   return (
     <>
-      {isFormSent && (
-        <Navigate to="/administration/partenaires" replace={true} />
-      )}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex w-full max-w-144 flex-col flex-nowrap items-center justify-center"
@@ -107,6 +123,7 @@ export default function FormPartenaire(props) {
         <input
           {...register("logo")}
           type="file"
+          name="image"
           id="logo"
           className="hidden"
           aria-describedby="logo-label"
@@ -125,7 +142,7 @@ export default function FormPartenaire(props) {
 
         <button type="submit" className="button big-button mt-4">
           {props.type == "create"
-            ? "Ajouter le partneiare"
+            ? "Ajouter le partenaire"
             : "Modifier le partenaire"}
         </button>
       </form>

@@ -16,7 +16,7 @@ export default function CardPartner(props) {
         >
           {props.logo && (
             <img
-              src={`/logos/${props.logo}`}
+              src={props.logo}
               alt={`Logo de ${props.nom}`}
               className="object-fill"
             />
@@ -51,7 +51,7 @@ export default function CardPartner(props) {
 }
 
 CardPartner.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   nom: PropTypes.string.isRequired,
   logo: PropTypes.string,
   informations: PropTypes.string.isRequired,

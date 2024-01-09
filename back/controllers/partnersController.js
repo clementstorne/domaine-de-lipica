@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
+import fs from "fs";
+
 const prisma = new PrismaClient();
 
 const PartnersController = {
@@ -127,13 +129,13 @@ const PartnersController = {
     }
 
     try {
-      const credentials = req.body;
+      const { nom, informations } = req.body;
+      let logo = "";
 
-      const updatedPartner = await prisma.partner.update({
+      const partner = await prisma.partner.findUnique({
         where: {
           id: partnerId,
         },
-        data: credentials,
         select: {
           id: true,
           nom: true,
@@ -142,9 +144,76 @@ const PartnersController = {
         },
       });
 
-      return res
-        .status(200)
-        .json({ message: "Partner was updated successfully.", updatedPartner });
+      if (partner.logo) {
+        if (req.file && req.file.filename) {
+          const filename = partner.logo.split("/images/")[1];
+          try {
+            fs.unlinkSync(`images/${filename}`);
+          } catch (unlinkError) {
+            console.error("Error deleting old file:", unlinkError);
+            return res.status(500).json({
+              error: "Error deleting old file",
+            });
+          }
+          logo = `${req.protocol}://${req.get("host")}/images/${
+            req.file.filename
+          }`;
+          const updatedPartner = await prisma.partner.update({
+            where: {
+              id: partnerId,
+            },
+            data: { nom, informations, logo },
+            select: {
+              id: true,
+              nom: true,
+              informations: true,
+              logo: true,
+            },
+          });
+        } else {
+          const updatedPartner = await prisma.partner.update({
+            where: {
+              id: partnerId,
+            },
+            data: { nom, informations },
+            select: {
+              id: true,
+              nom: true,
+              informations: true,
+              logo: true,
+            },
+          });
+
+          return res.status(200).json({
+            message: "Partner was updated successfully.",
+            updatedPartner,
+          });
+        }
+      } else {
+        if (req.file && req.file.filename) {
+          logo = `${req.protocol}://${req.get("host")}/images/${
+            req.file.filename
+          }`;
+        }
+
+        const updatedPartner = await prisma.partner.update({
+          where: {
+            id: partnerId,
+          },
+          data: { nom, informations, logo },
+          select: {
+            id: true,
+            nom: true,
+            informations: true,
+            logo: true,
+          },
+        });
+
+        return res.status(200).json({
+          message: "Partner was updated successfully.",
+          updatedPartner,
+        });
+      }
     } catch (error) {
       console.error(error);
       return res.status(500).json({
@@ -171,7 +240,7 @@ const PartnersController = {
         },
       });
 
-      return res.status(204);
+      return res.status(204).send();
     } catch (error) {
       console.error(error);
       return res.status(500).json({

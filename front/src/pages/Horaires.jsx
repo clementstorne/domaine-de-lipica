@@ -1,7 +1,6 @@
-import partners from "../data/partenaires.json";
-
 import { useSelector, useDispatch } from "react-redux";
 import { getSingleEvent } from "../store/eventSlice";
+import { getAllPartners } from "../store/partnerSlice";
 
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
@@ -16,10 +15,13 @@ export default function Horaires() {
   useEffect(() => {
     const eventId = window.location.pathname.split("concours/")[1];
     dispatch(getSingleEvent({ id: eventId }));
+    dispatch(getAllPartners());
   }, []);
 
   const event = useSelector((state) => state.events.event);
-  const error = useSelector((state) => state.events.error);
+  const eventError = useSelector((state) => state.events.error);
+  const partners = useSelector((state) => state.partners.partnersList);
+  const partnersError = useSelector((state) => state.partners.error);
 
   const title = event
     ? `${event.discipline} ${event.niveau} ${singleEventDates(
@@ -33,7 +35,7 @@ export default function Horaires() {
         .map((schedule) => schedule.split("\n").join("<br />"))
     : "";
 
-  if (error) {
+  if (eventError || partnersError) {
     return <ErrorPage />;
   }
   return (
@@ -48,7 +50,7 @@ export default function Horaires() {
             className="mb-2 mr-2 flex h-12 w-12 items-center justify-center bg-white md:mb-4 md:mr-4 md:h-24 md:w-24"
           >
             <img
-              src={`/logos/${partner.logo}`}
+              src={partner.logo}
               alt={`Logo de ${partner.nom}`}
               className="object-fill"
             />

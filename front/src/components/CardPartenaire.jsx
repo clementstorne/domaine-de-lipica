@@ -1,10 +1,18 @@
 import PropTypes from "prop-types";
 
+import { useDispatch } from "react-redux";
+import { deletePartner } from "../store/partnerSlice";
+
+import Button from "../layouts/Button";
 import LinkButton from "../layouts/LinkButton";
 
 import { newlineToBreakTag } from "../utils/strUtils";
 
 export default function CardPartner(props) {
+  const dispatch = useDispatch();
+
+  const handleDeleteClick = () => dispatch(deletePartner({ id: props.id }));
+
   return (
     <div className="blue-gradient mb-8 flex w-full max-w-88 flex-col flex-nowrap items-center justify-start rounded-10 p-4 text-gray-50 md:mx-2 md:max-w-112">
       <h3>{props.nom}</h3>
@@ -38,8 +46,8 @@ export default function CardPartner(props) {
             size="small"
             className="mr-4"
           />
-          <LinkButton
-            link={"/administration/partenaires/" + props.id}
+          <Button
+            onClick={handleDeleteClick}
             label="Supprimer"
             size="small"
             className="mr-4"

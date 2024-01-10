@@ -103,10 +103,28 @@ export default function FormPartenaire(props) {
           <label htmlFor="informations" className="form-label">
             Informations
           </label>
-          <textarea
-            {...register("informations")}
-            id="informations"
-            className="form-input h-40"
+          <Controller
+            name="informations"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: "Ce champ est requis",
+            }}
+            render={({ field, fieldState }) => (
+              <>
+                <textarea
+                  id="informations"
+                  type="text"
+                  className={`form-input h-40 py-0 ${
+                    fieldState?.error && "!error"
+                  }`}
+                  {...field}
+                />
+                {fieldState?.error && (
+                  <p className="error-message">{fieldState.error.message}</p>
+                )}
+              </>
+            )}
           />
         </div>
 
@@ -127,7 +145,7 @@ export default function FormPartenaire(props) {
           id="logo"
           className="hidden"
           aria-describedby="logo-label"
-          accept="image/png, image/jpg, image/jpeg"
+          accept="image/png, image/jpg, image/jpeg, image/svg+xml, image/webp"
           ref={hiddenFileInput}
           onChange={handleImageInput}
         />

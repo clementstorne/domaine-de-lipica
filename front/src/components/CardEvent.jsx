@@ -32,9 +32,6 @@ export default function CardEvent(props) {
   }, []);
 
   const handleDeleteClick = () => dispatch(deleteEvent({ id: props.id }));
-  // const handleDeleteClick = async () => {
-  //   await EventService.deleteEvent(props.id);
-  // };
 
   return (
     <div className={`${props.className} event-card`}>

@@ -1,10 +1,26 @@
-import partners from "../data/partenaires.json";
+import { useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { getAllPartners } from "../store/partnerSlice";
 
 import Navbar from "../layouts/Navbar";
 import CardPartner from "../components/CardPartenaire";
 import Footer from "../layouts/Footer";
+import ErrorPage from "./ErrorPage";
 
 export default function Partenaires() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllPartners());
+  }, []);
+
+  const partners = useSelector((state) => state.partners.partnersList);
+  const error = useSelector((state) => state.partners.error);
+
+  if (error) {
+    return <ErrorPage />;
+  }
   return (
     <>
       <Navbar />

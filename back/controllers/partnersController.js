@@ -136,13 +136,13 @@ const PartnersController = {
         where: {
           id: partnerId,
         },
-        select: {
-          id: true,
-          nom: true,
-          informations: true,
-          logo: true,
-        },
       });
+
+      if (!partner) {
+        return res.status(404).json({
+          error: "Not found",
+        });
+      }
 
       if (partner.logo) {
         if (req.file && req.file.filename) {
@@ -234,7 +234,31 @@ const PartnersController = {
     }
 
     try {
-      const deletedEvent = await prisma.partner.delete({
+      const partner = await prisma.partner.findUnique({
+        where: {
+          id: partnerId,
+        },
+      });
+
+      if (!partner) {
+        return res.status(404).json({
+          error: "Not found",
+        });
+      }
+
+      if (partner.logo) {
+        const filename = partner.logo.split("/images/")[1];
+        try {
+          fs.unlinkSync(`images/${filename}`);
+        } catch (unlinkError) {
+          console.error("Error deleting old file:", unlinkError);
+          return res.status(500).json({
+            error: "Error deleting old file",
+          });
+        }
+      }
+
+      await prisma.partner.delete({
         where: {
           id: partnerId,
         },

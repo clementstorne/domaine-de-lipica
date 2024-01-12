@@ -4,37 +4,50 @@ import { useForm, Controller } from "react-hook-form";
 
 export default function FormEcurie(props) {
   const [images, setImages] = useState([]);
-  const [imageBase64url, setImageBase64url] = useState("");
-  const [imageFile, setImageFile] = useState(null);
+  const [imageFiles, setImageFiles] = useState([]);
 
-  const { handleSubmit, setValue, register, control, reset } = useForm();
+  const { handleSubmit, setValue, register, control } = useForm();
 
   const hiddenFileInput = useRef(null);
 
-  const handleUploadButtonClick = () => {
+  const handleUploadButtonClick = (e) => {
+    e.preventDefault();
     hiddenFileInput.current.click();
   };
 
   const handleImageInput = (e) => {
-    setImageFile(e.target.files[0]);
-    console.log(e.target.files);
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(e.target.files[0]);
-    fileReader.addEventListener("load", () => {
-      setImageBase64url(fileReader.result);
+    const selectedFiles = Array.from(e.target.files);
+    setImageFiles(selectedFiles);
+
+    selectedFiles.map((file) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        setImages((prevImages) => [...prevImages, fileReader.result]);
+      };
     });
-    setImages((images) => [...images, imageBase64url]);
+  };
+
+  const createFormData = (data, imageFile, id) => {
+    const formData = new FormData();
+    if (id) {
+      formData.append("id", id);
+    }
+    formData.append("nom", data.nom);
+    formData.append("informations", data.informations);
+    images.forEach((image, index) => {
+      formData.append(`images[${index}]`, imageFiles[index]);
+    });
+    return formData;
   };
 
   const onSubmit = (data) => {
     if (props.type === "create") {
-      console.log("Partenaire créé", { ...data });
-      // setImageBase64url("");
-      // reset();
+      const formData = createFormData(data, imageFiles);
+      console.log(formData);
     } else {
-      console.log("Partenaire modifié", { ...data });
-      // setImageBase64url("");
-      // reset();
+      const formData = createFormData(data, imageFiles, props.stable.id);
+      console.log(formData);
     }
   };
 
@@ -95,18 +108,11 @@ export default function FormEcurie(props) {
             {images.map((image, index) => (
               <img
                 key={index}
-                src={`/${image}`}
+                src={image}
                 alt=""
                 className="max-h-full max-w-full self-center justify-self-center object-fill"
               />
             ))}
-            {imageBase64url && (
-              <img
-                src={imageBase64url}
-                alt=""
-                className="max-h-full max-w-full self-center justify-self-center object-fill"
-              />
-            )}
           </div>
         )}
 
@@ -126,7 +132,7 @@ export default function FormEcurie(props) {
           onClick={handleUploadButtonClick}
         >
           <label htmlFor="images" id="images-label">
-            {imageBase64url ? "Modifier les images" : "Ajouter une image"}
+            {images.length > 0 ? "Modifier les images" : "Ajouter des images"}
           </label>
         </button>
 

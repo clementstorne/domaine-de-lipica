@@ -18,7 +18,6 @@ export default function FormPartenaire(props) {
 
   const handleUploadButtonClick = (e) => {
     e.preventDefault();
-    // e.stopPropagation();
     hiddenFileInput.current.click();
   };
 
@@ -26,9 +25,9 @@ export default function FormPartenaire(props) {
     setImageFile(e.target.files[0]);
     const fileReader = new FileReader();
     fileReader.readAsDataURL(e.target.files[0]);
-    fileReader.addEventListener("load", () => {
+    fileReader.onload = () => {
       setImageBase64url(fileReader.result);
-    });
+    };
   };
 
   const createFormData = (data, imageFile, id) => {

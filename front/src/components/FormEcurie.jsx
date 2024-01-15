@@ -1,8 +1,16 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createStable, updateStable } from "../store/stableSlice";
 import { useForm, Controller } from "react-hook-form";
 
+import { stringToUrl } from "../utils/strUtils";
+
 export default function FormEcurie(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [images, setImages] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
 
@@ -28,15 +36,16 @@ export default function FormEcurie(props) {
     });
   };
 
-  const createFormData = (data, imageFile, id) => {
+  const createFormData = (data, imageFiles, id) => {
     const formData = new FormData();
     if (id) {
       formData.append("id", id);
     }
     formData.append("nom", data.nom);
     formData.append("informations", data.informations);
-    images.forEach((image, index) => {
-      formData.append(`images[${index}]`, imageFiles[index]);
+    formData.append("url", stringToUrl(data.nom));
+    imageFiles.forEach((imageFile, index) => {
+      formData.append(`images[${index}]`, imageFile);
     });
     return formData;
   };
@@ -44,10 +53,12 @@ export default function FormEcurie(props) {
   const onSubmit = (data) => {
     if (props.type === "create") {
       const formData = createFormData(data, imageFiles);
-      console.log(formData);
+      dispatch(createStable(formData));
+      navigate("/administration/ecuries");
     } else {
       const formData = createFormData(data, imageFiles, props.stable.id);
-      console.log(formData);
+      dispatch(updateStable(formData));
+      navigate("/administration/ecuries");
     }
   };
 

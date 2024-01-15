@@ -1,28 +1,24 @@
-import axios from "axios";
-
-axios.defaults.baseURL = "http://localhost:3000/partners";
-const token = localStorage.getItem("DomaineDeLipica_token");
-axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+import axios from "./http-common";
 
 class PartnerService {
   static createPartner = async (credentials) => {
-    return axios.post("/", credentials);
+    return axios.post("/partners/", credentials);
   };
 
   static getAllPartners = () => {
-    return axios.get("/");
+    return axios.get("/partners/");
   };
 
-  static getSinglePartner = async (eventId) => {
-    return axios.get(`/${eventId}`);
+  static getSinglePartner = async (partnerId) => {
+    return axios.get(`/partners/${partnerId}`);
   };
 
-  static updatePartner = async (eventId, credentials) => {
-    return axios.patch(`/${eventId}`, credentials);
+  static updatePartner = async (partnerId, credentials) => {
+    return axios.patch(`/partners/${partnerId}`, credentials);
   };
 
-  static deletePartner = async (eventId) => {
-    return axios.delete(`/${eventId}`);
+  static deletePartner = async (partnerId) => {
+    return axios.delete(`/partners/${partnerId}`);
   };
 }
 

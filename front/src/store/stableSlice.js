@@ -1,19 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import PartnerService from "../services/PartnerService";
+import StableService from "../services/StableService";
 
 const initialState = {
-  partner: null,
-  partnersList: [],
+  stable: null,
+  stablesList: [],
   isLoading: false,
   error: null,
 };
 
-export const createPartner = createAsyncThunk(
-  "partners/createPartner",
+export const createStable = createAsyncThunk(
+  "stables/createStable",
   async (credentials, thunkAPI) => {
     try {
-      const res = await PartnerService.createPartner(credentials);
+      const res = await StableService.createStable(credentials);
       if (res.status >= 200 && res.status <= 209) {
         return res.data;
       } else {
@@ -25,11 +25,11 @@ export const createPartner = createAsyncThunk(
   },
 );
 
-export const getAllPartners = createAsyncThunk(
-  "partners/getAllPartners",
+export const getAllStables = createAsyncThunk(
+  "stables/getAllStables",
   async (thunkAPI) => {
     try {
-      const res = await PartnerService.getAllPartners();
+      const res = await StableService.getAllStables();
       if (res.status >= 200 && res.status <= 209) {
         return res.data;
       } else {
@@ -41,12 +41,12 @@ export const getAllPartners = createAsyncThunk(
   },
 );
 
-export const getSinglePartner = createAsyncThunk(
-  "partners/getSinglePartner",
+export const getSingleStable = createAsyncThunk(
+  "stables/getSingleStable",
   async (credentials, thunkAPI) => {
-    const partnerId = credentials.id;
+    const stableId = credentials.id;
     try {
-      const res = await PartnerService.getSinglePartner(partnerId);
+      const res = await StableService.getSingleStable(stableId);
       if (res.status >= 200 && res.status <= 209) {
         return res.data;
       } else {
@@ -58,12 +58,12 @@ export const getSinglePartner = createAsyncThunk(
   },
 );
 
-export const updatePartner = createAsyncThunk(
-  "partners/updatePartner",
+export const updateStable = createAsyncThunk(
+  "stables/updateStable",
   async (credentials, thunkAPI) => {
-    const partnerId = credentials.get("id");
+    const stableId = credentials.get("id");
     try {
-      const res = await PartnerService.updatePartner(partnerId, credentials);
+      const res = await StableService.updateStable(stableId, credentials);
       if (res.status >= 200 && res.status <= 209) {
         return res.data;
       } else {
@@ -75,12 +75,12 @@ export const updatePartner = createAsyncThunk(
   },
 );
 
-export const deletePartner = createAsyncThunk(
-  "partners/deletePartner",
+export const deleteStable = createAsyncThunk(
+  "stables/deleteStable",
   async (credentials, thunkAPI) => {
-    const partnerId = credentials.id;
+    const stableId = credentials.id;
     try {
-      const res = await PartnerService.deletePartner(partnerId);
+      const res = await StableService.deleteStable(stableId);
       if (res.status >= 200 && res.status <= 209) {
         return;
       } else {
@@ -92,83 +92,83 @@ export const deletePartner = createAsyncThunk(
   },
 );
 
-const partnerSlice = createSlice({
-  name: "partners",
+const stableSlice = createSlice({
+  name: "stables",
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(createPartner.pending, (state) => {
+      .addCase(createStable.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(createPartner.fulfilled, (state, action) => {
+      .addCase(createStable.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.partnersList = [action.payload.newPartner, ...state.partnersList];
+        state.stablesList = [action.payload.newStable, ...state.stablesList];
       })
-      .addCase(createPartner.rejected, (state, action) => {
+      .addCase(createStable.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(getAllPartners.pending, (state) => {
+      .addCase(getAllStables.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getAllPartners.fulfilled, (state, action) => {
+      .addCase(getAllStables.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.partnersList = action.payload.partners;
+        state.stablesList = action.payload.stables;
       })
-      .addCase(getAllPartners.rejected, (state, action) => {
+      .addCase(getAllStables.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(getSinglePartner.pending, (state) => {
+      .addCase(getSingleStable.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getSinglePartner.fulfilled, (state, action) => {
+      .addCase(getSingleStable.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.partner = action.payload.partner;
+        state.stable = action.payload.stable;
       })
-      .addCase(getSinglePartner.rejected, (state, action) => {
+      .addCase(getSingleStable.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(updatePartner.pending, (state) => {
+      .addCase(updateStable.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(updatePartner.fulfilled, (state, action) => {
+      .addCase(updateStable.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.partnersList = state.partnersList.map((partner) =>
-          partner.id === action.payload.updatedPartner.id
-            ? action.payload.updatedPartner
-            : partner,
+        state.stablesList = state.stablesList.map((stable) =>
+          stable.id === action.payload.updatedStable.id
+            ? action.payload.updatedStable
+            : stable,
         );
       })
-      .addCase(updatePartner.rejected, (state, action) => {
+      .addCase(updateStable.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(deletePartner.pending, (state) => {
+      .addCase(deleteStable.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(deletePartner.fulfilled, (state, action) => {
+      .addCase(deleteStable.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.partnersList = state.partnersList.filter(
-          (partner) => partner.id !== action.meta.arg.id,
+        state.stablesList = state.stablesList.filter(
+          (stable) => stable.id !== action.meta.arg.id,
         );
       })
-      .addCase(deletePartner.rejected, (state, action) => {
+      .addCase(deleteStable.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
   },
 });
 
-export default partnerSlice.reducer;
+export default stableSlice.reducer;

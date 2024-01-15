@@ -1,10 +1,26 @@
-import stables from "../data/ecuries.json";
+import { useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { getAllStables } from "../store/stableSlice";
 
 import Navbar from "../layouts/Navbar";
 import CardEcurie from "../components/CardEcurie";
 import Footer from "../layouts/Footer";
+import ErrorPage from "./ErrorPage";
 
 export default function AdminEcuries() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllStables());
+  }, []);
+
+  const stables = useSelector((state) => state.stables.stablesList);
+  const error = useSelector((state) => state.stables.error);
+
+  if (error) {
+    return <ErrorPage />;
+  }
   return (
     <>
       <Navbar />

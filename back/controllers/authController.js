@@ -2,6 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+import { missingParameter, serverError } from "../errors/customErrors";
+
 const prisma = new PrismaClient();
 
 const AuthController = {
@@ -10,8 +12,7 @@ const AuthController = {
 
     if (!email || !password) {
       return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
+        error: missingParameter,
       });
     }
 
@@ -59,8 +60,7 @@ const AuthController = {
     } catch (error) {
       console.error(error);
       res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },
@@ -70,8 +70,7 @@ const AuthController = {
 
     if (!email || !password) {
       return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
+        error: missingParameter,
       });
     }
 
@@ -110,8 +109,7 @@ const AuthController = {
     } catch (error) {
       console.error(error);
       res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },

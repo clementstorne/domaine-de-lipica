@@ -18,4 +18,9 @@ const storage = multer.diskStorage({
   },
 });
 
+const singleMulter = multer({ storage }).single("image");
+const multipleMulter = multer({ storage }).array("images");
+
+export { singleMulter, multipleMulter };
+
 export default multer({ storage }).single("image");

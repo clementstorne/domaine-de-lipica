@@ -44,8 +44,8 @@ export default function FormEcurie(props) {
     formData.append("nom", data.nom);
     formData.append("informations", data.informations);
     formData.append("url", stringToUrl(data.nom));
-    imageFiles.forEach((imageFile, index) => {
-      formData.append(`images[${index}]`, imageFile);
+    imageFiles.forEach((imageFile) => {
+      formData.append("images", imageFile);
     });
     return formData;
   };
@@ -66,7 +66,10 @@ export default function FormEcurie(props) {
     if (props.stable) {
       setValue("nom", props.stable.nom);
       setValue("informations", props.stable.informations);
-      setImages(props.stable.images);
+      if (props.stable.images.length > 0) {
+        const loadedImages = props.stable.images.map((image) => image.url);
+        setImages(loadedImages);
+      }
     }
   }, []);
 
@@ -143,12 +146,12 @@ export default function FormEcurie(props) {
           onClick={handleUploadButtonClick}
         >
           <label htmlFor="images" id="images-label">
-            {images.length > 0 ? "Modifier les images" : "Ajouter des images"}
+            Ajouter des images
           </label>
         </button>
 
         <button type="submit" className="button big-button mt-4">
-          {props.type == "create" ? "Ajouter l'écurie" : "Modifier l'écurie'"}
+          {props.type == "create" ? "Ajouter l'écurie" : "Modifier l'écurie"}
         </button>
       </form>
     </>

@@ -61,7 +61,6 @@ export default function FormPartenaire(props) {
       setValue("nom", props.partner.nom);
       setValue("informations", props.partner.informations);
       setImageBase64url(`${props.partner.logo}`);
-      setImageBase64url(`${props.partner.logo}`);
     }
   }, []);
 

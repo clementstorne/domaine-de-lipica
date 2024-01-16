@@ -2,27 +2,33 @@ import { PrismaClient } from "@prisma/client";
 
 import fs from "fs";
 
+import {
+  missingParameter,
+  notFound,
+  serverError,
+  deleteFileError,
+} from "../errors/customErrors";
+
 const prisma = new PrismaClient();
 
-const PartnersController = {
+missingParameter;
+
+const StablesController = {
   createStable: async (req, res) => {
     const { nom, informations, url } = req.body;
 
     if (!nom || !informations || !url) {
       return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
+        error: missingParameter,
       });
     }
 
     try {
       let images = [];
-      if (req.file && req.file.filename) {
-        images.push({
-          url: `${req.protocol}://${req.get("host")}/images/${
-            req.file.filename
-          }`,
-        });
+      if (req.files && req.files.length > 0) {
+        images = req.files.map((file) => ({
+          url: `${req.protocol}://${req.get("host")}/images/${file.filename}`,
+        }));
       }
 
       const newStable = await prisma.stable.create({
@@ -34,6 +40,13 @@ const PartnersController = {
             create: images,
           },
         },
+        include: {
+          images: {
+            select: {
+              url: true,
+            },
+          },
+        },
       });
 
       return res
@@ -42,8 +55,7 @@ const PartnersController = {
     } catch (error) {
       console.error(error);
       res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },
@@ -56,7 +68,11 @@ const PartnersController = {
           nom: true,
           informations: true,
           url: true,
-          images: true,
+          images: {
+            select: {
+              url: true,
+            },
+          },
         },
         orderBy: [
           {
@@ -67,7 +83,7 @@ const PartnersController = {
 
       if (!stables) {
         return res.status(404).json({
-          error: "Not found",
+          error: notFound,
         });
       }
 
@@ -77,8 +93,7 @@ const PartnersController = {
     } catch (error) {
       console.error(error);
       res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },
@@ -88,8 +103,7 @@ const PartnersController = {
 
     if (!stableId) {
       return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
+        error: missingParameter,
       });
     }
 
@@ -103,13 +117,17 @@ const PartnersController = {
           nom: true,
           informations: true,
           url: true,
-          images: true,
+          images: {
+            select: {
+              url: true,
+            },
+          },
         },
       });
 
       if (!stable) {
         return res.status(404).json({
-          error: "Not found",
+          error: notFound,
         });
       }
 
@@ -119,8 +137,80 @@ const PartnersController = {
     } catch (error) {
       console.error(error);
       return res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
+      });
+    }
+  },
+
+  updateStable: async (req, res) => {
+    const stableId = req.params.id;
+
+    if (!stableId) {
+      return res.status(400).json({
+        error: missingParameter,
+      });
+    }
+
+    try {
+      const { nom, informations, url } = req.body;
+
+      const stable = await prisma.stable.findUnique({
+        where: {
+          id: stableId,
+        },
+        include: {
+          images: {
+            select: {
+              url: true,
+            },
+          },
+        },
+      });
+
+      if (!stable) {
+        return res.status(404).json({
+          error: notFound,
+        });
+      }
+
+      let newImages = [];
+
+      if (req.files && req.files.length > 0) {
+        const newImagesUrl = req.files.map((file) => ({
+          url: `${req.protocol}://${req.get("host")}/images/${file.filename}`,
+        }));
+        newImages = [...newImagesUrl];
+      }
+
+      const updatedStable = await prisma.stable.update({
+        where: {
+          id: stableId,
+        },
+        data: {
+          nom,
+          informations,
+          url,
+          images: {
+            create: newImages.map((image) => ({ url: image.url })),
+          },
+        },
+        include: {
+          images: {
+            select: {
+              url: true,
+            },
+          },
+        },
+      });
+
+      return res.status(200).json({
+        message: "Stable successfully updated.",
+        updatedStable,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        error: serverError,
       });
     }
   },
@@ -130,8 +220,7 @@ const PartnersController = {
 
     if (!stableId) {
       return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
+        error: missingParameter,
       });
     }
 
@@ -140,25 +229,36 @@ const PartnersController = {
         where: {
           id: stableId,
         },
+        include: {
+          images: {
+            select: {
+              url: true,
+            },
+          },
+        },
       });
 
       if (!stable) {
         return res.status(404).json({
-          error: "Not found",
+          error: notFound,
         });
       }
 
-      // if (stable.images) {
-      //   const filename = stable.images.split("/images/")[1];
-      //   try {
-      //     fs.unlinkSync(`images/${filename}`);
-      //   } catch (unlinkError) {
-      //     console.error("Error deleting old file:", unlinkError);
-      //     return res.status(500).json({
-      //       error: "Error deleting old file",
-      //     });
-      //   }
-      // }
+      if (stable.images && stable.images.length > 0) {
+        await Promise.all(
+          stable.images.map(async (image) => {
+            const filename = image.url.split("/images/")[1];
+            try {
+              await fs.unlinkSync(`images/${filename}`);
+            } catch (unlinkError) {
+              console.error(deleteFileError, unlinkError);
+              return res.status(500).json({
+                error: deleteFileError,
+              });
+            }
+          })
+        );
+      }
 
       await prisma.stable.delete({
         where: {
@@ -170,11 +270,10 @@ const PartnersController = {
     } catch (error) {
       console.error(error);
       return res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },
 };
 
-export default PartnersController;
+export default StablesController;

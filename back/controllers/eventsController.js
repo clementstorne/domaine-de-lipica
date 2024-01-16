@@ -1,5 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 
+import {
+  missingParameter,
+  notFound,
+  serverError,
+} from "../errors/customErrors";
+
 const prisma = new PrismaClient();
 
 const EventsController = {
@@ -8,8 +14,7 @@ const EventsController = {
 
     if (!debut || !fin || !discipline || !niveau) {
       return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
+        error: missingParameter,
       });
     }
 
@@ -31,8 +36,7 @@ const EventsController = {
     } catch (error) {
       console.error(error);
       res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },
@@ -58,7 +62,7 @@ const EventsController = {
 
       if (!events) {
         return res.status(404).json({
-          error: "Not found",
+          error: notFound,
         });
       }
 
@@ -68,8 +72,7 @@ const EventsController = {
     } catch (error) {
       console.error(error);
       res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },
@@ -79,8 +82,7 @@ const EventsController = {
 
     if (!eventId) {
       return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
+        error: missingParameter,
       });
     }
 
@@ -102,7 +104,7 @@ const EventsController = {
 
       if (!event) {
         return res.status(404).json({
-          error: "Not found",
+          error: notFound,
         });
       }
 
@@ -112,8 +114,7 @@ const EventsController = {
     } catch (error) {
       console.error(error);
       return res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },
@@ -123,8 +124,7 @@ const EventsController = {
 
     if (!eventId) {
       return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
+        error: missingParameter,
       });
     }
 
@@ -153,8 +153,7 @@ const EventsController = {
     } catch (error) {
       console.error(error);
       return res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },
@@ -164,8 +163,7 @@ const EventsController = {
 
     if (!eventId) {
       return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
+        error: missingParameter,
       });
     }
 
@@ -180,8 +178,7 @@ const EventsController = {
     } catch (error) {
       console.error(error);
       return res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },

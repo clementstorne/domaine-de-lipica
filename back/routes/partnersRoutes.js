@@ -1,7 +1,7 @@
 import express from "express";
 import PartnersController from "../controllers/partnersController";
 
-import multer from "../middlewares/multer";
+import { singleMulter as multer } from "../middlewares/multer";
 
 const router = express.Router();
 

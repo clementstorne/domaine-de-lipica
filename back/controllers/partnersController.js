@@ -2,7 +2,24 @@ import { PrismaClient } from "@prisma/client";
 
 import fs from "fs";
 
+import {
+  missingParameter,
+  notFound,
+  serverError,
+  deleteFileError,
+} from "../errors/customErrors";
+
 const prisma = new PrismaClient();
+
+const deletePartnerLogo = async (logoUrl) => {
+  const filename = logoUrl.split("/images/")[1];
+  try {
+    fs.unlinkSync(`images/${filename}`);
+  } catch (unlinkError) {
+    console.error(deleteFileError, unlinkError);
+    throw new Error(deleteFileError);
+  }
+};
 
 const PartnersController = {
   createPartner: async (req, res) => {
@@ -10,8 +27,7 @@ const PartnersController = {
 
     if (!nom || !informations) {
       return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
+        error: missingParameter,
       });
     }
 
@@ -37,8 +53,7 @@ const PartnersController = {
     } catch (error) {
       console.error(error);
       res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },
@@ -61,7 +76,7 @@ const PartnersController = {
 
       if (!partners) {
         return res.status(404).json({
-          error: "Not found",
+          error: notFound,
         });
       }
 
@@ -71,8 +86,7 @@ const PartnersController = {
     } catch (error) {
       console.error(error);
       res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },
@@ -82,8 +96,7 @@ const PartnersController = {
 
     if (!partnerId) {
       return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
+        error: missingParameter,
       });
     }
 
@@ -102,7 +115,7 @@ const PartnersController = {
 
       if (!partner) {
         return res.status(404).json({
-          error: "Not found",
+          error: notFound,
         });
       }
 
@@ -112,8 +125,7 @@ const PartnersController = {
     } catch (error) {
       console.error(error);
       return res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
+        error: serverError,
       });
     }
   },
@@ -122,15 +134,11 @@ const PartnersController = {
     const partnerId = req.params.id;
 
     if (!partnerId) {
-      return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
-      });
+      return res.status(400).json({ error: missingParameter });
     }
 
     try {
       const { nom, informations } = req.body;
-      let logo = "";
 
       const partner = await prisma.partner.findUnique({
         where: {
@@ -139,74 +147,39 @@ const PartnersController = {
       });
 
       if (!partner) {
-        return res.status(404).json({
-          error: "Not found",
-        });
+        return res.status(404).json({ error: notFound });
       }
 
       if (partner.logo) {
+        let logo = partner.logo;
         if (req.file && req.file.filename) {
-          const filename = partner.logo.split("/images/")[1];
-          try {
-            fs.unlinkSync(`images/${filename}`);
-          } catch (unlinkError) {
-            console.error("Error deleting old file:", unlinkError);
-            return res.status(500).json({
-              error: "Error deleting old file",
-            });
-          }
-          logo = `${req.protocol}://${req.get("host")}/images/${
-            req.file.filename
-          }`;
-          const updatedPartner = await prisma.partner.update({
-            where: {
-              id: partnerId,
-            },
-            data: { nom, informations, logo },
-            select: {
-              id: true,
-              nom: true,
-              informations: true,
-              logo: true,
-            },
-          });
-        } else {
-          const updatedPartner = await prisma.partner.update({
-            where: {
-              id: partnerId,
-            },
-            data: { nom, informations },
-            select: {
-              id: true,
-              nom: true,
-              informations: true,
-              logo: true,
-            },
-          });
-
-          return res.status(200).json({
-            message: "Partner was updated successfully.",
-            updatedPartner,
-          });
-        }
-      } else {
-        if (req.file && req.file.filename) {
+          await deletePartnerLogo(partner.logo);
           logo = `${req.protocol}://${req.get("host")}/images/${
             req.file.filename
           }`;
         }
 
         const updatedPartner = await prisma.partner.update({
-          where: {
-            id: partnerId,
-          },
+          where: { id: partnerId },
           data: { nom, informations, logo },
-          select: {
-            id: true,
-            nom: true,
-            informations: true,
-            logo: true,
-          },
+          select: { id: true, nom: true, informations: true, logo: true },
+        });
+
+        return res.status(200).json({
+          message: "Partner was updated successfully.",
+          updatedPartner,
+        });
+      } else {
+        if (req.file) {
+          logo = `${req.protocol}://${req.get("host")}/images/${
+            req.file.filename
+          }`;
+        }
+
+        const updatedPartner = await prisma.partner.update({
+          where: { id: partnerId },
+          data: { nom, informations, logo },
+          select: { id: true, nom: true, informations: true, logo: true },
         });
 
         return res.status(200).json({
@@ -216,10 +189,7 @@ const PartnersController = {
       }
     } catch (error) {
       console.error(error);
-      return res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
-      });
+      return res.status(500).json({ error: serverError });
     }
   },
 
@@ -227,10 +197,7 @@ const PartnersController = {
     const partnerId = req.params.id;
 
     if (!partnerId) {
-      return res.status(400).json({
-        error:
-          "The server could not process the request because a required parameter is missing. Please include all necessary parameters and try again.",
-      });
+      return res.status(400).json({ error: missingParameter });
     }
 
     try {
@@ -241,36 +208,21 @@ const PartnersController = {
       });
 
       if (!partner) {
-        return res.status(404).json({
-          error: "Not found",
-        });
+        return res.status(404).json({ error: notFound });
       }
 
       if (partner.logo) {
-        const filename = partner.logo.split("/images/")[1];
-        try {
-          fs.unlinkSync(`images/${filename}`);
-        } catch (unlinkError) {
-          console.error("Error deleting old file:", unlinkError);
-          return res.status(500).json({
-            error: "Error deleting old file",
-          });
-        }
+        await deletePartnerLogo(partner.logo);
       }
 
       await prisma.partner.delete({
-        where: {
-          id: partnerId,
-        },
+        where: { id: partnerId },
       });
 
       return res.status(204).send();
     } catch (error) {
       console.error(error);
-      return res.status(500).json({
-        error:
-          "The server encountered an unexpected condition that prevented it from fulfilling the request. Please try again later or contact the administrator.",
-      });
+      return res.status(500).json({ error: serverError });
     }
   },
 };

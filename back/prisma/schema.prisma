@@ -40,6 +40,6 @@ model Stable {
 
 model Images {
   url      String @id
-  stable   Stable @relation(fields: [stableId], references: [id])
+  stable   Stable @relation(fields: [stableId], references: [id], onDelete: Cascade)
   stableId String
 }

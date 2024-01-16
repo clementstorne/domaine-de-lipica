@@ -8,6 +8,8 @@ import CardPartner from "../components/CardPartenaire";
 import Footer from "../layouts/Footer";
 import ErrorPage from "./ErrorPage";
 
+import LinkButton from "../layouts/LinkButton";
+
 export default function AdminPartenaires() {
   const dispatch = useDispatch();
 
@@ -30,6 +32,15 @@ export default function AdminPartenaires() {
           <CardPartner key={partner.id} {...partner} admin={true} />
         ))}
       </section>
+
+      <div className="mb-8 flex flex-col items-center justify-center md:mb-16">
+        <LinkButton
+          link="/administration/dashboard/"
+          label="Retour au dashboard"
+          size="small"
+          className="mr-4"
+        />
+      </div>
       <Footer />
     </>
   );

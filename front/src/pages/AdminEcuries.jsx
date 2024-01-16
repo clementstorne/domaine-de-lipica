@@ -8,6 +8,8 @@ import CardEcurie from "../components/CardEcurie";
 import Footer from "../layouts/Footer";
 import ErrorPage from "./ErrorPage";
 
+import LinkButton from "../layouts/LinkButton";
+
 export default function AdminEcuries() {
   const dispatch = useDispatch();
 
@@ -30,6 +32,15 @@ export default function AdminEcuries() {
           <CardEcurie key={partner.id} {...partner} />
         ))}
       </section>
+
+      <div className="mb-8 flex flex-col items-center justify-center md:mb-16">
+        <LinkButton
+          link="/administration/dashboard/"
+          label="Retour au dashboard"
+          size="small"
+          className="mr-4"
+        />
+      </div>
       <Footer />
     </>
   );

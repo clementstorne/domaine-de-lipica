@@ -1,6 +1,4 @@
-import Navbar from "../layouts/Navbar";
-import FormConcours from "../components/FormConcours";
-import Footer from "../layouts/Footer";
+import { Footer, FormConcours, Navbar } from "../components/index";
 
 export default function AdminConcoursCreate() {
   return (

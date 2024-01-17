@@ -1,10 +1,10 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model User {
@@ -40,6 +40,8 @@ model Stable {
 
 model Images {
   url      String @id
-  stable   Stable @relation(fields: [stableId], references: [id], onDelete: Cascade)
   stableId String
+  stable   Stable @relation(fields: [stableId], references: [id], onDelete: Cascade)
+
+  @@index([stableId], map: "Images_stableId_fkey")
 }

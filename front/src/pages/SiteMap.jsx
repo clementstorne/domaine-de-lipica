@@ -1,16 +1,27 @@
-import stables from "../data/ecuries.json";
+import { useEffect } from "react";
 
-import Navbar from "../layouts/Navbar";
-import LinkButton from "../layouts/LinkButton";
-import Footer from "../layouts/Footer";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllStables } from "../store/stableSlice";
 
-export default function Home() {
+import { Footer, LinkButton, Navbar } from "../components/index";
+
+export default function SiteMap() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllStables());
+  }, []);
+
+  const stables = useSelector((state) => state.stables.stablesList);
+  const error = useSelector((state) => state.stables.error);
+  const isLoading = useSelector((state) => state.stables.isLoading);
+
   return (
     <>
       <Navbar />
       <h1>Plan du site</h1>
 
-      <main className="max-w-288 mx-auto flex flex-col justify-between lg:flex-row">
+      <main className="mx-auto flex max-w-288 flex-col justify-between lg:flex-row">
         <section className="mx-0 my-4 md:mx-4">
           <h2 className="text-blue-900">Domaine de Lipica</h2>
           <nav className="flex flex-col items-center justify-between">
@@ -47,22 +58,22 @@ export default function Home() {
           </nav>
         </section>
 
-        <section className="mx-0 my-4 md:mx-4">
-          <h2 className="text-blue-900">Centre équestre</h2>
-          <nav className="flex flex-col items-center justify-between">
-            {stables.map((stable) => (
-              <LinkButton
-                key={stable.id}
-                link={`/${stable.url}`}
-                label={stable.nom}
-                className="mb-2"
-                size="small"
-              />
-            ))}
-          </nav>
-
-          <ul className="flex flex-col items-center"></ul>
-        </section>
+        {!isLoading && !error && (
+          <section className="mx-0 my-4 md:mx-4">
+            <h2 className="text-blue-900">Centre équestre</h2>
+            <nav className="flex flex-col items-center justify-between">
+              {stables.map((stable) => (
+                <LinkButton
+                  key={stable.id}
+                  link={`/${stable.url}`}
+                  label={stable.nom}
+                  className="mb-2"
+                  size="small"
+                />
+              ))}
+            </nav>
+          </section>
+        )}
 
         <section className="mx-0 my-4 md:mx-4">
           <h2 className="text-blue-900">Concours</h2>

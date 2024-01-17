@@ -25,7 +25,7 @@ const AuthController = {
     }
 
     try {
-      const userAlreadyExists = await prisma.user.findUnique({
+      const userAlreadyExists = await prisma.user.findUniqueOrThrow({
         where: {
           email,
         },
@@ -75,7 +75,7 @@ const AuthController = {
     }
 
     try {
-      const user = await prisma.user.findUnique({
+      const user = await prisma.user.findUniqueOrThrow({
         where: {
           email,
         },

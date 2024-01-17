@@ -1,6 +1,4 @@
-import Navbar from "../layouts/Navbar";
-import LinkButton from "../layouts/LinkButton";
-import Footer from "../layouts/Footer";
+import { Footer, LinkButton, Navbar } from "../components/index";
 
 export default function Dahsboard() {
   return (

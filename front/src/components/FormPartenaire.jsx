@@ -1,5 +1,6 @@
-import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
+
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createPartner, updatePartner } from "../store/partnerSlice";

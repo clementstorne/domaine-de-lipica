@@ -108,7 +108,7 @@ const StablesController = {
     }
 
     try {
-      const stable = await prisma.stable.findUnique({
+      const stable = await prisma.stable.findUniqueOrThrow({
         where: {
           id: stableId,
         },
@@ -125,11 +125,43 @@ const StablesController = {
         },
       });
 
-      if (!stable) {
-        return res.status(404).json({
-          error: notFound,
-        });
-      }
+      return res
+        .status(200)
+        .json({ message: "Stable retrieved successfully.", stable });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        error: serverError,
+      });
+    }
+  },
+
+  getStableByUrl: async (req, res) => {
+    const stableUrl = req.params.url;
+
+    if (!stableUrl) {
+      return res.status(400).json({
+        error: missingParameter,
+      });
+    }
+
+    try {
+      const stable = await prisma.stable.findFirstOrThrow({
+        where: {
+          url: stableUrl,
+        },
+        select: {
+          id: true,
+          nom: true,
+          informations: true,
+          url: true,
+          images: {
+            select: {
+              url: true,
+            },
+          },
+        },
+      });
 
       return res
         .status(200)
@@ -154,7 +186,7 @@ const StablesController = {
     try {
       const { nom, informations, url } = req.body;
 
-      const stable = await prisma.stable.findUnique({
+      const stable = await prisma.stable.findUniqueOrThrow({
         where: {
           id: stableId,
         },
@@ -225,7 +257,7 @@ const StablesController = {
     }
 
     try {
-      const stable = await prisma.stable.findUnique({
+      const stable = await prisma.stable.findUniqueOrThrow({
         where: {
           id: stableId,
         },

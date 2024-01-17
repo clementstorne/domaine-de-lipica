@@ -1,6 +1,6 @@
-import { useForm, Controller } from "react-hook-form";
-
 import emailjs from "@emailjs/browser";
+
+import { useForm, Controller } from "react-hook-form";
 
 export default function FormContact() {
   const { control, handleSubmit, reset } = useForm();

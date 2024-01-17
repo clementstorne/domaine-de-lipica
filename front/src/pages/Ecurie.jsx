@@ -1,27 +1,31 @@
-import stables from "../data/ecuries.json";
+import { useEffect } from "react";
 
-import Navbar from "../layouts/Navbar";
-import Carousel from "../layouts/Carousel";
-import Footer from "../layouts/Footer";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getStableByUrl } from "../store/stableSlice";
+
+import { ErrorPage } from "./index";
+import { EcurieSection, Footer, Navbar } from "../components/index";
 
 export default function Ecurie() {
-  const stableUrl = window.location.pathname.split("/")[1];
-  const stable = stables.filter((stable) => stable.url === stableUrl)[0];
+  const dispatch = useDispatch();
+  const { ecurieUrl } = useParams();
 
+  useEffect(() => {
+    dispatch(getStableByUrl({ url: ecurieUrl }));
+  }, [ecurieUrl]);
+
+  const stable = useSelector((state) => state.stables.stable);
+  const error = useSelector((state) => state.stables.error);
+  const isLoading = useSelector((state) => state.stables.isLoading);
+
+  if (error) {
+    return <ErrorPage />;
+  }
   return (
     <>
       <Navbar />
-      <h1>{stable.nom}</h1>
-
-      <section className="mb-8 md:mb-16">
-        <p className="mb-4">{stable.informations}</p>
-        {stable.images && (
-          <div className="mx-auto md:w-3/4 lg:w-1/2">
-            <Carousel images={stable.images} />
-          </div>
-        )}
-      </section>
-
+      {!isLoading && stable && <EcurieSection stable={stable} />}
       <Footer />
     </>
   );

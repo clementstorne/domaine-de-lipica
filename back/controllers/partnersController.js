@@ -101,7 +101,7 @@ const PartnersController = {
     }
 
     try {
-      const partner = await prisma.partner.findUnique({
+      const partner = await prisma.partner.findUniqueOrThrow({
         where: {
           id: partnerId,
         },
@@ -112,12 +112,6 @@ const PartnersController = {
           logo: true,
         },
       });
-
-      if (!partner) {
-        return res.status(404).json({
-          error: notFound,
-        });
-      }
 
       return res
         .status(200)
@@ -140,7 +134,7 @@ const PartnersController = {
     try {
       const { nom, informations } = req.body;
 
-      const partner = await prisma.partner.findUnique({
+      const partner = await prisma.partner.findUniqueOrThrow({
         where: {
           id: partnerId,
         },
@@ -201,7 +195,7 @@ const PartnersController = {
     }
 
     try {
-      const partner = await prisma.partner.findUnique({
+      const partner = await prisma.partner.findUniqueOrThrow({
         where: {
           id: partnerId,
         },

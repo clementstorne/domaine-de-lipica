@@ -11,7 +11,7 @@
   "author": "Clément STORNE",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.7.1",
+    "@prisma/client": "^5.8.1",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -29,6 +29,6 @@
     "@babel/core": "^7.23.7",
     "@babel/node": "^7.22.19",
     "@babel/preset-env": "^7.23.7",
-    "prisma": "^5.7.1"
+    "prisma": "^5.8.1"
   }
 }

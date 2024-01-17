@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { deletePartner } from "../store/partnerSlice";
 
-import Button from "../layouts/Button";
-import LinkButton from "../layouts/LinkButton";
+import { Button, LinkButton } from "./index";
 
 import { newlineToBreakTag } from "../utils/strUtils";
 
-export default function CardPartner(props) {
+export default function CardPartenaire(props) {
   const dispatch = useDispatch();
 
   const handleDeleteClick = () => dispatch(deletePartner({ id: props.id }));
@@ -58,7 +57,7 @@ export default function CardPartner(props) {
   );
 }
 
-CardPartner.propTypes = {
+CardPartenaire.propTypes = {
   id: PropTypes.string.isRequired,
   nom: PropTypes.string.isRequired,
   logo: PropTypes.string,

@@ -1,7 +1,4 @@
-import Navbar from "../layouts/Navbar";
-import NextEvents from "../components/NextEvents";
-import LinkButton from "../layouts/LinkButton";
-import Footer from "../layouts/Footer";
+import { Footer, LinkButton, Navbar, NextEvents } from "../components/index";
 
 export default function Home() {
   return (

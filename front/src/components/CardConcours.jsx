@@ -1,18 +1,15 @@
-import PropTypes from "prop-types";
-
 import { useEffect, useState } from "react";
-import { eventDates, isInFuture } from "../utils/dateUtils";
+import PropTypes from "prop-types";
 
 import { useDispatch } from "react-redux";
 import { deleteEvent } from "../store/eventSlice";
 
+import { DisciplineTag, Button, LinkButton } from "./index";
 import { FaTrash, FaPen } from "react-icons/fa6";
 
-import DisciplineTag from "../layouts/DisciplineTag";
-import Button from "../layouts/Button";
-import LinkButton from "../layouts/LinkButton";
+import { eventDates, isInFuture } from "../utils/dateUtils";
 
-export default function CardEvent(props) {
+export default function CardConcours(props) {
   const dispatch = useDispatch();
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -85,7 +82,7 @@ export default function CardEvent(props) {
   );
 }
 
-CardEvent.propTypes = {
+CardConcours.propTypes = {
   id: PropTypes.string.isRequired,
   debut: PropTypes.string.isRequired,
   fin: PropTypes.string.isRequired,

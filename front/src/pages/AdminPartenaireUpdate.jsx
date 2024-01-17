@@ -1,19 +1,18 @@
 import { useEffect } from "react";
 
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getSinglePartner } from "../store/partnerSlice";
 
-import Navbar from "../layouts/Navbar";
-import FormPartenaire from "../components/FormPartenaire";
-import Footer from "../layouts/Footer";
-import ErrorPage from "./ErrorPage";
+import { ErrorPage } from "./index";
+import { Footer, FormPartenaire, Navbar } from "../components/index";
 
 export default function AdminPartenaireUpdate() {
   const dispatch = useDispatch();
+  const { partenaireId } = useParams();
 
   useEffect(() => {
-    const partnerId = window.location.pathname.split("partenaires/")[1];
-    dispatch(getSinglePartner({ id: partnerId }));
+    dispatch(getSinglePartner({ id: partenaireId }));
   }, []);
 
   const partner = useSelector((state) => state.partners.partner);
@@ -29,7 +28,9 @@ export default function AdminPartenaireUpdate() {
       <h1>Modifier un Partenaire</h1>
 
       <main className="flex flex-col items-center px-4 md:px-0">
-        {!isLoading && <FormPartenaire type="update" partner={partner} />}
+        {!isLoading && partner && (
+          <FormPartenaire type="update" partner={partner} />
+        )}
       </main>
 
       <Footer />

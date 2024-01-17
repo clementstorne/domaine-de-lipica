@@ -1,9 +1,12 @@
-import stables from "../data/ecuries.json";
-
 import { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllStables } from "../store/stableSlice";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isSubMenuOpen, setSubMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -36,6 +39,13 @@ export default function Navbar() {
       window.removeEventListener("resize", handleResize);
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    dispatch(getAllStables());
+  }, []);
+
+  const stables = useSelector((state) => state.stables.stablesList);
+  const error = useSelector((state) => state.stables.error);
 
   return (
     <header className="navbar">
@@ -96,7 +106,7 @@ export default function Navbar() {
               ))}
             </>
           )}
-          {windowWidth > breakpoint && (
+          {windowWidth > breakpoint && !error && (
             <li className="navlink relative">
               <span
                 onClick={toggleSubMenu}
@@ -106,7 +116,7 @@ export default function Navbar() {
               >
                 Centre équestre
               </span>
-              {isSubMenuOpen && (
+              {isSubMenuOpen && !error && (
                 <ul className="submenu">
                   {stables.map((stable) => (
                     <li key={stable.id} className="navlink">

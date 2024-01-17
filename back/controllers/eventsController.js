@@ -87,7 +87,7 @@ const EventsController = {
     }
 
     try {
-      const event = await prisma.event.findUnique({
+      const event = await prisma.event.findUniqueOrThrow({
         where: {
           id: eventId,
         },
@@ -101,12 +101,6 @@ const EventsController = {
           lienWinJump: true,
         },
       });
-
-      if (!event) {
-        return res.status(404).json({
-          error: notFound,
-        });
-      }
 
       return res
         .status(200)

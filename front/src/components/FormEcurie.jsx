@@ -1,5 +1,6 @@
-import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
+
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createStable, updateStable } from "../store/stableSlice";
@@ -67,8 +68,7 @@ export default function FormEcurie(props) {
       setValue("nom", props.stable.nom);
       setValue("informations", props.stable.informations);
       if (props.stable.images.length > 0) {
-        const loadedImages = props.stable.images.map((image) => image.url);
-        setImages(loadedImages);
+        setImages(props.stable.images);
       }
     }
   }, []);

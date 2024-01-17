@@ -1,14 +1,10 @@
+import { useEffect } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 import { getAllEvents } from "../store/eventSlice";
 
-import Navbar from "../layouts/Navbar";
-import CardEvent from "../components/CardEvent";
-import Footer from "../layouts/Footer";
-import ErrorPage from "./ErrorPage";
-
-import LinkButton from "../layouts/LinkButton";
-
-import { useEffect } from "react";
+import { ErrorPage } from "./index";
+import { CardConcours, Footer, LinkButton, Navbar } from "../components/index";
 
 export default function AdminConcours() {
   const dispatch = useDispatch();
@@ -41,7 +37,7 @@ export default function AdminConcours() {
             <p>Actions</p>
           </div>
           {futureEvents.map((event, index) => (
-            <CardEvent
+            <CardConcours
               key={event.id}
               {...event}
               admin={true}
@@ -62,7 +58,7 @@ export default function AdminConcours() {
             <p>Actions</p>
           </div>
           {pastEvents.map((event, index) => (
-            <CardEvent
+            <CardConcours
               key={event.id}
               {...event}
               admin={true}

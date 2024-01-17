@@ -3,8 +3,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllEvents } from "../store/eventSlice";
 
-import CardNextEvent from "./CardNextEvent";
-import LinkButton from "../layouts/LinkButton";
+import { CardNextEvent, LinkButton } from "./index";
 
 export default function NextEvents() {
   const dispatch = useDispatch();

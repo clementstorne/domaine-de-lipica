@@ -1,19 +1,18 @@
 import { useEffect } from "react";
 
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getSingleStable } from "../store/stableSlice";
 
-import Navbar from "../layouts/Navbar";
-import FormEcurie from "../components/FormEcurie";
-import Footer from "../layouts/Footer";
-import ErrorPage from "./ErrorPage";
+import { ErrorPage } from "./index";
+import { Footer, FormEcurie, Navbar } from "../components/index";
 
 export default function AdminEcurieUpdate() {
   const dispatch = useDispatch();
+  const { ecurieId } = useParams();
 
   useEffect(() => {
-    const stableId = window.location.pathname.split("ecuries/")[1];
-    dispatch(getSingleStable({ id: stableId }));
+    dispatch(getSingleStable({ id: ecurieId }));
   }, []);
 
   const stable = useSelector((state) => state.stables.stable);
@@ -26,10 +25,10 @@ export default function AdminEcurieUpdate() {
   return (
     <>
       <Navbar />
-      <h1>Ajouter une écurie</h1>
+      <h1>Modifier une écurie</h1>
 
       <main className="flex flex-col items-center px-4 md:px-0">
-        {!isLoading && <FormEcurie type="update" stable={stable} />}
+        {!isLoading && stable && <FormEcurie type="update" stable={stable} />}
       </main>
 
       <Footer />

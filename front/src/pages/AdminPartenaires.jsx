@@ -3,12 +3,13 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllPartners } from "../store/partnerSlice";
 
-import Navbar from "../layouts/Navbar";
-import CardPartner from "../components/CardPartenaire";
-import Footer from "../layouts/Footer";
-import ErrorPage from "./ErrorPage";
-
-import LinkButton from "../layouts/LinkButton";
+import { ErrorPage } from "./index";
+import {
+  CardPartenaire,
+  Footer,
+  LinkButton,
+  Navbar,
+} from "../components/index";
 
 export default function AdminPartenaires() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export default function AdminPartenaires() {
       <h1>Liste des partenaires</h1>
       <section className="mb-8 flex flex-col flex-wrap items-center justify-center md:mb-16 md:flex-row md:items-stretch">
         {partners.map((partner) => (
-          <CardPartner key={partner.id} {...partner} admin={true} />
+          <CardPartenaire key={partner.id} {...partner} admin={true} />
         ))}
       </section>
 

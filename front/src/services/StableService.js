@@ -13,6 +13,10 @@ class StrableService {
     return axios.get(`/stables/${stableId}`);
   };
 
+  static getStableByUrl = async (stableUrl) => {
+    return axios.get(`/stables/url/${stableUrl}`);
+  };
+
   static updateStable = async (stableId, credentials) => {
     return axios.patch(`/stables/${stableId}`, credentials);
   };

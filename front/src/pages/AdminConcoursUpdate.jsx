@@ -1,19 +1,18 @@
 import { useEffect } from "react";
 
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getSingleEvent } from "../store/eventSlice";
 
-import Navbar from "../layouts/Navbar";
-import FormConcours from "../components/FormConcours";
-import Footer from "../layouts/Footer";
-import ErrorPage from "./ErrorPage";
+import { ErrorPage } from "./index";
+import { Footer, FormConcours, Navbar } from "../components/index";
 
 export default function AdminConcoursUpdate() {
   const dispatch = useDispatch();
+  const { concoursId } = useParams();
 
   useEffect(() => {
-    const eventId = window.location.pathname.split("concours/")[1];
-    dispatch(getSingleEvent({ id: eventId }));
+    dispatch(getSingleEvent({ id: concoursId }));
   }, []);
 
   const event = useSelector((state) => state.events.event);
@@ -29,7 +28,7 @@ export default function AdminConcoursUpdate() {
       <h1>Modifier un concours</h1>
 
       <main className="flex flex-col items-center px-4 md:px-0">
-        {!isLoading && <FormConcours type="update" event={event} />}
+        {!isLoading && event && <FormConcours type="update" event={event} />}
       </main>
 
       <Footer />

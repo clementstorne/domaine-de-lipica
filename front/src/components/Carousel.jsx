@@ -1,7 +1,5 @@
-import PropTypes from "prop-types";
-
 import { useEffect, useState } from "react";
-
+import PropTypes from "prop-types";
 import { useSwipeable } from "react-swipeable";
 
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
@@ -163,7 +161,7 @@ export default function Carousel(props) {
       >
         <FaAngleLeft />
       </div>
-      <div className="md:h-128 flex h-96 transition-transform duration-500 ease-in-out">
+      <div className="flex h-96 transition-transform duration-500 ease-in-out md:h-128">
         {props.images.map((image, index) => (
           <div
             key={index}

@@ -1,20 +1,21 @@
+import { useEffect } from "react";
+
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getSingleEvent } from "../store/eventSlice";
 import { getAllPartners } from "../store/partnerSlice";
 
-import Navbar from "../layouts/Navbar";
-import Footer from "../layouts/Footer";
-import ErrorPage from "./ErrorPage";
+import { ErrorPage } from "./index";
+import { Footer, Navbar } from "../components/index";
 
 import { singleEventDates } from "../utils/dateUtils";
-import { useEffect } from "react";
 
 export default function Horaires() {
   const dispatch = useDispatch();
+  const { concoursId } = useParams();
 
   useEffect(() => {
-    const eventId = window.location.pathname.split("concours/")[1];
-    dispatch(getSingleEvent({ id: eventId }));
+    dispatch(getSingleEvent({ id: concoursId }));
     dispatch(getAllPartners());
   }, []);
 

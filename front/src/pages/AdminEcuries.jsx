@@ -3,12 +3,8 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllStables } from "../store/stableSlice";
 
-import Navbar from "../layouts/Navbar";
-import CardEcurie from "../components/CardEcurie";
-import Footer from "../layouts/Footer";
-import ErrorPage from "./ErrorPage";
-
-import LinkButton from "../layouts/LinkButton";
+import { ErrorPage } from "./index";
+import { CardEcurie, Footer, LinkButton, Navbar } from "../components/index";
 
 export default function AdminEcuries() {
   const dispatch = useDispatch();

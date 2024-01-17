@@ -1,6 +1,4 @@
-import Navbar from "../layouts/Navbar";
-import Carousel from "../layouts/Carousel";
-import Footer from "../layouts/Footer";
+import { Carousel, Footer, Navbar } from "../components/index";
 
 const images = [
   {

@@ -1,6 +1,4 @@
-import Navbar from "../layouts/Navbar";
-import FormEcurie from "../components/FormEcurie";
-import Footer from "../layouts/Footer";
+import { Footer, FormEcurie, Navbar } from "../components/index";
 
 export default function AdminEcurieCreate() {
   return (

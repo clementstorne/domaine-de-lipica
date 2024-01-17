@@ -3,10 +3,8 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllEvents } from "../store/eventSlice";
 
-import Navbar from "../layouts/Navbar";
-import CardEvent from "../components/CardEvent";
-import Footer from "../layouts/Footer";
-import ErrorPage from "./ErrorPage";
+import { ErrorPage } from "./index";
+import { CardConcours, Footer, Navbar } from "../components/index";
 
 export default function Concours() {
   const dispatch = useDispatch();
@@ -39,7 +37,7 @@ export default function Concours() {
             <p>Liens</p>
           </div>
           {futureEvents.map((event, index) => (
-            <CardEvent
+            <CardConcours
               key={event.id}
               {...event}
               className={`${index % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}`}
@@ -59,7 +57,7 @@ export default function Concours() {
             <p>Liens</p>
           </div>
           {pastEvents.map((event, index) => (
-            <CardEvent
+            <CardConcours
               key={event.id}
               {...event}
               className={`${index % 2 === 0 ? "bg-gray-200" : "bg-gray-100"}`}

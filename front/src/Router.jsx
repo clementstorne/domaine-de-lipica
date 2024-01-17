@@ -29,7 +29,7 @@ export default function Router() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/presentation" element={<Presentation />} />
-        <Route path="/:ecurieId" element={<Ecurie />} />
+        <Route path="/:ecurieUrl" element={<Ecurie />} />
         <Route path="/concours" element={<Concours />} />
         <Route path="/concours/:concoursId" element={<Horaires />} />
         <Route path="/partenaires" element={<Partenaires />} />
@@ -68,7 +68,6 @@ export default function Router() {
         />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/plan-du-site" element={<SiteMap />} />
-        {/* <Route errorElement={ErrorPage} /> */}
       </Routes>
     </BrowserRouter>
   );

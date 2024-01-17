@@ -1,6 +1,4 @@
-import Navbar from "../layouts/Navbar";
-import FormLogin from "../components/FormLogin";
-import Footer from "../layouts/Footer";
+import { Footer, FormLogin, Navbar } from "../components/index";
 
 export default function Login() {
   return (

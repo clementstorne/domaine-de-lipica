@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { deleteStable } from "../store/stableSlice";
 
-import Button from "../layouts/Button";
-import LinkButton from "../layouts/LinkButton";
+import { Button, LinkButton } from "./index";
 
 import { newlineToBreakTag } from "../utils/strUtils";
 

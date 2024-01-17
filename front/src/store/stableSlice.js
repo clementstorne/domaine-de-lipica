@@ -58,6 +58,23 @@ export const getSingleStable = createAsyncThunk(
   },
 );
 
+export const getStableByUrl = createAsyncThunk(
+  "stables/getStableByUrl",
+  async (credentials, thunkAPI) => {
+    const stableUrl = credentials.url;
+    try {
+      const res = await StableService.getStableByUrl(stableUrl);
+      if (res.status >= 200 && res.status <= 209) {
+        return res.data;
+      } else {
+        return thunkAPI.rejectWithValue(res.errorr);
+      }
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
 export const updateStable = createAsyncThunk(
   "stables/updateStable",
   async (credentials, thunkAPI) => {
@@ -131,8 +148,27 @@ const stableSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.stable = action.payload.stable;
+        state.stable.images = action.payload.stable.images.map(
+          (image) => image.url,
+        );
       })
       .addCase(getSingleStable.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(getStableByUrl.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getStableByUrl.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.stable = action.payload.stable;
+        state.stable.images = action.payload.stable.images.map(
+          (image) => image.url,
+        );
+      })
+      .addCase(getStableByUrl.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })

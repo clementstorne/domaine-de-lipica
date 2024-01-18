@@ -66,6 +66,7 @@ export default function Presentation() {
 
       <section className="mb-8 md:mb-16">
         <h2 className="text-blue-900">Plan</h2>
+        <img src="/plan.png" alt="Plan de situation du domaine de Lipica" />
       </section>
 
       <Footer />

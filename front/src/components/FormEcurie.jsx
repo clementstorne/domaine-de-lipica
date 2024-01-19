@@ -3,10 +3,13 @@ import PropTypes from "prop-types";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createStable, updateStable } from "../store/stableSlice";
+import { createStable, updateStable, resetStable } from "../store/stableSlice";
 import { useForm, Controller } from "react-hook-form";
 
+import { FaRegTrashCan } from "react-icons/fa6";
+
 import { stringToUrl } from "../utils/strUtils";
+import ImageService from "../services/ImagesService";
 
 export default function FormEcurie(props) {
   const dispatch = useDispatch();
@@ -37,6 +40,26 @@ export default function FormEcurie(props) {
     });
   };
 
+  const handleRemoveImage = async (e, index) => {
+    const updatedImages = [...images];
+    updatedImages.splice(index, 1);
+    setImages(updatedImages);
+
+    const updatedImageFiles = [...imageFiles];
+    updatedImageFiles.splice(index, 1);
+    setImageFiles(updatedImageFiles);
+
+    if (props.type === "update" && props.stable.images[index]) {
+      const imageUrl = props.stable.images[index];
+
+      try {
+        await ImageService.deleteImage(imageUrl);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   const createFormData = (data, imageFiles, id) => {
     const formData = new FormData();
     if (id) {
@@ -56,10 +79,12 @@ export default function FormEcurie(props) {
       const formData = createFormData(data, imageFiles);
       dispatch(createStable(formData));
       navigate("/administration/ecuries");
+      dispatch(resetStable());
     } else {
       const formData = createFormData(data, imageFiles, props.stable.id);
       dispatch(updateStable(formData));
       navigate("/administration/ecuries");
+      dispatch(resetStable());
     }
   };
 
@@ -120,12 +145,23 @@ export default function FormEcurie(props) {
         {images.length > 0 && (
           <div className="grid w-full auto-rows-32 grid-cols-3 items-center gap-2">
             {images.map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt=""
-                className="max-h-full max-w-full self-center justify-self-center object-fill"
-              />
+              <div key={index} className="relative h-full w-full">
+                <img
+                  key={index}
+                  src={image}
+                  alt=""
+                  className="m-auto max-h-full max-w-full self-center justify-self-center object-fill"
+                />
+                <button
+                  type="button"
+                  className="absolute bottom-2 left-1/2 z-10 -translate-x-1/2 rounded-full bg-sun-400 p-2 text-gray-950 outline-none drop-shadow-base
+                  hover:border-4 hover:border-sun-400 hover:bg-gray-50 hover:p-1 
+                  focus:border-4 focus:border-sun-400 focus:bg-gray-50 focus:p-1"
+                  onClick={(e) => handleRemoveImage(e, index)}
+                >
+                  <FaRegTrashCan />
+                </button>
+              </div>
             ))}
           </div>
         )}

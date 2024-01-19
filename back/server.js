@@ -8,6 +8,7 @@ import authRoutes from "./routes/authRoutes.js";
 import eventsRoutes from "./routes/eventsRoutes.js";
 import partnersRoutes from "./routes/partnersRoutes.js";
 import stablesRoutes from "./routes/stablesRoutes.js";
+import imagesRoutes from "./routes/imagesRoutes.js";
 
 const app = express();
 const corsOptions = {
@@ -27,6 +28,7 @@ app.use("/auth", authRoutes);
 app.use("/events", eventsRoutes);
 app.use("/partners", partnersRoutes);
 app.use("/stables", stablesRoutes);
+app.use("/images", imagesRoutes);
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 

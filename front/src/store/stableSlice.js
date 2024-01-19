@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import StableService from "../services/StableService";
+import ImagesService from "../services/ImagesService";
 
 const initialState = {
   stable: null,
@@ -112,6 +113,11 @@ export const deleteStable = createAsyncThunk(
 const stableSlice = createSlice({
   name: "stables",
   initialState,
+  reducers: {
+    resetStable: (state) => {
+      state.stable = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createStable.pending, (state) => {
@@ -207,4 +213,5 @@ const stableSlice = createSlice({
   },
 });
 
+export const { resetStable } = stableSlice.actions;
 export default stableSlice.reducer;

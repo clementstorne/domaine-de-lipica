@@ -4,12 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllPartners } from "../store/partnerSlice";
 
 import { ErrorPage } from "./index";
-import {
-  CardPartenaire,
-  Footer,
-  LinkButton,
-  Navbar,
-} from "../components/index";
+import { CardPartenaire, LinkButton } from "../components/index";
 
 export default function AdminPartenaires() {
   const dispatch = useDispatch();
@@ -26,7 +21,6 @@ export default function AdminPartenaires() {
   }
   return (
     <>
-      <Navbar />
       <h1>Liste des partenaires</h1>
       <section className="mb-8 flex flex-col flex-wrap items-center justify-center md:mb-16 md:flex-row md:items-stretch">
         {partners.map((partner) => (
@@ -42,7 +36,6 @@ export default function AdminPartenaires() {
           className="mr-4"
         />
       </div>
-      <Footer />
     </>
   );
 }

@@ -15,4 +15,5 @@ export { default as FormPartenaire } from "./FormPartenaire";
 export { default as LinkButton } from "./LinkButton";
 export { default as Navbar } from "./Navbar";
 export { default as NextEvents } from "./NextEvents";
+export { default as ScrollToTop } from "./ScrollToTop";
 export { default as SmallLinkButton } from "./SmallLinkButton";

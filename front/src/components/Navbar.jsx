@@ -17,6 +17,10 @@ export default function Navbar() {
     setMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   const toggleSubMenu = () => {
     setSubMenuOpen(!isSubMenuOpen);
   };
@@ -49,7 +53,7 @@ export default function Navbar() {
 
   return (
     <header className="navbar">
-      <Link to="/" className="fixed">
+      <Link to="/" className="fixed" onClick={closeMenu}>
         <img
           src="/logo.png"
           alt="Logo du domaine de Lipica"
@@ -92,16 +96,22 @@ export default function Navbar() {
       >
         <ul className="navlist">
           <li className="navlink">
-            <Link to="/">Accueil</Link>
+            <Link to="/" onClick={closeMenu}>
+              Accueil
+            </Link>
           </li>
           <li className="navlink">
-            <Link to="/presentation">Présentation</Link>
+            <Link to="/presentation" onClick={closeMenu}>
+              Présentation
+            </Link>
           </li>
           {windowWidth < breakpoint && (
             <>
               {stables.map((stable) => (
                 <li key={stable.id} className="navlink">
-                  <Link to={`/${stable.url}`}>{stable.nom}</Link>
+                  <Link to={`/${stable.url}`} onClick={closeMenu}>
+                    {stable.nom}
+                  </Link>
                 </li>
               ))}
             </>
@@ -129,7 +139,9 @@ export default function Navbar() {
           )}
 
           <li className="navlink">
-            <Link to="/concours">Concours</Link>
+            <Link to="/concours" onClick={closeMenu}>
+              Concours
+            </Link>
           </li>
           <li className="navlink">
             <a
@@ -141,10 +153,14 @@ export default function Navbar() {
             </a>
           </li>
           <li className="navlink">
-            <Link to="/partenaires">Partenaires</Link>
+            <Link to="/partenaires" onClick={closeMenu}>
+              Partenaires
+            </Link>
           </li>
           <li className="navlink">
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact" onClick={closeMenu}>
+              Contact
+            </Link>
           </li>
         </ul>
       </nav>

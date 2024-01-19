@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllEvents } from "../store/eventSlice";
 
 import { ErrorPage } from "./index";
-import { CardConcours, Footer, Navbar } from "../components/index";
+import { CardConcours } from "../components/index";
 
 export default function Concours() {
   const dispatch = useDispatch();
@@ -22,7 +22,6 @@ export default function Concours() {
   }
   return (
     <>
-      <Navbar />
       <h1>Concours</h1>
       {futureEvents.length === 0 ? (
         <></>
@@ -65,8 +64,6 @@ export default function Concours() {
           ))}
         </section>
       )}
-
-      <Footer />
     </>
   );
 }

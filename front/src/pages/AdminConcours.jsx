@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllEvents } from "../store/eventSlice";
 
 import { ErrorPage } from "./index";
-import { CardConcours, Footer, LinkButton, Navbar } from "../components/index";
+import { CardConcours, LinkButton } from "../components/index";
 
 export default function AdminConcours() {
   const dispatch = useDispatch();
@@ -22,7 +22,6 @@ export default function AdminConcours() {
   }
   return (
     <>
-      <Navbar />
       <h1>Liste des concours</h1>
       {futureEvents.length === 0 ? (
         <></>
@@ -75,8 +74,6 @@ export default function AdminConcours() {
           className="mr-4"
         />
       </div>
-
-      <Footer />
     </>
   );
 }

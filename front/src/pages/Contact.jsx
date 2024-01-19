@@ -1,9 +1,8 @@
-import { Footer, FormContact, Navbar } from "../components/index";
+import { FormContact } from "../components/index";
 
 export default function Contact() {
   return (
     <>
-      <Navbar />
       <h1>Contact</h1>
 
       <section className="flex flex-col items-center px-4 text-center md:px-0">
@@ -30,8 +29,6 @@ export default function Contact() {
         <h2 className="text-blue-900">Contactez-nous</h2>
         <FormContact />
       </main>
-
-      <Footer />
     </>
   );
 }

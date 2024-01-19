@@ -1,9 +1,8 @@
-import { Footer, LinkButton, Navbar, NextEvents } from "../components/index";
+import { LinkButton, NextEvents } from "../components/index";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
       <h1>Bienvenue au Centre Équestre du Domaine de Lipica !</h1>
       <main className="px-4 md:px-0">
         <div className="md:mb-8 md:grid md:grid-cols-5 md:items-center md:gap-x-8">
@@ -61,8 +60,6 @@ export default function Home() {
           label="Voir les engagés et les résultats"
         />
       </section>
-
-      <Footer />
     </>
   );
 }

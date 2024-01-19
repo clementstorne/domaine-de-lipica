@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getSingleStable } from "../store/stableSlice";
 
 import { ErrorPage } from "./index";
-import { Footer, FormEcurie, Navbar } from "../components/index";
+import { FormEcurie } from "../components/index";
 
 export default function AdminEcurieUpdate() {
   const dispatch = useDispatch();
@@ -24,14 +24,11 @@ export default function AdminEcurieUpdate() {
   }
   return (
     <>
-      <Navbar />
       <h1>Modifier une écurie</h1>
 
       <main className="flex flex-col items-center px-4 md:px-0">
         {!isLoading && stable && <FormEcurie type="update" stable={stable} />}
       </main>
-
-      <Footer />
     </>
   );
 }

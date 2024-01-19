@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getStableByUrl } from "../store/stableSlice";
 
 import { ErrorPage } from "./index";
-import { EcurieSection, Footer, Navbar } from "../components/index";
+import { EcurieSection } from "../components/index";
 
 export default function Ecurie() {
   const dispatch = useDispatch();
@@ -22,11 +22,5 @@ export default function Ecurie() {
   if (error) {
     return <ErrorPage />;
   }
-  return (
-    <>
-      <Navbar />
-      {!isLoading && stable && <EcurieSection stable={stable} />}
-      <Footer />
-    </>
-  );
+  return <>{!isLoading && stable && <EcurieSection stable={stable} />}</>;
 }

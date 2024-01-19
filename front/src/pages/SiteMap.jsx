@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllStables } from "../store/stableSlice";
 
-import { Footer, LinkButton, Navbar } from "../components/index";
+import { LinkButton } from "../components/index";
 
 export default function SiteMap() {
   const dispatch = useDispatch();
@@ -18,7 +18,6 @@ export default function SiteMap() {
 
   return (
     <>
-      <Navbar />
       <h1>Plan du site</h1>
 
       <main className="mx-auto flex max-w-288 flex-col justify-between lg:flex-row">
@@ -93,8 +92,6 @@ export default function SiteMap() {
           </nav>
         </section>
       </main>
-
-      <Footer />
     </>
   );
 }

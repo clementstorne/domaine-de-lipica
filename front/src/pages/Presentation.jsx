@@ -1,4 +1,4 @@
-import { Carousel, Footer, Navbar } from "../components/index";
+import { Carousel } from "../components/index";
 
 const images = [
   {
@@ -54,7 +54,6 @@ const images = [
 export default function Presentation() {
   return (
     <>
-      <Navbar />
       <h1>Présentation</h1>
 
       <section className="mb-8 md:mb-16">
@@ -68,8 +67,6 @@ export default function Presentation() {
         <h2 className="text-blue-900">Plan</h2>
         <img src="/plan.png" alt="Plan de situation du domaine de Lipica" />
       </section>
-
-      <Footer />
     </>
   );
 }

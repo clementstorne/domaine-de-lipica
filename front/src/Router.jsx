@@ -22,10 +22,13 @@ import {
   MentionsLegales,
   SiteMap,
 } from "./pages/index.js";
+import { Footer, Navbar, ScrollToTop } from "./components/index.js";
 
 export default function Router() {
   return (
     <BrowserRouter>
+      <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/presentation" element={<Presentation />} />
@@ -69,6 +72,7 @@ export default function Router() {
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/plan-du-site" element={<SiteMap />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

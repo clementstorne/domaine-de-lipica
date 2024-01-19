@@ -1,11 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { Footer, Navbar } from "../components/index";
-
 export default function Home() {
   return (
     <>
-      <Navbar />
       <h1>Mentions légales</h1>
 
       <section className="px-4 md:px-0">
@@ -87,8 +84,6 @@ export default function Home() {
           la propriété intellectuelle et le Code civil.
         </p>
       </section>
-
-      <Footer />
     </>
   );
 }

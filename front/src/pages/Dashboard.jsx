@@ -1,9 +1,8 @@
-import { Footer, LinkButton, Navbar } from "../components/index";
+import { LinkButton } from "../components/index";
 
 export default function Dahsboard() {
   return (
     <>
-      <Navbar />
       <h1>Administration du site</h1>
 
       <main className="mx-auto flex max-w-288 flex-col justify-between px-8 lg:flex-row">
@@ -61,8 +60,6 @@ export default function Dahsboard() {
           </nav>
         </section>
       </main>
-
-      <Footer />
     </>
   );
 }

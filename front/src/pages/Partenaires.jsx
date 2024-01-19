@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllPartners } from "../store/partnerSlice";
 
 import { ErrorPage } from "./index";
-import { CardPartenaire, Footer, Navbar } from "../components/index";
+import { CardPartenaire } from "../components/index";
 
 export default function Partenaires() {
   const dispatch = useDispatch();
@@ -21,14 +21,12 @@ export default function Partenaires() {
   }
   return (
     <>
-      <Navbar />
       <h1>Partenaires</h1>
       <section className="mb-8 flex flex-col flex-wrap items-center justify-center md:mb-16 md:flex-row md:items-stretch">
         {partners.map((partner) => (
           <CardPartenaire key={partner.id} {...partner} />
         ))}
       </section>
-      <Footer />
     </>
   );
 }

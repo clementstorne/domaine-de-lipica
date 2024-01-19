@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getSingleEvent } from "../store/eventSlice";
 
 import { ErrorPage } from "./index";
-import { Footer, FormConcours, Navbar } from "../components/index";
+import { FormConcours } from "../components/index";
 
 export default function AdminConcoursUpdate() {
   const dispatch = useDispatch();
@@ -24,14 +24,11 @@ export default function AdminConcoursUpdate() {
   }
   return (
     <>
-      <Navbar />
       <h1>Modifier un concours</h1>
 
       <main className="flex flex-col items-center px-4 md:px-0">
         {!isLoading && event && <FormConcours type="update" event={event} />}
       </main>
-
-      <Footer />
     </>
   );
 }

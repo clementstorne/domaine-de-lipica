@@ -6,7 +6,6 @@ import { getSingleEvent } from "../store/eventSlice";
 import { getAllPartners } from "../store/partnerSlice";
 
 import { ErrorPage } from "./index";
-import { Footer, Navbar } from "../components/index";
 
 import { singleEventDates } from "../utils/dateUtils";
 
@@ -41,7 +40,6 @@ export default function Horaires() {
   }
   return (
     <>
-      <Navbar />
       <h1>{title}</h1>
 
       <div className="m-4 flex  flex-row flex-wrap justify-center md:m-16">
@@ -93,8 +91,6 @@ export default function Horaires() {
         </p>
         <p>Restaurant et buvette ouverts toute la journée.</p>
       </section>
-
-      <Footer />
     </>
   );
 }

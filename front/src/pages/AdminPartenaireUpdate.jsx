@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getSinglePartner } from "../store/partnerSlice";
 
 import { ErrorPage } from "./index";
-import { Footer, FormPartenaire, Navbar } from "../components/index";
+import { FormPartenaire } from "../components/index";
 
 export default function AdminPartenaireUpdate() {
   const dispatch = useDispatch();
@@ -24,7 +24,6 @@ export default function AdminPartenaireUpdate() {
   }
   return (
     <>
-      <Navbar />
       <h1>Modifier un Partenaire</h1>
 
       <main className="flex flex-col items-center px-4 md:px-0">
@@ -32,8 +31,6 @@ export default function AdminPartenaireUpdate() {
           <FormPartenaire type="update" partner={partner} />
         )}
       </main>
-
-      <Footer />
     </>
   );
 }

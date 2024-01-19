@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import StableService from "../services/StableService";
-import ImagesService from "../services/ImagesService";
 
 const initialState = {
   stable: null,

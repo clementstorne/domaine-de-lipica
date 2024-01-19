@@ -1,9 +1,8 @@
-import { Footer, LinkButton, Navbar } from "../components/index";
+import { LinkButton } from "../components/index";
 
 export default function ErrorPage() {
   return (
     <>
-      <Navbar />
       <h1>Erreur 404</h1>
       <main className="flex h-[42vh] flex-col items-center px-4 md:px-0">
         <p className="paragraph text-center">
@@ -15,8 +14,6 @@ export default function ErrorPage() {
           className="mt-8"
         />
       </main>
-
-      <Footer />
     </>
   );
 }

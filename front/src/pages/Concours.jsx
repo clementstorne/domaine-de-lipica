@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllEvents } from "../store/eventSlice";
 
+import { CardConcours, PartnersGrid } from "../components/index";
 import { ErrorPage } from "./index";
-import { CardConcours } from "../components/index";
 
 export default function Concours() {
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ export default function Concours() {
   return (
     <>
       <h1>Concours</h1>
+      <PartnersGrid />
       {futureEvents.length === 0 ? (
         <></>
       ) : (

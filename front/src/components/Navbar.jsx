@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { getAllStables } from "../store/stableSlice";
 
 export default function Navbar() {
@@ -19,6 +19,7 @@ export default function Navbar() {
 
   const closeMenu = () => {
     setMenuOpen(false);
+    setSubMenuOpen(false);
   };
 
   const toggleSubMenu = () => {
@@ -57,13 +58,13 @@ export default function Navbar() {
         <img
           src="/logo.png"
           alt="Logo du domaine de Lipica"
-          className="h-14 w-auto md:h-24"
+          className="w-auto h-14 md:h-24"
         />
       </Link>
 
       {windowWidth < breakpoint && (
         <div
-          className="fixed right-4 cursor-pointer outline-offset-8 outline-blue-900"
+          className="fixed cursor-pointer right-4 outline-offset-8 outline-blue-900"
           tabIndex="0"
           onClick={toggleMenu}
           onKeyDown={(e) => e.key === "Enter" && toggleMenu()}
@@ -117,7 +118,7 @@ export default function Navbar() {
             </>
           )}
           {windowWidth > breakpoint && !error && (
-            <li className="navlink relative">
+            <li className="relative navlink">
               <span
                 onClick={toggleSubMenu}
                 tabIndex="0"
@@ -130,7 +131,9 @@ export default function Navbar() {
                 <ul className="submenu">
                   {stables.map((stable) => (
                     <li key={stable.id} className="navlink">
-                      <Link to={`/${stable.url}`}>{stable.nom}</Link>
+                      <Link to={`/${stable.url}`} onClick={closeMenu}>
+                        {stable.nom}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -142,15 +145,6 @@ export default function Navbar() {
             <Link to="/concours" onClick={closeMenu}>
               Concours
             </Link>
-          </li>
-          <li className="navlink">
-            <a
-              href="https://ozoir.winjump.fr/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Engagés et résultats
-            </a>
           </li>
           <li className="navlink">
             <Link to="/partenaires" onClick={closeMenu}>

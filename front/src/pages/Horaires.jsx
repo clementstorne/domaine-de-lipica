@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { getSingleEvent } from "../store/eventSlice";
 import { getAllPartners } from "../store/partnerSlice";
 
+import { PartnersGrid } from "../components/index";
 import { ErrorPage } from "./index";
 
 import { singleEventDates } from "../utils/dateUtils";
@@ -19,9 +20,7 @@ export default function Horaires() {
   }, []);
 
   const event = useSelector((state) => state.events.event);
-  const eventError = useSelector((state) => state.events.error);
-  const partners = useSelector((state) => state.partners.partnersList);
-  const partnersError = useSelector((state) => state.partners.error);
+  const error = useSelector((state) => state.events.error);
 
   const title = event
     ? `${event.discipline} ${event.niveau} ${singleEventDates(
@@ -35,27 +34,14 @@ export default function Horaires() {
         .map((schedule) => schedule.split("\n").join("<br />"))
     : "";
 
-  if (eventError || partnersError) {
+  if (error) {
     return <ErrorPage />;
   }
   return (
     <>
       <h1>{title}</h1>
 
-      <div className="m-4 flex  flex-row flex-wrap justify-center md:m-16">
-        {partners.map((partner) => (
-          <div
-            key={partner.id}
-            className="mb-2 mr-2 flex h-12 w-12 items-center justify-center bg-white md:mb-4 md:mr-4 md:h-24 md:w-24"
-          >
-            <img
-              src={partner.logo}
-              alt={`Logo de ${partner.nom}`}
-              className="object-fill"
-            />
-          </div>
-        ))}
-      </div>
+      <PartnersGrid />
 
       <section className="bloc">
         <p className="mb-4">

@@ -1,12 +1,34 @@
-import { useEffect } from "react";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createEvent, updateEvent } from "../store/eventSlice";
-import { useForm, Controller } from "react-hook-form";
 
 import { unformatDate } from "../utils/dateUtils";
+import { DISCIPLINES } from "../utils/disciplineUtils";
+
+function RadioButton({ name, value, label, register }) {
+  const id = `${name}-${value}`;
+
+  return (
+    <div>
+      <input
+        {...register(name, {
+          required: "Ce champ est requis",
+        })}
+        type="radio"
+        id={id}
+        name={name}
+        value={value}
+      />
+      <label htmlFor={id} className="ml-2">
+        {label}
+      </label>
+    </div>
+  );
+}
 
 export default function FormConcours(props) {
   const dispatch = useDispatch();
@@ -47,7 +69,7 @@ export default function FormConcours(props) {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full max-w-144 flex-col flex-nowrap items-center justify-center"
+        className="flex flex-col items-center justify-center w-full max-w-144 flex-nowrap"
       >
         <div className="w-full max-w-144">
           <label htmlFor="debut" className="form-label">
@@ -103,72 +125,22 @@ export default function FormConcours(props) {
           />
         </div>
 
-        <div className="max-w-600 w-full">
+        <div className="w-full max-w-600">
           <fieldset
             className={`form-fieldset ${errors.discipline && "!error"}`}
           >
-            <legend className="form-label ml-0">Discipline</legend>
+            <legend className="ml-0 form-label">Discipline</legend>
 
-            <div className="mb-2 flex flex-col justify-between  md:flex-row md:items-center">
-              <div>
-                <input
-                  {...register("discipline", {
-                    required: "Ce champ est requis",
-                  })}
-                  type="radio"
-                  id="cso"
+            <div className="flex flex-col justify-between mb-2 md:grid md:grid-cols-4">
+              {DISCIPLINES.map((discipline) => (
+                <RadioButton
+                  key={discipline.code}
                   name="discipline"
-                  value="cso"
+                  value={discipline.code}
+                  label={discipline.name}
+                  register={register}
                 />
-                <label htmlFor="cso" className="ml-2">
-                  CSO
-                </label>
-              </div>
-
-              <div>
-                <input
-                  {...register("discipline", {
-                    required: "Ce champ est requis",
-                  })}
-                  type="radio"
-                  id="dressage"
-                  name="discipline"
-                  value="dressage"
-                />
-                <label htmlFor="dressage" className="ml-2">
-                  Dressage
-                </label>
-              </div>
-
-              <div>
-                <input
-                  {...register("discipline", {
-                    required: "Ce champ est requis",
-                  })}
-                  type="radio"
-                  id="hunter"
-                  name="discipline"
-                  value="hunter"
-                />
-                <label htmlFor="hunter" className="ml-2">
-                  Hunter
-                </label>
-              </div>
-
-              <div>
-                <input
-                  {...register("discipline", {
-                    required: "Ce champ est requis",
-                  })}
-                  type="radio"
-                  id="voltige"
-                  name="discipline"
-                  value="voltige"
-                />
-                <label htmlFor="voltige" className="ml-2">
-                  Voltige
-                </label>
-              </div>
+              ))}
             </div>
           </fieldset>
           {errors.discipline && (
@@ -176,11 +148,11 @@ export default function FormConcours(props) {
           )}
         </div>
 
-        <div className="max-w-600 w-full">
+        <div className="w-full max-w-600">
           <fieldset className={`form-fieldset ${errors.niveau && "!error"}`}>
-            <legend className="form-label ml-0">Niveau</legend>
+            <legend className="ml-0 form-label">Niveau</legend>
 
-            <div className="mb-2 flex flex-col justify-between md:grid md:grid-flow-col md:grid-cols-3 md:grid-rows-2">
+            <div className="flex flex-col justify-between mb-2 md:grid md:grid-flow-col md:grid-cols-3 md:grid-rows-2">
               <div>
                 <input
                   {...register("niveau", {
@@ -277,14 +249,14 @@ export default function FormConcours(props) {
           )}
         </div>
 
-        <div className="max-w-600 w-full">
+        <div className="w-full max-w-600">
           <label htmlFor="horaires" className="form-label">
             Horaires
           </label>
           <textarea
             {...register("horaires")}
             id="horaires"
-            className="form-input h-40"
+            className="h-40 form-input"
           />
         </div>
 
@@ -299,7 +271,7 @@ export default function FormConcours(props) {
           />
         </div>
 
-        <button type="submit" className="button big-button mt-4">
+        <button type="submit" className="mt-4 button big-button">
           {props.type == "create"
             ? "Ajouter le concours"
             : "Modifier le concours"}
@@ -308,6 +280,13 @@ export default function FormConcours(props) {
     </>
   );
 }
+
+RadioButton.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  register: PropTypes.func.isRequired,
+};
 
 FormConcours.propTypes = {
   type: PropTypes.oneOf(["create", "update"]),

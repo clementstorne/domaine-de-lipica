@@ -1,39 +1,39 @@
 import PropTypes from "prop-types";
 
+import { DISCIPLINES } from "../utils/disciplineUtils";
+
 export default function DisciplineTag(props) {
-  const csoColor = "#732F7B";
-  const dressageColor = "#043D79";
-  const hunterColor = "#A95A1B";
-  const voltigeColor = "#0D8DC7";
+  const discipline = DISCIPLINES.filter(
+    (discipline) => discipline.code === props.name,
+  )[0];
 
-  let label = "";
-  let color = "";
-
-  switch (props.name) {
-    case "cso":
-      label = "CSO";
-      color = csoColor;
-      break;
-    case "dressage":
-      label = "Dressage";
-      color = dressageColor;
-      break;
-    case "hunter":
-      label = "Hunter";
-      color = hunterColor;
-      break;
-    case "voltige":
-      label = "Voltige";
-      color = voltigeColor;
-      break;
-  }
   return (
-    <div className="discipline-tag" style={{ backgroundColor: color }}>
-      {label}
+    <div
+      className="discipline-tag"
+      style={{ backgroundColor: discipline.color, color: discipline.textColor }}
+    >
+      {discipline.name}
     </div>
   );
 }
 
 DisciplineTag.propTypes = {
-  name: PropTypes.oneOf(["cso", "dressage", "hunter", "voltige"]),
+  name: PropTypes.oneOf([
+    "cso",
+    "hunter",
+    "cce",
+    "dressage",
+    "attelage",
+    "voltige",
+    "endurance",
+    "western",
+    "horseball",
+    "ponygames",
+    "trec",
+    "equifeel",
+    "equifun",
+    "ridebike",
+    "riderun",
+    "tiralarc",
+  ]),
 };

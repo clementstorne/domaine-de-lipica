@@ -1,4 +1,4 @@
-import { LinkButton, NextEvents } from "../components/index";
+import { NextEvents } from "../components/index";
 
 export default function Home() {
   return (
@@ -48,18 +48,6 @@ export default function Home() {
       </main>
 
       <NextEvents />
-
-      <section className="home-section blue-gradient md:px-16">
-        <h2>Listes de départ et résultats</h2>
-        <p className="mb-4 text-center text-xl md:mb-12 md:text-md-2xl">
-          Retrouvez les listes de départ et les résultats de tous les concours
-          organisés au domaine de Lipica
-        </p>
-        <LinkButton
-          link="https://ozoir.winjump.fr/"
-          label="Voir les engagés et les résultats"
-        />
-      </section>
     </>
   );
 }

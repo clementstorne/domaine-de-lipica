@@ -40,4 +40,4 @@ const singleEventDates = (debut, fin) => {
   }
 };
 
-export { formatDate, unformatDate, isInFuture, eventDates, singleEventDates };
+export { eventDates, formatDate, isInFuture, singleEventDates, unformatDate };

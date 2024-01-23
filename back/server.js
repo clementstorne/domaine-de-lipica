@@ -1,14 +1,15 @@
-import express from "express";
 import cors from "cors";
+import express from "express";
 import path from "path";
 
 import { PrismaClient } from "@prisma/client";
 
 import authRoutes from "./routes/authRoutes.js";
+import carouselRoutes from "./routes/carouselRoutes.js";
 import eventsRoutes from "./routes/eventsRoutes.js";
+import imagesRoutes from "./routes/imagesRoutes.js";
 import partnersRoutes from "./routes/partnersRoutes.js";
 import stablesRoutes from "./routes/stablesRoutes.js";
-import imagesRoutes from "./routes/imagesRoutes.js";
 
 const app = express();
 const corsOptions = {
@@ -29,6 +30,7 @@ app.use("/events", eventsRoutes);
 app.use("/partners", partnersRoutes);
 app.use("/stables", stablesRoutes);
 app.use("/images", imagesRoutes);
+app.use("/carousel", carouselRoutes);
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 

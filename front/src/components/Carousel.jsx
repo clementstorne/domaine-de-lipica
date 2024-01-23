@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
@@ -131,7 +131,7 @@ export default function Carousel(props) {
   return (
     <div className="relative w-full overflow-hidden">
       {props.preview && (
-        <div className="my-2 flex flex-row flex-nowrap items-center justify-center">
+        <div className="flex flex-row items-center justify-center my-2 flex-nowrap">
           {getPreviewImages(
             props.images,
             currentSlide,
@@ -140,7 +140,7 @@ export default function Carousel(props) {
           ).map((image) => (
             <img
               key={image.id}
-              src={image.src}
+              src={image.url}
               alt={image.alt}
               className={`mx-1 h-8 cursor-pointer ${
                 image.id === currentSlide
@@ -161,7 +161,7 @@ export default function Carousel(props) {
       >
         <FaAngleLeft />
       </div>
-      <div className="flex h-96 transition-transform duration-500 ease-in-out md:h-128">
+      <div className="flex transition-transform duration-500 ease-in-out h-96 md:h-128">
         {props.images.map((image, index) => (
           <div
             key={index}
@@ -171,20 +171,18 @@ export default function Carousel(props) {
           >
             <img
               {...handlers}
-              src={image.src || image}
+              src={image.url || image}
               alt={image.alt}
-              className="max-h-full max-w-full self-center justify-self-center object-fill"
+              className="self-center object-fill max-w-full max-h-full justify-self-center"
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
             />
-            {props.preview && (
-              <p className="mb-8 text-center">{image.legend}</p>
-            )}
+            {props.preview && <p className="mb-8 text-center">{image.title}</p>}
           </div>
         ))}
       </div>
       <div
-        className="carousel-arrow right-0"
+        className="right-0 carousel-arrow"
         onClick={() => handleArrowClick("right")}
         tabIndex="0"
         onKeyDown={(e) => e.key === "Enter" && handleArrowClick("right")}

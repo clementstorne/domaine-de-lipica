@@ -1,28 +1,31 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { Footer, Navbar, ScrollToTop } from "./components/index.js";
 import {
-  Home,
-  Presentation,
-  Ecurie,
-  Concours,
-  Horaires,
-  Partenaires,
-  Contact,
-  Login,
-  Dashboard,
+  AdminCarousel,
+  AdminCarouselCreate,
+  AdminCarouselUpdate,
   AdminConcours,
   AdminConcoursCreate,
   AdminConcoursUpdate,
-  AdminEcuries,
   AdminEcurieCreate,
   AdminEcurieUpdate,
-  AdminPartenaires,
+  AdminEcuries,
   AdminPartenaireCreate,
   AdminPartenaireUpdate,
+  AdminPartenaires,
+  Concours,
+  Contact,
+  Dashboard,
+  Ecurie,
+  Home,
+  Horaires,
+  Login,
   MentionsLegales,
+  Partenaires,
+  Presentation,
   SiteMap,
 } from "./pages/index.js";
-import { Footer, Navbar, ScrollToTop } from "./components/index.js";
 
 export default function Router() {
   return (
@@ -39,6 +42,15 @@ export default function Router() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/administration/login" element={<Login />} />
         <Route path="/administration/dashboard" element={<Dashboard />} />
+        <Route path="/administration/carousel" element={<AdminCarousel />} />
+        <Route
+          path="/administration/carousel/nouveau"
+          element={<AdminCarouselCreate />}
+        />
+        <Route
+          path="/administration/carousel/:imageId"
+          element={<AdminCarouselUpdate />}
+        />
         <Route path="/administration/concours" element={<AdminConcours />} />
         <Route
           path="/administration/concours/nouveau"

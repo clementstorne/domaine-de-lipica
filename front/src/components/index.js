@@ -1,12 +1,14 @@
 export { default as Button } from "./Button";
 export { default as CardConcours } from "./CardConcours";
 export { default as CardEcurie } from "./CardEcurie";
+export { default as CardImage } from "./CardImage";
 export { default as CardNextEvent } from "./CardNextEvent";
 export { default as CardPartenaire } from "./CardPartenaire";
 export { default as Carousel } from "./Carousel";
 export { default as DisciplineTag } from "./DisciplineTag";
 export { default as EcurieSection } from "./EcurieSection";
 export { default as Footer } from "./Footer";
+export { default as FormCarousel } from "./FormCarousel";
 export { default as FormConcours } from "./FormConcours";
 export { default as FormContact } from "./FormContact";
 export { default as FormEcurie } from "./FormEcurie";

@@ -127,6 +127,11 @@
     md:mb-0 md:grid md:h-20 md:grid-cols-4;
   }
 
+  .image-card {
+    @apply mb-4 flex h-96 w-full flex-col flex-nowrap items-center justify-between p-4
+    md:mb-0 md:grid md:h-48 md:grid-cols-4;
+  }
+
   .bloc {
     @apply blue-gradient rounded-10 p-2 text-sm text-gray-50 md:text-base;
   }

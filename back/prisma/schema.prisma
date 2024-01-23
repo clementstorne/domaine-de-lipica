@@ -45,3 +45,10 @@ model Images {
 
   @@index([stableId], map: "Images_stableId_fkey")
 }
+
+model Carousel {
+  id    String @id @default(uuid())
+  url   String
+  title String
+  alt   String
+}

@@ -1,19 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import PartnerService from "../services/PartnerService";
+import CarouselService from "../services/CarouselService";
 
 const initialState = {
-  partner: null,
-  partnersList: [],
+  image: null,
+  imagesList: [],
   isLoading: false,
   error: null,
 };
 
-export const createPartner = createAsyncThunk(
-  "partners/createPartner",
+export const createImage = createAsyncThunk(
+  "images/createImage",
   async (credentials, thunkAPI) => {
     try {
-      const res = await PartnerService.createPartner(credentials);
+      const res = await CarouselService.createImage(credentials);
       if (res.status >= 200 && res.status <= 209) {
         return res.data;
       } else {
@@ -25,11 +25,11 @@ export const createPartner = createAsyncThunk(
   },
 );
 
-export const getAllPartners = createAsyncThunk(
-  "partners/getAllPartners",
+export const getAllImages = createAsyncThunk(
+  "images/getAllImages",
   async (thunkAPI) => {
     try {
-      const res = await PartnerService.getAllPartners();
+      const res = await CarouselService.getAllImages();
       if (res.status >= 200 && res.status <= 209) {
         return res.data;
       } else {
@@ -41,12 +41,12 @@ export const getAllPartners = createAsyncThunk(
   },
 );
 
-export const getSinglePartner = createAsyncThunk(
-  "partners/getSinglePartner",
+export const getSingleImage = createAsyncThunk(
+  "images/getSingleImage",
   async (credentials, thunkAPI) => {
-    const partnerId = credentials.id;
+    const imageId = credentials.id;
     try {
-      const res = await PartnerService.getSinglePartner(partnerId);
+      const res = await CarouselService.getSingleImage(imageId);
       if (res.status >= 200 && res.status <= 209) {
         return res.data;
       } else {
@@ -58,12 +58,12 @@ export const getSinglePartner = createAsyncThunk(
   },
 );
 
-export const updatePartner = createAsyncThunk(
-  "partners/updatePartner",
+export const updateImage = createAsyncThunk(
+  "images/updateImage",
   async (credentials, thunkAPI) => {
-    const partnerId = credentials.get("id");
+    const imageId = credentials.get("id");
     try {
-      const res = await PartnerService.updatePartner(partnerId, credentials);
+      const res = await CarouselService.updateImage(imageId, credentials);
       if (res.status >= 200 && res.status <= 209) {
         return res.data;
       } else {
@@ -75,12 +75,12 @@ export const updatePartner = createAsyncThunk(
   },
 );
 
-export const deletePartner = createAsyncThunk(
-  "partners/deletePartner",
+export const deleteImage = createAsyncThunk(
+  "images/deleteImage",
   async (credentials, thunkAPI) => {
-    const partnerId = credentials.id;
+    const imageId = credentials.id;
     try {
-      const res = await PartnerService.deletePartner(partnerId);
+      const res = await CarouselService.deleteImage(imageId);
       if (res.status >= 200 && res.status <= 209) {
         return;
       } else {
@@ -92,83 +92,92 @@ export const deletePartner = createAsyncThunk(
   },
 );
 
-const partnerSlice = createSlice({
-  name: "partners",
+const imageSlice = createSlice({
+  name: "carousel",
   initialState,
+  reducers: {
+    resetImage: (state) => {
+      state.image = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(createPartner.pending, (state) => {
+      .addCase(createImage.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(createPartner.fulfilled, (state, action) => {
+      .addCase(createImage.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.partnersList = [action.payload.newPartner, ...state.partnersList];
+        state.imagesList = [
+          action.payload.newCarouselImage,
+          ...state.imagesList,
+        ];
       })
-      .addCase(createPartner.rejected, (state, action) => {
+      .addCase(createImage.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(getAllPartners.pending, (state) => {
+      .addCase(getAllImages.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getAllPartners.fulfilled, (state, action) => {
+      .addCase(getAllImages.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.partnersList = action.payload.partners;
+        state.imagesList = action.payload.images;
       })
-      .addCase(getAllPartners.rejected, (state, action) => {
+      .addCase(getAllImages.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(getSinglePartner.pending, (state) => {
+      .addCase(getSingleImage.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getSinglePartner.fulfilled, (state, action) => {
+      .addCase(getSingleImage.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.partner = action.payload.partner;
+        state.image = action.payload.image;
       })
-      .addCase(getSinglePartner.rejected, (state, action) => {
+      .addCase(getSingleImage.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(updatePartner.pending, (state) => {
+      .addCase(updateImage.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(updatePartner.fulfilled, (state, action) => {
+      .addCase(updateImage.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.partnersList = state.partnersList.map((partner) =>
-          partner.id === action.payload.updatedPartner.id
-            ? action.payload.updatedPartner
-            : partner,
+        state.imagesList = state.imagesList.map((image) =>
+          image.id === action.payload.updatedImage.id
+            ? action.payload.updatedImage
+            : image,
         );
       })
-      .addCase(updatePartner.rejected, (state, action) => {
+      .addCase(updateImage.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       })
-      .addCase(deletePartner.pending, (state) => {
+      .addCase(deleteImage.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(deletePartner.fulfilled, (state, action) => {
+      .addCase(deleteImage.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.partnersList = state.partnersList.filter(
-          (partner) => partner.id !== action.meta.arg.id,
+        state.imagesList = state.imagesList.filter(
+          (image) => image.id !== action.meta.arg.id,
         );
       })
-      .addCase(deletePartner.rejected, (state, action) => {
+      .addCase(deleteImage.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
   },
 });
 
-export default partnerSlice.reducer;
+export const { resetImage } = imageSlice.actions;
+export default imageSlice.reducer;

@@ -1,15 +1,15 @@
-import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { useEffect, useRef, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { createStable, updateStable, resetStable } from "../store/stableSlice";
-import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { createStable, resetStable, updateStable } from "../store/stableSlice";
 
 import { FaRegTrashCan } from "react-icons/fa6";
 
-import { stringToUrl } from "../utils/strUtils";
 import ImageService from "../services/ImagesService";
+import { stringToUrl } from "../utils/strUtils";
 
 export default function FormEcurie(props) {
   const dispatch = useDispatch();
@@ -102,7 +102,7 @@ export default function FormEcurie(props) {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full max-w-144 flex-col flex-nowrap items-center justify-center"
+        className="flex flex-col items-center justify-center w-full max-w-144 flex-nowrap"
       >
         <div className="w-full max-w-144">
           <label htmlFor="nom" className="form-label">
@@ -131,32 +131,30 @@ export default function FormEcurie(props) {
           />
         </div>
 
-        <div className="max-w-600 w-full">
+        <div className="w-full max-w-600">
           <label htmlFor="informations" className="form-label">
             Informations
           </label>
           <textarea
             {...register("informations")}
             id="informations"
-            className="form-input h-40"
+            className="h-40 form-input"
           />
         </div>
 
         {images.length > 0 && (
-          <div className="grid w-full auto-rows-32 grid-cols-3 items-center gap-2">
+          <div className="grid items-center w-full grid-cols-3 gap-2 auto-rows-32">
             {images.map((image, index) => (
-              <div key={index} className="relative h-full w-full">
+              <div key={index} className="relative w-full h-full">
                 <img
                   key={index}
                   src={image}
                   alt=""
-                  className="m-auto max-h-full max-w-full self-center justify-self-center object-fill"
+                  className="self-center object-fill max-w-full max-h-full m-auto justify-self-center"
                 />
                 <button
                   type="button"
-                  className="absolute bottom-2 left-1/2 z-10 -translate-x-1/2 rounded-full bg-sun-400 p-2 text-gray-950 outline-none drop-shadow-base
-                  hover:border-4 hover:border-sun-400 hover:bg-gray-50 hover:p-1 
-                  focus:border-4 focus:border-sun-400 focus:bg-gray-50 focus:p-1"
+                  className="absolute z-10 p-2 -translate-x-1/2 rounded-full outline-none bottom-2 left-1/2 bg-sun-400 text-gray-950 drop-shadow-base hover:border-4 hover:border-sun-400 hover:bg-gray-50 hover:p-1 focus:border-4 focus:border-sun-400 focus:bg-gray-50 focus:p-1"
                   onClick={(e) => handleRemoveImage(e, index)}
                 >
                   <FaRegTrashCan />
@@ -173,12 +171,12 @@ export default function FormEcurie(props) {
           id="images"
           className="hidden"
           aria-describedby="images-label"
-          accept="image/png, image/jpg, image/jpeg"
+          accept="image/png, image/jpg, image/jpeg, image/webp"
           ref={hiddenFileInput}
           onChange={handleImageInput}
         />
         <button
-          className="button big-button mt-4"
+          className="mt-4 button big-button"
           onClick={handleUploadButtonClick}
         >
           <label htmlFor="images" id="images-label">
@@ -186,7 +184,7 @@ export default function FormEcurie(props) {
           </label>
         </button>
 
-        <button type="submit" className="button big-button mt-4">
+        <button type="submit" className="mt-4 button big-button">
           {props.type == "create" ? "Ajouter l'écurie" : "Modifier l'écurie"}
         </button>
       </form>

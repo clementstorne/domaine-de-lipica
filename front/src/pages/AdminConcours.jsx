@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllEvents } from "../store/eventSlice";
 
-import { ErrorPage } from "./index";
 import { CardConcours, LinkButton } from "../components/index";
+import { ErrorPage } from "./index";
 
 export default function AdminConcours() {
   const dispatch = useDispatch();
@@ -23,6 +23,16 @@ export default function AdminConcours() {
   return (
     <>
       <h1>Liste des concours</h1>
+
+      <div className="flex flex-col items-center justify-center mb-4 md:mb-16">
+        <LinkButton
+          link="/administration/concours/nouveau"
+          label="Ajouter un concours"
+          className="mb-2"
+          size="small"
+        />
+      </div>
+
       {futureEvents.length === 0 ? (
         <></>
       ) : (
@@ -66,12 +76,11 @@ export default function AdminConcours() {
           ))}
         </section>
       )}
-      <div className="mb-8 flex flex-col items-center justify-center md:mb-16">
+      <div className="flex flex-col items-center justify-center mb-8 md:mb-16">
         <LinkButton
           link="/administration/dashboard/"
           label="Retour au dashboard"
           size="small"
-          className="mr-4"
         />
       </div>
     </>

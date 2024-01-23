@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { useEffect, useRef, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { createPartner, updatePartner } from "../store/partnerSlice";
-import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { createImage, updateImage } from "../store/carouselSlice";
 
-export default function FormPartenaire(props) {
+export default function FormCarousel(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -36,8 +36,8 @@ export default function FormPartenaire(props) {
     if (id) {
       formData.append("id", id);
     }
-    formData.append("nom", data.nom);
-    formData.append("informations", data.informations);
+    formData.append("title", data.title);
+    formData.append("alt", data.alt);
     if (imageFile) {
       formData.append("image", imageFile);
     }
@@ -47,21 +47,21 @@ export default function FormPartenaire(props) {
   const onSubmit = (data) => {
     if (props.type === "create") {
       const formData = createFormData(data, imageFile);
-      dispatch(createPartner(formData));
-      navigate("/administration/partenaires");
+      dispatch(createImage(formData));
+      navigate("/administration/carousel");
     } else {
       setImageBase64url("");
-      const formData = createFormData(data, imageFile, props.partner.id);
-      dispatch(updatePartner(formData));
-      navigate("/administration/partenaires");
+      const formData = createFormData(data, imageFile, props.image.id);
+      dispatch(updateImage(formData));
+      navigate("/administration/carousel");
     }
   };
 
   useEffect(() => {
-    if (props.partner) {
-      setValue("nom", props.partner.nom);
-      setValue("informations", props.partner.informations);
-      setImageBase64url(`${props.partner.logo}`);
+    if (props.image) {
+      setValue("title", props.image.title);
+      setValue("alt", props.image.alt);
+      setImageBase64url(`${props.image.url}`);
     }
   }, []);
 
@@ -71,12 +71,46 @@ export default function FormPartenaire(props) {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col items-center justify-center w-full max-w-144 flex-nowrap"
       >
+        {props.type === "create" && (
+          <>
+            <input
+              {...register("image")}
+              type="file"
+              name="image"
+              id="image"
+              className="hidden"
+              aria-describedby="image-label"
+              accept="image/png, image/jpg, image/jpeg, image/svg+xml, image/webp"
+              ref={hiddenFileInput}
+              onChange={handleImageInput}
+            />
+            <button
+              className="mb-4 button big-button"
+              onClick={handleUploadButtonClick}
+            >
+              <label htmlFor="image" id="image-label">
+                {imageBase64url ? "Modifier l'image" : "Sélectionner une image"}
+              </label>
+            </button>
+          </>
+        )}
+
+        {imageBase64url && (
+          <div className="flex items-center justify-center bg-white h-80 w-80">
+            <img
+              src={imageBase64url}
+              alt=""
+              className="object-fill max-h-80 max-w-80"
+            />
+          </div>
+        )}
+
         <div className="w-full max-w-144">
-          <label htmlFor="nom" className="form-label">
-            Nom
+          <label htmlFor="title" className="form-label">
+            Titre
           </label>
           <Controller
-            name="nom"
+            name="title"
             control={control}
             defaultValue=""
             rules={{
@@ -85,7 +119,7 @@ export default function FormPartenaire(props) {
             render={({ field, fieldState }) => (
               <>
                 <input
-                  id="nom"
+                  id="title"
                   type="text"
                   className={`form-input py-0 ${fieldState?.error && "!error"}`}
                   {...field}
@@ -98,12 +132,12 @@ export default function FormPartenaire(props) {
           />
         </div>
 
-        <div className="w-full max-w-600">
-          <label htmlFor="informations" className="form-label">
-            Informations
+        <div className="w-full max-w-144">
+          <label htmlFor="alt" className="form-label">
+            Description
           </label>
           <Controller
-            name="informations"
+            name="alt"
             control={control}
             defaultValue=""
             rules={{
@@ -111,12 +145,10 @@ export default function FormPartenaire(props) {
             }}
             render={({ field, fieldState }) => (
               <>
-                <textarea
-                  id="informations"
+                <input
+                  id="alt"
                   type="text"
-                  className={`form-input h-40 py-0 ${
-                    fieldState?.error && "!error"
-                  }`}
+                  className={`form-input py-0 ${fieldState?.error && "!error"}`}
                   {...field}
                 />
                 {fieldState?.error && (
@@ -127,47 +159,15 @@ export default function FormPartenaire(props) {
           />
         </div>
 
-        {imageBase64url && (
-          <div className="flex items-center justify-center w-40 h-40 bg-white">
-            <img
-              src={imageBase64url}
-              alt=""
-              className="object-fill max-h-40 max-w-40"
-            />
-          </div>
-        )}
-
-        <input
-          {...register("logo")}
-          type="file"
-          name="image"
-          id="logo"
-          className="hidden"
-          aria-describedby="logo-label"
-          accept="image/png, image/jpg, image/jpeg, image/svg+xml, image/webp"
-          ref={hiddenFileInput}
-          onChange={handleImageInput}
-        />
-        <button
-          className="mt-4 button big-button"
-          onClick={handleUploadButtonClick}
-        >
-          <label htmlFor="logo" id="logo-label">
-            {imageBase64url ? "Modifier le logo" : "Ajouter un logo"}
-          </label>
-        </button>
-
         <button type="submit" className="mt-4 button big-button">
-          {props.type == "create"
-            ? "Ajouter le partenaire"
-            : "Modifier le partenaire"}
+          Enregistrer l&apos;image
         </button>
       </form>
     </>
   );
 }
 
-FormPartenaire.propTypes = {
+FormCarousel.propTypes = {
   type: PropTypes.oneOf(["create", "update"]),
-  partner: PropTypes.object,
+  image: PropTypes.object,
 };

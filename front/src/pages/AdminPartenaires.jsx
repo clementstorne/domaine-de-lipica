@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllPartners } from "../store/partnerSlice";
 
-import { ErrorPage } from "./index";
 import { CardPartenaire, LinkButton } from "../components/index";
+import { ErrorPage } from "./index";
 
 export default function AdminPartenaires() {
   const dispatch = useDispatch();
@@ -22,18 +22,30 @@ export default function AdminPartenaires() {
   return (
     <>
       <h1>Liste des partenaires</h1>
-      <section className="mb-8 flex flex-col flex-wrap items-center justify-center md:mb-16 md:flex-row md:items-stretch">
-        {partners.map((partner) => (
-          <CardPartenaire key={partner.id} {...partner} admin={true} />
-        ))}
-      </section>
 
-      <div className="mb-8 flex flex-col items-center justify-center md:mb-16">
+      <div className="flex flex-col items-center justify-center mb-4 md:mb-16">
+        <LinkButton
+          link="/administration/partenaires/nouveau"
+          label="Ajouter un partenaire"
+          size="small"
+        />
+      </div>
+
+      {partners.length > 0 ? (
+        <section className="flex flex-col flex-wrap items-center justify-center mb-8 md:mb-16 md:flex-row md:items-stretch">
+          {partners.map((partner) => (
+            <CardPartenaire key={partner.id} {...partner} admin={true} />
+          ))}
+        </section>
+      ) : (
+        <></>
+      )}
+
+      <div className="flex flex-col items-center justify-center mb-8 md:mb-16">
         <LinkButton
           link="/administration/dashboard/"
           label="Retour au dashboard"
           size="small"
-          className="mr-4"
         />
       </div>
     </>

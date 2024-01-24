@@ -25,11 +25,12 @@ const AuthController = {
     }
 
     try {
-      const userAlreadyExists = await prisma.user.findUniqueOrThrow({
+      const userAlreadyExists = await prisma.user.findUnique({
         where: {
           email,
         },
       });
+
       if (userAlreadyExists) {
         return res.status(409).json({
           error:
@@ -50,10 +51,12 @@ const AuthController = {
         {
           id: newUser.id,
           email: newUser.email,
+          admin: true,
         },
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_DURING }
       );
+
       return res
         .status(201)
         .json({ message: "User created successfully.", access_token: token });
@@ -99,10 +102,12 @@ const AuthController = {
         {
           id: user.id,
           email: user.email,
+          admin: true,
         },
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_DURING }
       );
+
       return res
         .status(200)
         .json({ message: "User successfully logged in.", access_token: token });

@@ -1,15 +1,17 @@
-import { useState } from "react";
-
+import { Controller, useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { useForm, Controller } from "react-hook-form";
+import { login } from "../store/authSlice.js";
 
 export default function FormLogin() {
-  const [isAuth, setIsAuth] = useState(false);
+  const dispatch = useDispatch();
+
   const { control, handleSubmit, reset } = useForm();
 
+  const isAuth = useSelector((state) => state.auth.isAuth);
+
   const onSubmit = (data) => {
-    console.log(data);
-    setIsAuth(true);
+    dispatch(login(data));
     reset();
   };
 
@@ -18,9 +20,9 @@ export default function FormLogin() {
       {isAuth && <Navigate to="/administration/dashboard" replace={true} />}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full max-w-144 flex-col flex-nowrap items-center justify-center"
+        className="flex flex-col items-center justify-center w-full max-w-144 flex-nowrap"
       >
-        <div className="max-w-600 w-full">
+        <div className="w-full max-w-600">
           <label htmlFor="email" className="form-label">
             Email
           </label>
@@ -52,7 +54,7 @@ export default function FormLogin() {
           />
         </div>
 
-        <div className="max-w-600 w-full">
+        <div className="w-full max-w-600">
           <label htmlFor="password" className="form-label">
             Mot de passe
           </label>
@@ -80,7 +82,7 @@ export default function FormLogin() {
           />
         </div>
 
-        <button type="submit" className="button big-button mt-4">
+        <button type="submit" className="mt-4 button big-button">
           Se connecter
         </button>
       </form>

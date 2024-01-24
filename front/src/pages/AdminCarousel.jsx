@@ -23,7 +23,7 @@ export default function AdminConcours() {
     <>
       <h1>Liste des images</h1>
 
-      <div className="flex flex-col items-center justify-center mb-4 md:mb-16">
+      <div className="mb-4 flex flex-col items-center justify-center md:mb-16">
         <LinkButton
           link="/administration/carousel/nouveau"
           label="Ajouter une image"
@@ -54,7 +54,7 @@ export default function AdminConcours() {
           ))}
         </section>
       )}
-      <div className="flex flex-col items-center justify-center mb-8 md:mb-16">
+      <div className="mb-8 flex flex-col items-center justify-center md:mb-16">
         <LinkButton
           link="/administration/dashboard/"
           label="Retour au dashboard"

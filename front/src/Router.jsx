@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { Footer, Navbar, ScrollToTop } from "./components/index.js";
+import { Footer, GuardAuth, Navbar, ScrollToTop } from "./components/index.js";
 import {
   AdminCarousel,
   AdminCarouselCreate,
@@ -41,45 +41,109 @@ export default function Router() {
         <Route path="/partenaires" element={<Partenaires />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/administration/login" element={<Login />} />
-        <Route path="/administration/dashboard" element={<Dashboard />} />
-        <Route path="/administration/carousel" element={<AdminCarousel />} />
+        <Route
+          path="/administration/dashboard"
+          element={
+            <GuardAuth>
+              <Dashboard />
+            </GuardAuth>
+          }
+        />
+        <Route
+          path="/administration/carousel"
+          element={
+            <GuardAuth>
+              <AdminCarousel />
+            </GuardAuth>
+          }
+        />
         <Route
           path="/administration/carousel/nouveau"
-          element={<AdminCarouselCreate />}
+          element={
+            <GuardAuth>
+              <AdminCarouselCreate />
+            </GuardAuth>
+          }
         />
         <Route
           path="/administration/carousel/:imageId"
-          element={<AdminCarouselUpdate />}
+          element={
+            <GuardAuth>
+              <AdminCarouselUpdate />
+            </GuardAuth>
+          }
         />
-        <Route path="/administration/concours" element={<AdminConcours />} />
+        <Route
+          path="/administration/concours"
+          element={
+            <GuardAuth>
+              <AdminConcours />
+            </GuardAuth>
+          }
+        />
         <Route
           path="/administration/concours/nouveau"
-          element={<AdminConcoursCreate />}
+          element={
+            <GuardAuth>
+              <AdminConcoursCreate />
+            </GuardAuth>
+          }
         />
         <Route
           path="/administration/concours/:concoursId"
-          element={<AdminConcoursUpdate />}
+          element={
+            <GuardAuth>
+              <AdminConcoursUpdate />
+            </GuardAuth>
+          }
         />
         <Route
           path="/administration/partenaires"
-          element={<AdminPartenaires />}
+          element={
+            <GuardAuth>
+              <AdminPartenaires />
+            </GuardAuth>
+          }
         />
         <Route
           path="/administration/partenaires/nouveau"
-          element={<AdminPartenaireCreate />}
+          element={
+            <GuardAuth>
+              <AdminPartenaireCreate />
+            </GuardAuth>
+          }
         />
         <Route
           path="/administration/partenaires/:partenaireId"
-          element={<AdminPartenaireUpdate />}
+          element={
+            <GuardAuth>
+              <AdminPartenaireUpdate />
+            </GuardAuth>
+          }
         />
-        <Route path="/administration/ecuries" element={<AdminEcuries />} />
+        <Route
+          path="/administration/ecuries"
+          element={
+            <GuardAuth>
+              <AdminEcuries />
+            </GuardAuth>
+          }
+        />
         <Route
           path="/administration/ecuries/nouveau"
-          element={<AdminEcurieCreate />}
+          element={
+            <GuardAuth>
+              <AdminEcurieCreate />
+            </GuardAuth>
+          }
         />
         <Route
           path="/administration/ecuries/:ecurieId"
-          element={<AdminEcurieUpdate />}
+          element={
+            <GuardAuth>
+              <AdminEcurieUpdate />
+            </GuardAuth>
+          }
         />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/plan-du-site" element={<SiteMap />} />

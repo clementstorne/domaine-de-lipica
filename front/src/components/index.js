@@ -14,6 +14,7 @@ export { default as FormContact } from "./FormContact";
 export { default as FormEcurie } from "./FormEcurie";
 export { default as FormLogin } from "./FormLogin";
 export { default as FormPartenaire } from "./FormPartenaire";
+export { default as GuardAuth } from "./GuardAuth";
 export { default as LinkButton } from "./LinkButton";
 export { default as Navbar } from "./Navbar";
 export { default as NextEvents } from "./NextEvents";

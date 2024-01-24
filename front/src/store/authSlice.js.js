@@ -1,13 +1,15 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import AuthService from "../services/AuthService";
+import { isValidToken } from "../utils/tokenUtils";
 
 const initialState = {
   token: null || localStorage.getItem("DomaineDeLipica_token"),
-  isAuth: !!localStorage.getItem("DomaineDeLipica_token"),
+  isAuth:
+    localStorage.getItem("DomaineDeLipica_token") &&
+    isValidToken(localStorage.getItem("DomaineDeLipica_token")),
   isLoading: false,
   error: null,
-  status: null,
 };
 
 export const signup = createAsyncThunk(
@@ -49,15 +51,13 @@ const authSlice = createSlice({
     builder
       .addCase(login.pending, (state) => {
         state.isLoading = true;
-        state.status = "Pending";
         state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.status = "Fulfilled";
         state.error = null;
         state.token = action.payload.access_token;
-        localStorage.setItem("Learn@Home_token", state.token);
+        localStorage.setItem("DomaineDeLipica_token", state.token);
         state.isAuth = true;
       })
       .addCase(login.rejected, (state, action) => {
@@ -67,15 +67,13 @@ const authSlice = createSlice({
       })
       .addCase(signup.pending, (state) => {
         state.isLoading = true;
-        state.status = "Pending";
         state.error = null;
       })
       .addCase(signup.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.status = "Fulfilled";
         state.error = null;
         state.token = action.payload.access_token;
-        localStorage.setItem("Learn@Home_token", state.token);
+        localStorage.setItem("DomaineDeLipica_token", state.token);
         state.isAuth = true;
       })
       .addCase(signup.rejected, (state, action) => {

@@ -22,21 +22,16 @@ app.use(express.urlencoded({ extended: true }));
 
 const prisma = new PrismaClient();
 
-app.use("/auth", authRoutes);
-app.use("/events", eventsRoutes);
-app.use("/partners", partnersRoutes);
-app.use("/stables", stablesRoutes);
-app.use("/images", imagesRoutes);
-app.use("/carousel", carouselRoutes);
+app.use("api/auth", authRoutes);
+app.use("api/events", eventsRoutes);
+app.use("api/partners", partnersRoutes);
+app.use("api/stables", stablesRoutes);
+app.use("api/images", imagesRoutes);
+app.use("api/carousel", carouselRoutes);
 
-app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("api/images", express.static(path.join(__dirname, "images")));
 
 const publicPath = path.join(__dirname, "../public");
-app.use(express.static(publicPath));
-app.get("*", (_, res) => {
-  res.sendFile(path.join(publicPath, "index.html"));
-});
-
 app.use(express.static(publicPath));
 app.get("*", (_, res) => {
   res.sendFile(path.join(publicPath, "index.html"));

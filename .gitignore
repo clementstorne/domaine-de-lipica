@@ -23,8 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-back/src/images
 back/dist
 **/.gitignore
 **/package-lock.json
-
+**/.env

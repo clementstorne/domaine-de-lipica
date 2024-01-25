@@ -22,12 +22,12 @@ app.use(express.urlencoded({ extended: true }));
 
 const prisma = new PrismaClient();
 
-app.use("api/auth", authRoutes);
-app.use("api/events", eventsRoutes);
-app.use("api/partners", partnersRoutes);
-app.use("api/stables", stablesRoutes);
-app.use("api/images", imagesRoutes);
-app.use("api/carousel", carouselRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/events", eventsRoutes);
+app.use("/api/partners", partnersRoutes);
+app.use("/api/stables", stablesRoutes);
+app.use("/api/images", imagesRoutes);
+app.use("/api/carousel", carouselRoutes);
 
 app.use("api/images", express.static(path.join(__dirname, "images")));
 

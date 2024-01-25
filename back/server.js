@@ -21,10 +21,6 @@ app.use(express.urlencoded({ extended: true }));
 
 const prisma = new PrismaClient();
 
-app.get("/", (_, res) => {
-  res.status(200).json("Welcome to Domaine de Lipica backend");
-});
-
 app.use("/auth", authRoutes);
 app.use("/events", eventsRoutes);
 app.use("/partners", partnersRoutes);
@@ -35,6 +31,11 @@ app.use("/carousel", carouselRoutes);
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 const publicPath = path.join(__dirname, "./build");
+app.use(express.static(publicPath));
+app.get("*", (_, res) => {
+  res.sendFile(path.join(publicPath, "index.html"));
+});
+
 app.use(express.static(publicPath));
 app.get("*", (_, res) => {
   res.sendFile(path.join(publicPath, "index.html"));

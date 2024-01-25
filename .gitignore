@@ -23,9 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Local Netlify folder
-.netlify
-
 back/src/images
 back/dist
-.vercel
+**/.gitignore
+**/package-lock.json

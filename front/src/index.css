@@ -155,6 +155,10 @@
 }
 
 @layer utilities {
+  .link {
+    @apply font-semibold text-blue-900;
+  }
+
   .blue-gradient {
     background: linear-gradient(
       180deg,

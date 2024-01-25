@@ -12,16 +12,15 @@ import partnersRoutes from "./routes/partnersRoutes.js";
 import stablesRoutes from "./routes/stablesRoutes.js";
 
 const app = express();
-// const corsOptions = {
-//   origin: "http://localhost:5173",
-// };
-// app.use(cors(corsOptions));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const prisma = new PrismaClient();
 
+app.get("/api/", (_, res) => {
+  res.status(200).json("Welcome to Domaine de Lipica backend");
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/partners", partnersRoutes);

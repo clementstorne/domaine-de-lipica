@@ -12,7 +12,7 @@ export default function Home() {
           numérique, dite L.C.E.N., il est porté à la connaissance des
           utilisateurs et visiteurs, ci-après l&apos;
           <em>Utilisateur</em>, du site{" "}
-          <Link to="/" className="font-semibold text-blue-900">
+          <Link to="/" className="link">
             www.ozoir-equitation.com
           </Link>
           , ci-après le <em>Site</em>, les présentes mentions légales.
@@ -24,7 +24,7 @@ export default function Home() {
         </p>
         <p>
           Ces dernières sont accessibles sur le <em>Site</em> à la rubrique{" "}
-          <Link to="/mentions-legales" className="font-semibold text-blue-900">
+          <Link to="/mentions-legales" className="link">
             Mentions légales
           </Link>
         </p>

@@ -31,7 +31,7 @@ app.use("/carousel", carouselRoutes);
 
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-const publicPath = path.join(__dirname, "./build");
+const publicPath = path.join(__dirname, "../public");
 app.use(express.static(publicPath));
 app.get("*", (_, res) => {
   res.sendFile(path.join(publicPath, "index.html"));

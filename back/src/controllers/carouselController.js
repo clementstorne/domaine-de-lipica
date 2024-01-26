@@ -12,9 +12,16 @@ import {
 const prisma = new PrismaClient();
 
 const deleteImageFromDirectory = async (imageUrl) => {
-  const filename = imageUrl.split("/images/")[1];
+  const filename = imageUrl.split("/")[1];
+
   try {
-    fs.unlinkSync(`images/${filename}`);
+    const filePath = path.join(__dirname, `../../public/${filename}`);
+
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    } else {
+      console.error("File does not exist");
+    }
   } catch (unlinkError) {
     console.error(deleteFileError, unlinkError);
     throw new Error(deleteFileError);
@@ -32,9 +39,7 @@ const CarouselController = {
     }
 
     try {
-      let url = `${req.protocol}://${req.get("host")}/images/${
-        req.file.filename
-      }`;
+      let url = `/${req.file.filename}`;
 
       const newCarouselImage = await prisma.carousel.create({
         data: {

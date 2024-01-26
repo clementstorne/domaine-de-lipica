@@ -13,10 +13,10 @@ import {
 const prisma = new PrismaClient();
 
 const deletePartnerLogo = async (logoUrl) => {
-  const filename = logoUrl.split("/images/")[1];
+  const filename = logoUrl.split("/")[1];
 
   try {
-    const filePath = path.join(__dirname, `../../dist/images/${filename}`);
+    const filePath = path.join(__dirname, `../../public/${filename}`);
 
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);

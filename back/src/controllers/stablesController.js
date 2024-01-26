@@ -3,10 +3,10 @@ import { PrismaClient } from "@prisma/client";
 import fs from "fs";
 
 import {
+  deleteFileError,
   missingParameter,
   notFound,
   serverError,
-  deleteFileError,
 } from "../errors/customErrors";
 
 const prisma = new PrismaClient();
@@ -27,7 +27,7 @@ const StablesController = {
       let images = [];
       if (req.files && req.files.length > 0) {
         images = req.files.map((file) => ({
-          url: `${req.protocol}://${req.get("host")}/images/${file.filename}`,
+          url: `/${req.file.filename}`,
         }));
       }
 

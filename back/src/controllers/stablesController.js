@@ -209,7 +209,7 @@ const StablesController = {
 
       if (req.files && req.files.length > 0) {
         const newImagesUrl = req.files.map((file) => ({
-          url: `${req.protocol}://${req.get("host")}/images/${file.filename}`,
+          url: `/${req.file.filename}`,
         }));
         newImages = [...newImagesUrl];
       }

@@ -13,7 +13,13 @@ export default function FormCarousel(props) {
   const [imageBase64url, setImageBase64url] = useState(null);
   const [imageFile, setImageFile] = useState(null);
 
-  const { handleSubmit, setValue, register, control } = useForm();
+  const {
+    handleSubmit,
+    setValue,
+    register,
+    control,
+    formState: { errors },
+  } = useForm();
 
   const hiddenFileInput = useRef(null);
 
@@ -69,12 +75,14 @@ export default function FormCarousel(props) {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center w-full max-w-144 flex-nowrap"
+        className="flex w-full max-w-144 flex-col flex-nowrap items-center justify-center"
       >
         {props.type === "create" && (
           <>
             <input
-              {...register("image")}
+              {...register("image", {
+                required: "Vous devez sélectionner une image",
+              })}
               type="file"
               name="image"
               id="image"
@@ -85,22 +93,25 @@ export default function FormCarousel(props) {
               onChange={handleImageInput}
             />
             <button
-              className="mb-4 button big-button"
+              className="button big-button mb-4"
               onClick={handleUploadButtonClick}
             >
               <label htmlFor="image" id="image-label">
                 {imageBase64url ? "Modifier l'image" : "Sélectionner une image"}
               </label>
             </button>
+            {errors.image && (
+              <p className="error-message">{errors.image.message}</p>
+            )}
           </>
         )}
 
         {imageBase64url && (
-          <div className="flex items-center justify-center bg-white h-80 w-80">
+          <div className="flex h-80 w-80 items-center justify-center bg-white">
             <img
               src={imageBase64url}
               alt=""
-              className="object-fill max-h-80 max-w-80"
+              className="max-h-80 max-w-80 object-fill"
             />
           </div>
         )}
@@ -159,7 +170,7 @@ export default function FormCarousel(props) {
           />
         </div>
 
-        <button type="submit" className="mt-4 button big-button">
+        <button type="submit" className="button big-button mt-4">
           Enregistrer l&apos;image
         </button>
       </form>

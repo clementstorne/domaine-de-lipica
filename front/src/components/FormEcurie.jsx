@@ -171,7 +171,7 @@ export default function FormEcurie(props) {
           id="images"
           className="hidden"
           aria-describedby="images-label"
-          accept="image/png, image/jpg, image/jpeg, image/webp"
+          accept="image/png, image/jpg, image/jpeg, image/svg+xml, image/webp"
           ref={hiddenFileInput}
           onChange={handleImageInput}
         />

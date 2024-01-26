@@ -1,9 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-import fs from "fs";
-
 import {
-  deleteFileError,
   missingParameter,
   notFound,
   serverError,

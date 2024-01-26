@@ -1,33 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 
-import fs from "fs";
-import path from "path";
-
 import {
-  deleteFileError,
   missingParameter,
   notFound,
   serverError,
 } from "../errors/customErrors";
 
 const prisma = new PrismaClient();
-
-const deletePartnerLogo = async (logoUrl) => {
-  const filename = logoUrl.split("/")[1];
-
-  try {
-    const filePath = path.join(__dirname, `../../public/${filename}`);
-
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
-    } else {
-      console.error("File does not exist");
-    }
-  } catch (unlinkError) {
-    console.error(deleteFileError, unlinkError);
-    throw new Error(deleteFileError);
-  }
-};
 
 const PartnersController = {
   createPartner: async (req, res) => {
@@ -153,7 +132,7 @@ const PartnersController = {
       if (partner.logo) {
         let logo = partner.logo;
         if (req.file && req.file.filename) {
-          await deletePartnerLogo(partner.logo);
+          await deleteImageFromDirectory(partner.logo);
           logo = `/${req.file.filename}`;
         }
 
@@ -208,7 +187,7 @@ const PartnersController = {
       }
 
       if (partner.logo) {
-        await deletePartnerLogo(partner.logo);
+        await deleteImageFromDirectory(partner.logo);
       }
 
       await prisma.partner.delete({

@@ -1,3 +1,5 @@
+import { deleteFileError } from "../errors/customErrors";
+
 const deleteImageFromDirectory = async (imageUrl) => {
   const filename = imageUrl.split("/")[1];
 

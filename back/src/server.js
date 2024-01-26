@@ -28,8 +28,6 @@ app.use("/api/stables", stablesRoutes);
 app.use("/api/images", imagesRoutes);
 app.use("/api/carousel", carouselRoutes);
 
-app.use("/api/images", express.static(path.join(__dirname, "../dist/images")));
-
 const publicPath = path.join(__dirname, "../public");
 app.use(express.static(publicPath));
 app.get("*", (_, res) => {

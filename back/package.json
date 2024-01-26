@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node src/server.js",
-    "build": "npm install && babel src -d dist && cp -R src/images dist/",
+    "build": "npm install && babel src -d dist",
     "serve": "npx prisma generate --schema=./src/prisma/schema.prisma && node dist/server.js"
   },
   "keywords": [],

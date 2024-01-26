@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 import fs from "fs";
+import path from "path";
 
 import {
   deleteFileError,
@@ -13,8 +14,15 @@ const prisma = new PrismaClient();
 
 const deletePartnerLogo = async (logoUrl) => {
   const filename = logoUrl.split("/images/")[1];
+
   try {
-    fs.unlinkSync(`images/${filename}`);
+    const filePath = path.join(__dirname, `../../dist/images/${filename}`);
+
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    } else {
+      console.error("File does not exist");
+    }
   } catch (unlinkError) {
     console.error(deleteFileError, unlinkError);
     throw new Error(deleteFileError);
@@ -34,9 +42,7 @@ const PartnersController = {
     try {
       let logo = "";
       if (req.file && req.file.filename) {
-        logo = `${req.protocol}://${req.get("host")}/images/${
-          req.file.filename
-        }`;
+        logo = `/${req.file.filename}`;
       }
 
       const newPartner = await prisma.partner.create({
@@ -148,9 +154,7 @@ const PartnersController = {
         let logo = partner.logo;
         if (req.file && req.file.filename) {
           await deletePartnerLogo(partner.logo);
-          logo = `${req.protocol}://${req.get("host")}/images/${
-            req.file.filename
-          }`;
+          logo = `/${req.file.filename}`;
         }
 
         const updatedPartner = await prisma.partner.update({
@@ -165,9 +169,7 @@ const PartnersController = {
         });
       } else {
         if (req.file) {
-          logo = `${req.protocol}://${req.get("host")}/images/${
-            req.file.filename
-          }`;
+          logo = `/${req.file.filename}`;
         }
 
         const updatedPartner = await prisma.partner.update({

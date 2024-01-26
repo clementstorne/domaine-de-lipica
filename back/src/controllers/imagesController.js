@@ -1,32 +1,13 @@
 import { PrismaClient } from "@prisma/client";
 
-import fs from "fs";
-
 import {
-  deleteFileError,
   missingParameter,
   notFound,
   serverError,
 } from "../errors/customErrors";
+import { deleteImageFromDirectory } from "../utils/imageUtils";
 
 const prisma = new PrismaClient();
-
-const deleteImageFromDirectory = async (imageUrl) => {
-  const filename = imageUrl.split("/")[1];
-
-  try {
-    const filePath = path.join(__dirname, `../../public/${filename}`);
-
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
-    } else {
-      console.error("File does not exist");
-    }
-  } catch (unlinkError) {
-    console.error(deleteFileError, unlinkError);
-    throw new Error(deleteFileError);
-  }
-};
 
 const ImagesController = {
   deleteImage: async (req, res) => {

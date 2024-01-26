@@ -8,6 +8,7 @@ import {
   notFound,
   serverError,
 } from "../errors/customErrors";
+import { deleteImageFromDirectory } from "../utils/imageUtils";
 
 const prisma = new PrismaClient();
 
@@ -27,7 +28,7 @@ const StablesController = {
       let images = [];
       if (req.files && req.files.length > 0) {
         images = req.files.map((file) => ({
-          url: `/${req.file.filename}`,
+          url: `/${file.filename}`,
         }));
       }
 
@@ -209,7 +210,7 @@ const StablesController = {
 
       if (req.files && req.files.length > 0) {
         const newImagesUrl = req.files.map((file) => ({
-          url: `/${req.file.filename}`,
+          url: `/${file.filename}`,
         }));
         newImages = [...newImagesUrl];
       }
@@ -279,15 +280,7 @@ const StablesController = {
       if (stable.images && stable.images.length > 0) {
         await Promise.all(
           stable.images.map(async (image) => {
-            const filename = image.url.split("/images/")[1];
-            try {
-              await fs.unlinkSync(`images/${filename}`);
-            } catch (unlinkError) {
-              console.error(deleteFileError, unlinkError);
-              return res.status(500).json({
-                error: deleteFileError,
-              });
-            }
+            await deleteImageFromDirectory(image.url);
           })
         );
       }

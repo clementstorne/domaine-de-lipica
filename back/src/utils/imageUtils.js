@@ -1,3 +1,4 @@
+import path from "path";
 import { deleteFileError } from "../errors/customErrors";
 
 const deleteImageFromDirectory = async (imageUrl) => {

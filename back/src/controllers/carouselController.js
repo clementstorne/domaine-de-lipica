@@ -13,7 +13,7 @@ const CarouselController = {
   addCarouselImage: async (req, res) => {
     const { title, alt } = req.body;
 
-    if (!title || !alt) {
+    if (!title || !alt || !req.file) {
       return res.status(400).json({
         error: missingParameter,
       });

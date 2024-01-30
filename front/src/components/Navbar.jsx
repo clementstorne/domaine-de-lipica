@@ -56,7 +56,7 @@ export default function Navbar() {
     <header className="navbar">
       <Link to="/" className="fixed" onClick={closeMenu}>
         <img
-          src="/logo.png"
+          src="/logo-domaine-lipica.png"
           alt="Logo du domaine de Lipica"
           className="w-auto h-14 md:h-24"
         />

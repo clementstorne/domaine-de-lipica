@@ -78,6 +78,8 @@ export default {
         88: "352px",
         112: "448px",
         128: "512px",
+        140: "560px",
+        214: "856px",
       },
       maxWidth: {
         80: "320px",
@@ -88,6 +90,7 @@ export default {
         288: "1152px",
       },
       borderRadius: {
+        5: "5px",
         10: "10px",
       },
       aspectRatio: {

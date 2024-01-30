@@ -13,7 +13,7 @@ export default function EcurieSection(props) {
     <>
       <h1>{props.stable.nom}</h1>
 
-      <section className="mb-8 md:mb-16">
+      <section>
         {paragraphes.map((schedule, index) => (
           <p
             key={index}

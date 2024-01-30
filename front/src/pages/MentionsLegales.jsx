@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <h1>Mentions légales</h1>
 
-      <section className="px-4 md:px-0">
+      <section>
         <p className="mb-4">
           Conformément aux dispositions des Articles 6-III et 19 de la Loi
           n°2004-575 du 21 juin 2004 pour la Confiance dans l&apos;économie
@@ -30,33 +30,54 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="px-4 md:px-0">
+      <section>
         <h2 className="text-blue-900">Article 1 - L&apos;éditeur</h2>
         <p className="mb-4">
-          L&apos;édition du Site est assurée par Domaine de Lipica
-          _______________ au capital de _______________ €, immatriculée au
-          Registre du Commerce et des Sociétés de MELUN sous le numéro 443068176
-          dont le siège social est situé au 1, rond-point du Manège 77330
-          OZOIR-LA- FERRIÈRE, Numéro de téléphone _______________, Adresse
-          e-mail : _______________. N° de TVA intracommunautaire :
-          _______________
+          L&apos;édition du Site est assurée par{" "}
+          <strong>ACE Sport Jumping Ile-de-France</strong>, association loi
+          1901, immatriculée au Registre du Commerce et des Sociétés de MEAUX
+          sous le numéro 513558072 dont le siège social est situé au 1 rond
+          point du manège - 77330 OZOIR-LA-FERRIÈRE.
+          <br />
+          Numéro de téléphone :{" "}
+          <a href="tel:+33688167937" className="link">
+            0688167937
+          </a>
+          <br />
+          Adresse mail :{" "}
+          <a href="mailto:info@ozoir-equitation.com" className="link">
+            info@ozoir-equitation.com
+          </a>
+          <br />
+          Numéro de TVA intracommunautaire : FR45513558072
         </p>
         <p>
-          Le Directeur de la publication est MONET François-Xavier ci-après
-          l&apos;<em>Éditeur</em>.
+          Le Directeur de la publication est{" "}
+          <strong>MONET François-Xavier</strong> ci-après l&apos;
+          <em>Éditeur</em>.
         </p>
       </section>
 
-      <section className="px-4 md:px-0">
+      <section>
         <h2 className="text-blue-900">Article 2 - L&apos;hébergeur</h2>
         <p>
-          L&apos;hébergeur du Site est la société _______________, dont le siège
-          social est situé au _______________, avec le numéro de téléphone :
-          _______________ + adresse mail de contact
+          L&apos;hébergeur du Site est la société <strong>Nuxit</strong>, dont
+          le siège social est situé au 97-97B rue du Général Mangin - 38100
+          GRENOBLE.
+          <br />
+          Numéro de téléphone :{" "}
+          <a href="tel:+33486576000" className="link">
+            0486576000
+          </a>
+          <br />
+          Adresse mail de contact :{" "}
+          <a href="mailto:commercial@nuxit.com" className="link">
+            commercial@nuxit.com
+          </a>
         </p>
       </section>
 
-      <section className="px-4 md:px-0">
+      <section>
         <h2 className="text-blue-900">Article 3 - Accès au site</h2>
         <p className="mb-4">
           Le <em>Site</em> est accessible en tout endroit, 7j/7, 24h/24 sauf cas
@@ -69,7 +90,7 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="px-4 md:px-0">
+      <section>
         <h2 className="text-blue-900">Article 4 - Collecte de données</h2>
         <p className="mb-4">
           Le <em>Site</em> est exempté de déclaration à la Commission Nationale

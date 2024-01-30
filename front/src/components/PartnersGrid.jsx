@@ -16,7 +16,7 @@ export default function PartnersGrid() {
     return <></>;
   }
   return (
-    <div className="flex flex-row flex-wrap justify-center m-4 md:m-16">
+    <div className="flex flex-row flex-wrap justify-center m-4 md:m-8">
       {partners.map((partner) => (
         <div
           key={partner.id}

@@ -24,7 +24,7 @@ export default function Presentation() {
       <h1>Présentation</h1>
 
       {images.length > 0 ? (
-        <section className="mb-8 md:mb-16">
+        <section>
           <h2 className="text-blue-900">Installations</h2>
           <div className="mx-auto lg:w-19/12 md:w-3/4">
             <Carousel images={images} preview={true} />
@@ -34,7 +34,7 @@ export default function Presentation() {
         <></>
       )}
 
-      <section className="mb-8 md:mb-16">
+      <section>
         <h2 className="text-blue-900">Plan</h2>
         <img src="/plan.png" alt="Plan de situation du domaine de Lipica" />
       </section>

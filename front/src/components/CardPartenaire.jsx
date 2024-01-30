@@ -13,9 +13,9 @@ export default function CardPartenaire(props) {
   const handleDeleteClick = () => dispatch(deletePartner({ id: props.id }));
 
   return (
-    <div className="blue-gradient mb-8 flex w-full max-w-88 flex-col flex-nowrap items-center justify-start rounded-10 p-4 text-gray-50 md:mx-2 md:max-w-112">
+    <div className="flex flex-col items-center justify-start w-full p-4 mb-8 blue-gradient max-w-88 flex-nowrap rounded-10 text-gray-50 md:mx-2 ">
       <h3>{props.nom}</h3>
-      <div className="flex w-full flex-col items-center justify-center md:flex-row md:justify-start">
+      <div className="flex flex-col items-center justify-center w-full md:justify-start">
         <div
           className={`my-4 flex h-40 w-40 items-center justify-center md:mr-4 ${
             props.logo ? "bg-white" : "bg-gray-400"
@@ -38,19 +38,13 @@ export default function CardPartenaire(props) {
         />
       </div>
       {props.admin && (
-        <div className="mt-4 flex flex-row">
+        <div className="flex flex-row mt-4 gap-x-4">
           <LinkButton
             link={"/administration/partenaires/" + props.id}
             label="Modifier"
             size="small"
-            className="mr-4"
           />
-          <Button
-            onClick={handleDeleteClick}
-            label="Supprimer"
-            size="small"
-            className="mr-4"
-          />
+          <Button onClick={handleDeleteClick} label="Supprimer" size="small" />
         </div>
       )}
     </div>

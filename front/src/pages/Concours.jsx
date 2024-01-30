@@ -27,7 +27,7 @@ export default function Concours() {
       {futureEvents.length === 0 ? (
         <></>
       ) : (
-        <section className="mb-8 md:mb-16">
+        <section>
           <h2 className="text-blue-900">Concours à venir</h2>
 
           <div className="table-header blue-gradient">
@@ -48,7 +48,7 @@ export default function Concours() {
       {pastEvents.length === 0 ? (
         <></>
       ) : (
-        <section className="mb-8 md:mb-16">
+        <section>
           <h2 className="text-blue-900">Concours passés</h2>
           <div className="table-header blue-gradient">
             <p>Dates</p>

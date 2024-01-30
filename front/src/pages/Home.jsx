@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <h1>Bienvenue au Centre Équestre du Domaine de Lipica !</h1>
-      <main className="px-4 md:px-0">
+      <main>
         <div className="md:mb-8 md:grid md:grid-cols-5 md:items-center md:gap-x-8">
           <p className="paragraph md:col-span-3">
             Situé à Ozoir la Ferrière (77), à seulement 25 km à l&apos;est de
@@ -16,9 +16,9 @@ export default function Home() {
             location de poneys et chevaux.
           </p>
           <img
-            src="/img1.jpg"
+            src="/home1.webp"
             alt="Entrée du grand manège du domaine de Lipica"
-            className="mb-4 md:col-span-2"
+            className="w-full m-auto mb-4 sm:w-3/4 md:col-span-2 md:mx-0 md:w-full"
           />
         </div>
         <p className="paragraph md:mb-8 ">
@@ -29,9 +29,9 @@ export default function Home() {
         </p>
         <div className="md:mb-8 md:grid md:grid-cols-5 md:items-center md:gap-x-8">
           <img
-            src="img0.jpg"
+            src="home2.webp"
             alt="Compétition en extérieur organisée au domaine de Lipica"
-            className="mb-4 md:col-span-2"
+            className="w-full m-auto mb-4 sm:w-7/12 md:col-span-2 md:mx-0 md:w-full"
           />
           <div className="md:col-span-3 md:text-xl">
             <p className="paragraph md:mb-8">

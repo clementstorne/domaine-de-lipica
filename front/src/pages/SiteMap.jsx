@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllStables } from "../store/stableSlice";
 
 import { LinkButton } from "../components/index";
@@ -20,7 +20,7 @@ export default function SiteMap() {
     <>
       <h1>Plan du site</h1>
 
-      <main className="mx-auto flex max-w-288 flex-col justify-between lg:flex-row">
+      <div className="flex flex-col justify-between mb-8 max-w-288 md:mb-16 lg:flex-row">
         <section className="mx-0 my-4 md:mx-4">
           <h2 className="text-blue-900">Domaine de Lipica</h2>
           <nav className="flex flex-col items-center justify-between">
@@ -91,7 +91,7 @@ export default function SiteMap() {
             />
           </nav>
         </section>
-      </main>
+      </div>
     </>
   );
 }

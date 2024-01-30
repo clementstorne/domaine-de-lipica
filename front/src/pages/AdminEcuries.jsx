@@ -33,8 +33,8 @@ export default function AdminEcuries() {
 
       {stables.length > 0 ? (
         <section className="flex flex-col flex-wrap items-center justify-center mb-8 md:mb-16 md:flex-row md:items-stretch">
-          {stables.map((partner) => (
-            <CardEcurie key={partner.id} {...partner} />
+          {stables.map((stable) => (
+            <CardEcurie key={stable.id} {...stable} />
           ))}
         </section>
       ) : (

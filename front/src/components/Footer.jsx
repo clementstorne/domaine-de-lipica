@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="flex flex-row flex-nowrap items-center justify-between">
+    <footer className="flex flex-row items-center justify-between flex-nowrap">
       <Link to="/">
         <img
-          src="/logo.png"
+          src="/logo-domaine-lipica.png"
           alt="Logo du domaine de Lipica"
           className="h-14 md:h-24"
         />
       </Link>
-      <nav className="text-center text-xs leading-4 md:w-7/12 md:text-md-xl md:font-semibold">
-        <ul className="flex-row flex-nowrap items-center justify-between md:flex">
+      <nav className="text-xs leading-4 text-center md:w-7/12 md:text-md-xl md:font-semibold">
+        <ul className="flex-row items-center justify-between flex-nowrap md:flex">
           <li className="mb-0.5 hover:mb-0 hover:border-b-2 hover:border-blue-900">
             <Link to="/mentions-legales">Mentions légales</Link>
           </li>

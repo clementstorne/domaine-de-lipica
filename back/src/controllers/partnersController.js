@@ -5,6 +5,7 @@ import {
   notFound,
   serverError,
 } from "../errors/customErrors";
+import { deleteImageFromDirectory } from "../utils/imageUtils";
 
 const prisma = new PrismaClient();
 

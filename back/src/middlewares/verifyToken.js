@@ -9,6 +9,7 @@ const extractBearer = (authorization) => {
 };
 
 const verifyToken = (req, res, next) => {
+  console.log("ok");
   const token =
     req.headers.authorization && extractBearer(req.headers.authorization);
   if (!token) {

@@ -47,7 +47,7 @@ export default function FormPartenaire(props) {
   const onSubmit = (data) => {
     if (props.type === "create") {
       const formData = createFormData(data, imageFile);
-      dispatch(createPartner(formData));
+      dispatch(createPartner(formData)); 
       navigate("/administration/partenaires");
     } else {
       setImageBase64url("");

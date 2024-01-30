@@ -1,10 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import EventService from "../services/EventService";
 import {
-  sortEvents,
-  filterPastEvents,
   filterFutureEvents,
+  filterPastEvents,
+  sortEvents,
 } from "../utils/eventsUtils";
 
 const initialState = {
@@ -112,7 +112,13 @@ const eventSlice = createSlice({
       .addCase(createEvent.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.eventsList = [action.payload.newEvent, ...state.eventsList];
+        state.eventsList = sortEvents([
+          action.payload.newEvent,
+          ...state.eventsList,
+        ]);
+        state.pastEventsList = filterPastEvents(state.eventsList);
+        state.futureEventsList = filterFutureEvents(state.eventsList);
+        state.nextEvents = state.futureEventsList.slice(0, 3);
       })
       .addCase(createEvent.rejected, (state, action) => {
         state.isLoading = false;

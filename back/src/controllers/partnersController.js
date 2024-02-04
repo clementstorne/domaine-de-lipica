@@ -130,8 +130,10 @@ const PartnersController = {
         return res.status(404).json({ error: notFound });
       }
 
+      let logo = "";
+
       if (partner.logo) {
-        let logo = partner.logo;
+        logo = partner.logo;
         if (req.file && req.file.filename) {
           await deleteImageFromDirectory(partner.logo);
           logo = `/${req.file.filename}`;

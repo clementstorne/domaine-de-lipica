@@ -36,8 +36,8 @@ export default function Home() {
           L&apos;édition du Site est assurée par{" "}
           <strong>ACE Sport Jumping Ile-de-France</strong>, association loi
           1901, immatriculée au Registre du Commerce et des Sociétés de MEAUX
-          sous le numéro 513558072 dont le siège social est situé au 1 rond
-          point du manège - 77330 OZOIR-LA-FERRIÈRE.
+          sous le numéro 513558072 dont le siège social est situé au 1,
+          rond-point du Manège - 77330 OZOIR-LA-FERRIÈRE.
           <br />
           Numéro de téléphone :{" "}
           <a href="tel:+33688167937" className="link">

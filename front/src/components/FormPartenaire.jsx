@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { useEffect, useRef, useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createPartner, updatePartner } from "../store/partnerSlice";
-import { useForm, Controller } from "react-hook-form";
 
 export default function FormPartenaire(props) {
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ export default function FormPartenaire(props) {
   const onSubmit = (data) => {
     if (props.type === "create") {
       const formData = createFormData(data, imageFile);
-      dispatch(createPartner(formData)); 
+      dispatch(createPartner(formData));
       navigate("/administration/partenaires");
     } else {
       setImageBase64url("");
@@ -69,7 +69,7 @@ export default function FormPartenaire(props) {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center w-full max-w-144 flex-nowrap"
+        className="flex w-full max-w-144 flex-col flex-nowrap items-center justify-center"
       >
         <div className="w-full max-w-144">
           <label htmlFor="nom" className="form-label">
@@ -98,7 +98,7 @@ export default function FormPartenaire(props) {
           />
         </div>
 
-        <div className="w-full max-w-600">
+        <div className="max-w-600 w-full">
           <label htmlFor="informations" className="form-label">
             Informations
           </label>
@@ -128,11 +128,11 @@ export default function FormPartenaire(props) {
         </div>
 
         {imageBase64url && (
-          <div className="flex items-center justify-center w-40 h-40 bg-white">
+          <div className="flex h-40 w-40 items-center justify-center bg-white">
             <img
               src={imageBase64url}
               alt=""
-              className="object-fill max-h-40 max-w-40"
+              className="max-h-40 max-w-40 object-fill"
             />
           </div>
         )}
@@ -149,7 +149,7 @@ export default function FormPartenaire(props) {
           onChange={handleImageInput}
         />
         <button
-          className="mt-4 button big-button"
+          className="button big-button mt-4"
           onClick={handleUploadButtonClick}
         >
           <label htmlFor="logo" id="logo-label">
@@ -157,7 +157,7 @@ export default function FormPartenaire(props) {
           </label>
         </button>
 
-        <button type="submit" className="mt-4 button big-button">
+        <button type="submit" className="button big-button mt-4">
           {props.type == "create"
             ? "Ajouter le partenaire"
             : "Modifier le partenaire"}

@@ -119,6 +119,7 @@ const PartnersController = {
 
     try {
       const { nom, informations } = req.body;
+      let logo = "";
 
       const partner = await prisma.partner.findUniqueOrThrow({
         where: {
@@ -129,8 +130,6 @@ const PartnersController = {
       if (!partner) {
         return res.status(404).json({ error: notFound });
       }
-
-      let logo = "";
 
       if (partner.logo) {
         logo = partner.logo;

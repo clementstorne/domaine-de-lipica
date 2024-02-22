@@ -20,9 +20,9 @@ export default function FormLogin() {
       {isAuth && <Navigate to="/administration/dashboard" replace={true} />}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center w-full max-w-144 flex-nowrap"
+        className="flex w-full max-w-144 flex-col flex-nowrap items-center justify-center"
       >
-        <div className="w-full max-w-600">
+        <div className="max-w-600 w-full">
           <label htmlFor="email" className="form-label">
             Email
           </label>
@@ -54,7 +54,7 @@ export default function FormLogin() {
           />
         </div>
 
-        <div className="w-full max-w-600">
+        <div className="max-w-600 w-full">
           <label htmlFor="password" className="form-label">
             Mot de passe
           </label>
@@ -82,7 +82,7 @@ export default function FormLogin() {
           />
         </div>
 
-        <button type="submit" className="mt-4 button big-button">
+        <button type="submit" className="button big-button mt-4">
           Se connecter
         </button>
       </form>

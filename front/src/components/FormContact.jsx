@@ -1,6 +1,6 @@
 import emailjs from "@emailjs/browser";
 
-import { useForm, Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 export default function FormContact() {
   const { control, handleSubmit, reset } = useForm();
@@ -14,12 +14,12 @@ export default function FormContact() {
       organization: data.organization,
       message: data.message,
     };
-    // emailjs.send(
-    //   import.meta.env.VITE_EMAILJS_SERVICE_ID,
-    //   import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-    //   templateParams,
-    //   import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-    // );
+    emailjs.send(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      templateParams,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+    );
     reset();
   };
 
@@ -27,7 +27,7 @@ export default function FormContact() {
     <>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full max-w-144 flex-col flex-nowrap items-center justify-center"
+        className="flex flex-col items-center justify-center w-full max-w-144 flex-nowrap"
       >
         <div className="w-full max-w-144">
           <label htmlFor="lastname" className="form-label">
@@ -93,7 +93,7 @@ export default function FormContact() {
           />
         </div>
 
-        <div className="max-w-600 w-full">
+        <div className="w-full max-w-600">
           <label htmlFor="email" className="form-label">
             Email
           </label>
@@ -126,7 +126,7 @@ export default function FormContact() {
           />
         </div>
 
-        <div className="max-w-600 w-full">
+        <div className="w-full max-w-600">
           <label htmlFor="phone" className="form-label">
             Téléphone
           </label>
@@ -192,7 +192,7 @@ export default function FormContact() {
           />
         </div>
 
-        <div className="max-w-600 w-full">
+        <div className="w-full max-w-600">
           <label htmlFor="message" className="form-label">
             Message
           </label>
@@ -219,7 +219,7 @@ export default function FormContact() {
           />
         </div>
 
-        <button type="submit" className="button big-button mt-4">
+        <button type="submit" className="mt-4 button big-button">
           Valider et envoyer
         </button>
       </form>

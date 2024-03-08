@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply w-screen h-52 px-4 bg-h1 bg-center bg-cover bg-no-repeat flex items-center justify-center
+    text-blue-900 text-center text-3xl font-black uppercase tracking-wide
+    md:h-112 md:px-16 md:text-5xl
+    lg:px-32;
+  }
+
+  h2 {
+    @apply text-4xl font-bold uppercase
+    md:tracking-wide;
+  }
+
+  h3 {
+    @apply text-3xl font-semibold uppercase;
+  }
+
+  h4 {
+    @apply text-2xl font-semibold;
+  }
+}

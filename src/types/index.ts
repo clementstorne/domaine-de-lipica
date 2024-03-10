@@ -15,6 +15,11 @@ export interface Event {
   lienWinJump: string;
 }
 
+export interface LinkItem {
+  href: string;
+  label: string;
+}
+
 export type DisciplineCode =
   | "cso"
   | "hunter"

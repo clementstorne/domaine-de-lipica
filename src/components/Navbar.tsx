@@ -1,7 +1,8 @@
 "use client";
-import { Button, buttonVariants } from "@/components/ui/button";
+import NavbarLink from "@/components/NavbarLink";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Stable } from "@/types";
+import { LinkItem, Stable } from "@/types";
 import { ChevronDown, ChevronUp, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,29 +28,6 @@ const BurgerButton = ({ className, isOpen, onClick }: BurgerButtonProps) => {
   );
 };
 
-type Link = {
-  href: string;
-  label: string;
-};
-
-type NavbarLinkProps = Link & {
-  className?: string;
-};
-
-const NavbarLink = ({ href, label, className }: NavbarLinkProps) => {
-  return (
-    <Link
-      href={href}
-      className={cn(
-        buttonVariants({ variant: "link" }),
-        "uppercase font-semibold lg:text-lg"
-      )}
-    >
-      {label}
-    </Link>
-  );
-};
-
 type NavbarProps = {
   stables: Omit<Stable, "id" | "informations">[];
 };
@@ -58,7 +36,7 @@ const Navbar = ({ stables }: NavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
 
-  const links: Link[] = [
+  const links: LinkItem[] = [
     {
       href: "/",
       label: "Accueil",
@@ -152,7 +130,7 @@ const Navbar = ({ stables }: NavbarProps) => {
         <nav
           className={cn(
             "hidden",
-            "lg:w-full lg:flex lg:justify-between lg:items-center "
+            "lg:w-full lg:flex lg:justify-between lg:items-center"
           )}
         >
           {links.slice(0, 2).map((link, index) => (

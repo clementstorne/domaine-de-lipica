@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { getStablesForNavbar } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -38,6 +39,7 @@ const RootLayout = async ({
         >
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );

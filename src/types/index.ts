@@ -4,22 +4,28 @@ export interface CarouselImage {
   title: string;
   alt: string;
 }
-
-export interface Stable {
-  id: string;
-  nom: string;
-  url: string;
-  informations: string;
-}
-
 export interface Event {
   id: string;
   debut: string;
   fin: string;
   discipline: DisciplineCode;
   niveau: string;
-  horaires: string;
-  lienWinJump: string;
+  horaires?: string;
+  lienWinJump?: string;
+}
+
+export interface Partner {
+  id: string;
+  nom: string;
+  logo?: string;
+  informations: string;
+}
+
+export interface Stable {
+  id: string;
+  nom: string;
+  url: string;
+  informations: string;
 }
 
 export interface LinkItem {

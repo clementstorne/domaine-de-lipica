@@ -14,6 +14,21 @@ export const getStablesForNavbar = async () => {
   return stables;
 };
 
+export const getPartners = async () => {
+  const partners = await prisma.partner.findMany({
+    orderBy: {
+      nom: "asc",
+    },
+    select: {
+      id: true,
+      nom: true,
+      logo: true,
+      informations: true,
+    },
+  });
+  return partners;
+};
+
 export const getImagesForCarousel = async () => {
   const images = await prisma.carousel.findMany();
   return images;

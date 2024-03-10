@@ -11,15 +11,17 @@
   }
 
   h2 {
-    @apply text-4xl font-bold uppercase
-    md:tracking-wide;
+    @apply text-2xl font-bold uppercase
+    md:tracking-wide md:text-4xl;
   }
 
   h3 {
-    @apply text-3xl font-semibold uppercase;
+    @apply text-xl font-semibold uppercase
+    md:text-3xl;
   }
 
   h4 {
-    @apply text-2xl font-semibold;
+    @apply text-lg font-semibold
+    md:text-2xl;
   }
 }

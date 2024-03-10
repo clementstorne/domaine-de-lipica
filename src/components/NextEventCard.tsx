@@ -19,8 +19,8 @@ const NextEventCard = ({
   return (
     <div
       className={cn(
-        "h-52 p-4 flex flex-nowrap flex-col items-center justify-between rounded-md bg-gray-50 text-gray-950 text-center",
-        "md:p-8 sm:max-w-80 md:h-80 "
+        "w-64 h-52 p-4 flex flex-nowrap flex-col items-center justify-between rounded-md bg-gray-50 text-gray-950 text-center",
+        "md:w-auto md:p-8 sm:max-w-80 md:h-80 "
       )}
     >
       <DisciplineTag code={discipline} />

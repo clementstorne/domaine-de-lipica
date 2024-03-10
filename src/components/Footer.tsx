@@ -34,7 +34,7 @@ const Footer = () => {
           sizes="(min-width: 1120px) 102px, (min-width: 1040px) calc(98.33vw - 977px), 68px"
           alt="Logo du Domaine de Lipica, centre équestre à Ozoir la Ferrière"
           priority={true}
-          className="absolute left-0 bottom-0 w-auto h-14 lg:h-24"
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-auto h-14 lg:h-24"
         />
       </Link>
       <nav

@@ -5,9 +5,17 @@ import Link from "next/link";
 
 type NavbarLinkProps = LinkItem & {
   className?: string;
+  target?: string;
+  rel?: string;
 };
 
-const NavbarLink = ({ href, label, className }: NavbarLinkProps) => {
+const NavbarLink = ({
+  href,
+  label,
+  className,
+  target,
+  rel,
+}: NavbarLinkProps) => {
   return (
     <Link
       href={href}
@@ -16,6 +24,8 @@ const NavbarLink = ({ href, label, className }: NavbarLinkProps) => {
         "uppercase font-semibold lg:text-lg",
         className
       )}
+      target={target}
+      rel={rel}
     >
       {label}
     </Link>

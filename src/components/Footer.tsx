@@ -59,15 +59,15 @@ const Footer = () => {
         )}
       >
         <span className="block m-0">Designed by </span>
-        <a
-          href="https://clementstorne.dev"
+        <Link
+          href="https://ozoir.winjump.fr/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-[10px] font-medium md:text-md-sm"
         >
           Clément <br />
           Storne
-        </a>
+        </Link>
 
         <span className="block m-0 font-light normal-case">© 2024</span>
       </div>

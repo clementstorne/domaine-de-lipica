@@ -3,11 +3,11 @@ import NavbarLink from "@/components/NavbarLink";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { LinkItem, Stable } from "@/types";
+import logo from "@public/logo-domaine-lipica.png";
 import { ChevronDown, ChevronUp, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import logo from "../../public/logo-domaine-lipica.png";
 
 type BurgerButtonProps = {
   className?: string;

@@ -1,9 +1,9 @@
 import NavbarLink from "@/components/NavbarLink";
 import { cn } from "@/lib/utils";
 import { LinkItem } from "@/types";
+import logo from "@public/logo-domaine-lipica.png";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../public/logo-domaine-lipica.png";
 
 const Footer = () => {
   const links: LinkItem[] = [

@@ -5,7 +5,7 @@ import { LinkItem } from "@/types";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentions légales",
+  title: "Plan du site",
 };
 
 const page = async () => {

@@ -14,6 +14,11 @@ export const getStablesForNavbar = async () => {
   return stables;
 };
 
+export const getImagesForCarousel = async () => {
+  const images = await prisma.carousel.findMany();
+  return images;
+};
+
 export const getNextEvents = async () => {
   const events = await prisma.event.findMany({
     select: {

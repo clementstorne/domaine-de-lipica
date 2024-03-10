@@ -1,3 +1,10 @@
+export interface CarouselImage {
+  id: string;
+  url: string;
+  title: string;
+  alt: string;
+}
+
 export interface Stable {
   id: string;
   nom: string;

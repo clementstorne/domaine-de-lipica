@@ -2,8 +2,8 @@ import Image from "next/image";
 
 import NextEventsSection from "@/components/NextEventsSection";
 import { cn } from "@/lib/utils";
-import concours from "../../public/concours-saut-obstacles.webp";
-import manege from "../../public/entree-manege.webp";
+import concours from "@public/concours-saut-obstacles.webp";
+import manege from "@public/entree-manege.webp";
 
 const page = () => {
   return (

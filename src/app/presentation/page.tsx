@@ -27,7 +27,14 @@ const page = async () => {
         <CarouselPlugin>
           {images.map((image) => (
             <CarouselItem key={image.id}>
-              <Image src={image.url} alt={image.alt} width={800} height={600} />
+              <Image
+                src={image.url}
+                alt={image.alt}
+                width={800}
+                height={600}
+                sizes="(min-width: 1060px) 800px, (min-width: 780px) calc(32.69vw + 460px), 600px"
+                priority={true}
+              />
               <p className="text-center font-semibold text-lg">{image.title}</p>
             </CarouselItem>
           ))}

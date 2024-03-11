@@ -22,11 +22,13 @@ const CarouselPlugin = ({
         loop: true,
       }}
       plugins={[plugin.current]}
-      className="w-full"
+      className="w-full items-center"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
-      <CarouselContent>{children}</CarouselContent>
+      <CarouselContent className="w-[600px] h-[600px] items-center">
+        {children}
+      </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>

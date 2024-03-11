@@ -60,7 +60,7 @@ const Footer = () => {
       >
         <span className="block m-0">Designed by </span>
         <Link
-          href="https://ozoir.winjump.fr/"
+          href="https://clementstorne.dev/"
           target="_blank"
           rel="noopener noreferrer"
           className="text-[10px] font-medium md:text-md-sm"

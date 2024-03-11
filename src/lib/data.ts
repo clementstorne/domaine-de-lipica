@@ -14,6 +14,33 @@ export const getStablesForNavbar = async () => {
   return stables;
 };
 
+export const getSingleStable = async (stableUrl: string) => {
+  const stable = await prisma.stable.findFirst({
+    where: {
+      url: stableUrl,
+    },
+    select: {
+      nom: true,
+      url: true,
+      informations: true,
+      images: true,
+    },
+  });
+  return stable;
+};
+
+export const getStableName = async (stableUrl: string) => {
+  const stable = await prisma.stable.findFirst({
+    where: {
+      url: stableUrl,
+    },
+    select: {
+      nom: true,
+    },
+  });
+  return stable;
+};
+
 export const getPartners = async () => {
   const partners = await prisma.partner.findMany({
     orderBy: {

@@ -29,6 +29,25 @@ export const getPartners = async () => {
   return partners;
 };
 
+export const getPartnersLogos = async () => {
+  const partners = await prisma.partner.findMany({
+    where: {
+      NOT: {
+        logo: "",
+      },
+    },
+    orderBy: {
+      nom: "asc",
+    },
+    select: {
+      id: true,
+      nom: true,
+      logo: true,
+    },
+  });
+  return partners;
+};
+
 export const getImagesForCarousel = async () => {
   const images = await prisma.carousel.findMany();
   return images;
@@ -51,4 +70,66 @@ export const getNextEvents = async () => {
 
   const futureEvents = events.filter((event) => isInFuture(event.debut));
   return futureEvents.slice(0, 3);
+};
+
+export const getFutureEvents = async () => {
+  const events = await prisma.event.findMany({
+    select: {
+      id: true,
+      debut: true,
+      fin: true,
+      discipline: true,
+      niveau: true,
+      horaires: true,
+      lienWinJump: true,
+    },
+    orderBy: [
+      {
+        debut: "asc",
+      },
+    ],
+  });
+
+  const futureEvents = events.filter((event) => isInFuture(event.debut));
+  return futureEvents;
+};
+
+export const getPastEvents = async () => {
+  const events = await prisma.event.findMany({
+    select: {
+      id: true,
+      debut: true,
+      fin: true,
+      discipline: true,
+      niveau: true,
+      horaires: true,
+      lienWinJump: true,
+    },
+    orderBy: [
+      {
+        debut: "desc",
+      },
+    ],
+  });
+
+  const pastEvents = events.filter((event) => !isInFuture(event.debut));
+  return pastEvents;
+};
+
+export const getSingleEvent = async (eventId: string) => {
+  const event = await prisma.event.findUnique({
+    where: {
+      id: eventId,
+    },
+    select: {
+      id: true,
+      debut: true,
+      fin: true,
+      discipline: true,
+      niveau: true,
+      horaires: true,
+    },
+  });
+
+  return event;
 };

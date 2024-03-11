@@ -34,13 +34,33 @@ export const formatEventDates = (start: string, finish: string) => {
   } else if (sameMonth(start, finish)) {
     return `${DateTime.fromISO(start)
       .setLocale("fr")
-      .toFormat("d")}-${DateTime.fromISO(finish)
+      .toFormat("d")} - ${DateTime.fromISO(finish)
       .setLocale("fr")
       .toFormat("d LLLL yyyy")}`;
   } else {
     return `${DateTime.fromISO(start)
       .setLocale("fr")
       .toFormat("d LLLL")} - ${DateTime.fromISO(finish)
+      .setLocale("fr")
+      .toFormat("d LLLL yyyy")}`;
+  }
+};
+
+export const formatSingleEventDates = (start: string, finish: string) => {
+  if (daysBetweenTwoDates(start, finish) === 0) {
+    return `du ${DateTime.fromISO(start)
+      .setLocale("fr")
+      .toFormat("d LLLL yyyy")}`;
+  } else if (sameMonth(start, finish)) {
+    return `du ${DateTime.fromISO(start)
+      .setLocale("fr")
+      .toFormat("d")} au ${DateTime.fromISO(finish)
+      .setLocale("fr")
+      .toFormat("d LLLL yyyy")}`;
+  } else {
+    return `du ${DateTime.fromISO(start)
+      .setLocale("fr")
+      .toFormat("d LLLL")} au ${DateTime.fromISO(finish)
       .setLocale("fr")
       .toFormat("d LLLL yyyy")}`;
   }

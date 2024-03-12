@@ -12,8 +12,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import emailjs from "@emailjs/browser";
 import { zodResolver } from "@hookform/resolvers/zod";
-import emailjs from "emailjs-com";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 

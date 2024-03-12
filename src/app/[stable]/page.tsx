@@ -38,7 +38,7 @@ const page = async ({ params }: { params: { stable: string } }) => {
 
       <section
         className={cn(
-          "max-w-[600px] mx-4 space-y-4",
+          "max-w-[600px] mx-4 space-y-4 flex flex-col items-center",
           "md:max-w-[800px] md:mx-8"
         )}
       >
@@ -46,18 +46,21 @@ const page = async ({ params }: { params: { stable: string } }) => {
           <p key={index} dangerouslySetInnerHTML={{ __html: `${paragraph}` }} />
         ))}
 
-        <div className="w-3/4 m-auto">
+        <div className="px-8">
           <CarouselPlugin>
             {stable.images.map((image, index) => (
               <CarouselItem key={index}>
                 <Image
                   src={image.url}
                   alt={`Images de présentation de ${stable.nom}`}
-                  width={600}
+                  width={100}
                   height={100}
-                  sizes="584px"
+                  sizes="(min-width: 940px) 736px, (min-width: 780px) calc(60vw + 184px), (min-width: 680px) 536px, calc(92.22vw - 73px)"
                   priority={true}
-                  className="object-cover object-center"
+                  placeholder={"blur"}
+                  blurDataURL={image.url}
+                  style={{ objectFit: "contain" }}
+                  className={cn("w-full h-full object-contain object-right")}
                 />
               </CarouselItem>
             ))}

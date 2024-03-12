@@ -26,9 +26,7 @@ const CarouselPlugin = ({
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
-      <CarouselContent className="w-[600px] h-[600px] items-center">
-        {children}
-      </CarouselContent>
+      <CarouselContent className="items-center">{children}</CarouselContent>
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>

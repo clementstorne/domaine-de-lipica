@@ -7,6 +7,7 @@ import logo from "@public/logo-domaine-lipica.png";
 import { ChevronDown, ChevronUp, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type BurgerButtonProps = {
@@ -33,8 +34,15 @@ type NavbarProps = {
 };
 
 const Navbar = ({ stables }: NavbarProps) => {
+  const pathname = usePathname();
+
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+
+  useEffect(() => {
+    setIsOpen(false);
+    setIsSubmenuOpen(false);
+  }, [pathname]);
 
   const links: LinkItem[] = [
     {

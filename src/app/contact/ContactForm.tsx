@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
 import emailjs from "@emailjs/browser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -91,9 +90,7 @@ const ContactForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn(
-          "w-full p-8 bg-orange-3 rounded-lg space-y-8 flex flex-col items-center"
-        )}
+        className="w-full p-8 space-y-8 flex flex-col items-center"
       >
         <FormField
           control={form.control}
@@ -175,7 +172,7 @@ const ContactForm = () => {
         />
 
         <div className="w-full !mt-14 flex flex-col space-y-4">
-          <Button type="submit" size="lg" className="font-bold">
+          <Button size="lg" type="submit" className="font-bold">
             Valider et envoyer
           </Button>
         </div>

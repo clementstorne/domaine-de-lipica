@@ -22,6 +22,7 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Mot de passe", type: "password" },
       },
+      //@ts-ignore
       async authorize(credentials: { email: string; password: string }) {
         const parsedCredentials = z
           .object({
@@ -63,24 +64,15 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         return {
           ...token,
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          imageUrl: user.imageUrl,
-          role: user.role,
         };
       }
       return token;
     },
     session: ({ session, token }) => {
-      delete session.user.image;
       return {
         ...session,
         user: {
           ...session.user,
-          id: token.id,
-          role: token.role,
-          imageUrl: token.imageUrl,
         },
       };
     },

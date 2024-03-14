@@ -16,7 +16,7 @@ const Footer = () => {
       label: "Plan du site",
     },
     {
-      href: "/administration/login",
+      href: "/login",
       label: "Administration",
     },
   ];

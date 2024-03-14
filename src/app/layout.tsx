@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { Toaster } from "@/components/ui/toaster";
 import { getStablesForNavbar } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
@@ -40,6 +41,7 @@ const RootLayout = async ({
           {children}
         </main>
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

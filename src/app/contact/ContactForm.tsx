@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 import emailjs from "@emailjs/browser";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -56,6 +57,8 @@ const formSchema = z.object({
 });
 
 const ContactForm = () => {
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -78,12 +81,27 @@ const ContactForm = () => {
       organization,
       message,
     };
-    emailjs.send(
-      process.env.EMAILJS_SERVICE_ID,
-      process.env.EMAILJS_TEMPLATE_ID,
+    const res = await emailjs.send(
+      "service_0m8pnux",
+      "template_z8bw8ae",
       templateParams,
-      process.env.EMAILJS_PUBLIC_KEY
+      "8WUlGM-BWwXiHWYM4"
     );
+
+    if (res.status === 200) {
+      form.reset();
+      toast({
+        variant: "success",
+        title: "Votre message a bien été envoyé",
+        description: "Nous tâcherons d'y répondre dans les plus bref délais",
+      });
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Votre message n'a pas été envoyé",
+        description: "Veuillez réessayer",
+      });
+    }
   };
 
   return (

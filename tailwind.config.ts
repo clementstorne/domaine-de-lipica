@@ -1,5 +1,3 @@
-import type { Config } from "tailwindcss";
-
 const config = {
   darkMode: ["class"],
   content: [
@@ -11,8 +9,36 @@ const config = {
   prefix: "",
   theme: {
     colors: {
+      red: {
+        "50": "#fef3f2",
+        "100": "#fde6e3",
+        "200": "#fdd0cb",
+        "300": "#faafa7",
+        "400": "#f68f84",
+        "500": "#eb5848",
+        "600": "#d83b2a",
+        "700": "#b52e20",
+        "800": "#962a1e",
+        "900": "#7d281f",
+        "950": "#44100b",
+      },
+      green: {
+        "50": "#f1fee7",
+        "100": "#dffbcc",
+        "200": "#aff684",
+        "300": "#98f066",
+        "400": "#72e437",
+        "500": "#53ca18",
+        "600": "#3da10f",
+        "700": "#307b10",
+        "800": "#2a6113",
+        "900": "#255215",
+        "950": "#0f2e05",
+      },
+      warning: "#f6e884",
+      info: "#84dff6",
       white: "#ffffff",
-      red: "#CE2C31",
+      // red: "#CE2C31",
       cso: "#732F7B",
       dressage: "#043D79",
       hunter: "#A95A1B",
@@ -116,6 +142,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+};
 
 export default config;

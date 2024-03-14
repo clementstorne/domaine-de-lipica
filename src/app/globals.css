@@ -28,7 +28,7 @@
 
 @layer utilities {
   .link {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-blue-950
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-950
     text-blue-900 underline-offset-4 hover:underline p-0 h-auto;
   }
 }

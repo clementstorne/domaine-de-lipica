@@ -120,7 +120,9 @@ const LoginForm = () => {
         />
 
         {errorMessage && (
-          <p className="text-base font-bold text-red !mt-16">{errorMessage}</p>
+          <p className="text-base font-bold text-red-800 !mt-16">
+            {errorMessage}
+          </p>
         )}
 
         <div className="w-full !mt-14 flex flex-col space-y-4">

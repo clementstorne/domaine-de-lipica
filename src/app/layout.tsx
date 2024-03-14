@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { getStablesForNavbar } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Exo_2 } from "next/font/google";
 import "./globals.css";
@@ -42,6 +43,7 @@ const RootLayout = async ({
         </main>
         <Footer />
         <Toaster />
+        <SpeedInsights />
       </body>
     </html>
   );

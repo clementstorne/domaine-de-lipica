@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import LoginForm from "./LoginForm";
 
 export const metadata: Metadata = {
-  title: "Administration",
+  title: "Connexion",
 };
 
 const page = async () => {
@@ -17,7 +17,7 @@ const page = async () => {
   } else {
     return (
       <>
-        <h1>Administration</h1>
+        <h1>Connexion</h1>
 
         <section
           className={cn(

@@ -13,3 +13,14 @@ export const stringToUrl = (str: string) => {
 export const newlineToBreakTag = (str: string) => {
   return str.split("\n").join("<br />");
 };
+
+export const toPascalCase = (str: string) => {
+  const arr = str.split(" ");
+  arr.map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+  return arr.join("");
+};
+
+export const toCamelCase = (str: string) => {
+  str = toPascalCase(str);
+  return str.charAt(0).toLowerCase() + str.slice(1);
+};

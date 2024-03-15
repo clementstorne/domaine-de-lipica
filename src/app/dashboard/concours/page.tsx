@@ -1,38 +1,26 @@
-import PartnerLogo from "@/components/PartnerLogo";
-import { getFutureEvents, getPartnersLogos, getPastEvents } from "@/lib/data";
+import { getFutureEvents, getPastEvents } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 import EventCard from "./EventCard";
 
 export const metadata: Metadata = {
-  title: "Concours",
+  title: "Gérer les concours",
 };
 
 const page = async () => {
-  const partners = await getPartnersLogos();
   const futureEvents = await getFutureEvents();
   const pastEvents = await getPastEvents();
 
   return (
     <>
-      <h1>Concours</h1>
+      <h1>Gérer les concours</h1>
 
       <section
         className={cn(
           "max-w-[600px] mx-4 flex flex-wrap items-stretch justify-center gap-4",
           "md:max-w-max md:mx-8"
         )}
-      >
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
-          {partners.map((partner) => (
-            <PartnerLogo
-              key={partner.id}
-              nom={partner.nom}
-              logo={partner.logo}
-            />
-          ))}
-        </div>
-      </section>
+      ></section>
 
       <section
         className={cn("max-w-[600px] mx-4 space-y-4", "md:max-w-max md:mx-8")}

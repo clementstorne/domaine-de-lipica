@@ -4,11 +4,24 @@ import { getPartnersLogos, getSingleEvent } from "@/lib/data";
 import { formatSingleEventDates } from "@/lib/dateUtils";
 import { cn } from "@/lib/utils";
 import { Event } from "@/types";
-import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-export const metadata: Metadata = {
-  title: "Concours",
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { id: string };
+}) => {
+  const event = await getSingleEvent(params.id);
+
+  if (!event) {
+    redirect("/concours");
+  }
+
+  return {
+    title: `${event.discipline.toUpperCase()} ${
+      event.niveau
+    } ${formatSingleEventDates(event.debut, event.fin)}`,
+  };
 };
 
 const formatTitle = (event: Omit<Event, "lienWinJump">) => {

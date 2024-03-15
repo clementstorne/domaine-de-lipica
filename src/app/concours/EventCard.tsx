@@ -5,9 +5,7 @@ import { formatEventDates, isInFuture } from "@/lib/dateUtils";
 import { Event } from "@/types";
 import Link from "next/link";
 
-type EventCardProps = Event & {
-  className?: string;
-};
+type EventCardProps = Event;
 
 const EventCard = ({
   id,
@@ -17,7 +15,6 @@ const EventCard = ({
   niveau,
   horaires,
   lienWinJump,
-  className,
 }: EventCardProps) => {
   return (
     <Card className="min-w-56 basis-0 flex flex-col justify-center">

@@ -10,7 +10,7 @@ import Link from "next/link";
 type EventCardProps = Omit<Event, "horaires" | "lienWinJump">;
 
 const EventCard = ({ id, debut, fin, discipline, niveau }: EventCardProps) => {
-  const deleteEvent = async () => {
+  const deletePartner = async () => {
     "use server";
     await prisma.event.delete({ where: { id } });
     revalidatePath("/dashboard/concours");
@@ -30,9 +30,9 @@ const EventCard = ({ id, debut, fin, discipline, niveau }: EventCardProps) => {
       <CardFooter className="flex flex-col space-y-4">
         <form className="flex flex-col space-y-4" action="">
           <Button asChild className="font-bold">
-            <Link href={"/dashboard/concours/" + id}>Modifier</Link>
+            <Link href={"/dashboard/partenaires/" + id}>Modifier</Link>
           </Button>
-          <Button className="font-bold" formAction={deleteEvent}>
+          <Button className="font-bold" formAction={deletePartner}>
             Supprimer
           </Button>
         </form>

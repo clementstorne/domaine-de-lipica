@@ -1,8 +1,8 @@
 "use server";
 
+import { updateEventSchema } from "@/lib/eventSchemaValidation";
 import prisma from "@/lib/prisma";
 import { authenticatedAction } from "@/lib/safe-action";
-import { updateEventSchema } from "@/lib/validationSchema";
 import { Event } from "@/types";
 import { revalidatePath } from "next/cache";
 

@@ -1,8 +1,8 @@
 "use server";
 
+import { createEventSchema } from "@/lib/eventSchemaValidation";
 import prisma from "@/lib/prisma";
 import { authenticatedAction } from "@/lib/safe-action";
-import { createEventSchema } from "@/lib/validationSchema";
 import { revalidatePath } from "next/cache";
 
 export const createEvent = authenticatedAction(

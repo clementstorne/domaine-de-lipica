@@ -64,7 +64,7 @@ const page = () => {
           sous le numéro 513558072 dont le siège social est situé au 1,
           rond-point du Manège - 77330 OZOIR-LA-FERRIÈRE.
           <br />
-          Numéro de téléphone : <a href="tel:+33688167937">0688167937</a>
+          Numéro de téléphone : <a href="tel:+33688167937">06 88 16 79 37</a>
           <br />
           Adresse mail :{" "}
           <a href="mailto:info@ozoir-equitation.com">
@@ -94,7 +94,7 @@ const page = () => {
           le siège social est situé au 97-97B rue du Général Mangin - 38100
           GRENOBLE.
           <br />
-          Numéro de téléphone : <a href="tel:+33486576000">0486576000</a>
+          Numéro de téléphone : <a href="tel:+33486576000">04 86 57 60 00</a>
           <br />
           Adresse mail de contact :{" "}
           <a href="mailto:commercial@nuxit.com">commercial@nuxit.com</a>

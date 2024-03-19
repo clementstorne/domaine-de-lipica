@@ -15,41 +15,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { DISCIPLINES, NIVEAUX } from "@/lib/const";
 import { cn } from "@/lib/utils";
+import { eventFormSchema } from "@/lib/validationSchema";
 import { Event } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { updateEvent } from "./action";
-
-const formSchema = z.object({
-  debut: z
-    .string()
-    .min(1, {
-      message: "Ce champ est requis",
-    })
-    .refine(
-      (value) =>
-        /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(value),
-      "Mauvais format de date"
-    ),
-  fin: z
-    .string()
-    .min(1, {
-      message: "Ce champ est requis",
-    })
-    .refine(
-      (value) =>
-        /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(value),
-      "Mauvais format de date"
-    ),
-  discipline: z.string(),
-  niveau: z.array(z.string()).refine((value) => value.some((item) => item), {
-    message: "Vous devez sélectionner au moins une option",
-  }),
-  horaires: z.string().optional(),
-  lienWinJump: z.string().optional(),
-});
 
 type EventFormProps = Event;
 
@@ -66,8 +38,8 @@ const EventForm = ({
 
   const levelsArray = niveau.split(" - ");
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof eventFormSchema>>({
+    resolver: zodResolver(eventFormSchema),
     defaultValues: {
       debut: debut,
       fin: fin,
@@ -78,7 +50,7 @@ const EventForm = ({
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof eventFormSchema>) => {
     const niveau = values.niveau.join(" - ");
     const data = { id, ...values, niveau } as Event;
     await updateEvent(data);
@@ -89,7 +61,6 @@ const EventForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        // action={updateEvent}
         className="w-full p-8 space-y-8 flex flex-col items-center"
       >
         <FormField
@@ -123,7 +94,7 @@ const EventForm = ({
           name="discipline"
           render={({ field }) => (
             <FormItem className="space-y-3">
-              <FormLabel className="ml-2">Rôle</FormLabel>
+              <FormLabel className="ml-2">Discipline</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}

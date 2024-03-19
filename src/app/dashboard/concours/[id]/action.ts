@@ -1,24 +1,29 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { authenticatedAction } from "@/lib/safe-action";
+import { updateEventSchema } from "@/lib/validationSchema";
 import { Event } from "@/types";
 import { revalidatePath } from "next/cache";
 
 type Data = Event;
 
-export const updateEvent = async (data: Data) => {
-  await prisma.event.update({
-    where: { id: data.id },
-    data: {
-      debut: data.debut,
-      fin: data.fin,
-      discipline: data.discipline,
-      niveau: data.niveau,
-      horaires: data.horaires ? data.horaires : "",
-      lienWinJump: data.lienWinJump ? data.lienWinJump : "",
-    },
-  });
-  revalidatePath("/dashboard/concours");
-  revalidatePath("/concours");
-  revalidatePath("/");
-};
+export const updateEvent = authenticatedAction(
+  updateEventSchema,
+  async ({ id, debut, fin, discipline, niveau, horaires, lienWinJump }) => {
+    await prisma.event.update({
+      where: { id: id },
+      data: {
+        debut: debut,
+        fin: fin,
+        discipline: discipline,
+        niveau: niveau,
+        horaires: horaires ? horaires : "",
+        lienWinJump: lienWinJump ? lienWinJump : "",
+      },
+    });
+    revalidatePath("/dashboard/concours");
+    revalidatePath("/concours");
+    revalidatePath("/");
+  }
+);

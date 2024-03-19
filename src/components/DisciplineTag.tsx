@@ -1,4 +1,4 @@
-import { DISCIPLINES } from "@/lib/disciplineUtils";
+import { DISCIPLINES } from "@/lib/const";
 import { cn } from "@/lib/utils";
 import { DisciplineCode } from "@/types";
 

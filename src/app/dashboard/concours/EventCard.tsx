@@ -14,6 +14,8 @@ const EventCard = ({ id, debut, fin, discipline, niveau }: EventCardProps) => {
     "use server";
     await prisma.event.delete({ where: { id } });
     revalidatePath("/dashboard/concours");
+    revalidatePath("/concours");
+    revalidatePath("/");
   };
 
   return (

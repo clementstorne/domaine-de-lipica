@@ -20,7 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { updateEvent } from "./action";
+import { createEvent } from "./action";
 
 const formSchema = z.object({
   debut: z
@@ -51,37 +51,25 @@ const formSchema = z.object({
   lienWinJump: z.string().optional(),
 });
 
-type EventFormProps = Event;
-
-const EventForm = ({
-  id,
-  debut,
-  fin,
-  discipline,
-  niveau,
-  horaires,
-  lienWinJump,
-}: EventFormProps) => {
+const EventForm = () => {
   const router = useRouter();
-
-  const levelsArray = niveau.split(" - ");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      debut: debut,
-      fin: fin,
-      discipline: discipline,
-      niveau: levelsArray,
-      horaires: horaires ? horaires : "",
-      lienWinJump: lienWinJump ? lienWinJump : "",
+      debut: "",
+      fin: "",
+      discipline: "",
+      niveau: [],
+      horaires: "",
+      lienWinJump: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const niveau = values.niveau.join(" - ");
-    const data = { id, ...values, niveau } as Event;
-    await updateEvent(data);
+    const data = { ...values, niveau } as Omit<Event, "id">;
+    await createEvent(data);
     router.push("/dashboard/concours");
   };
 
@@ -89,7 +77,7 @@ const EventForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        // action={updateEvent}
+        // action={createEvent}
         className="w-full p-8 space-y-8 flex flex-col items-center"
       >
         <FormField
@@ -232,7 +220,7 @@ const EventForm = ({
 
         <div className="w-full !mt-14 flex flex-col space-y-4">
           <Button size="lg" type="submit" className="font-bold">
-            Modifier le concours
+            Ajouter le concours
           </Button>
         </div>
       </form>

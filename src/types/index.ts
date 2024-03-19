@@ -88,3 +88,20 @@ export interface Discipline {
     | "#3f2682";
   textColor: "#000000" | "#ffffff";
 }
+
+export interface Niveau {
+  id:
+    | "amateur"
+    | "pro"
+    | "cyclesLibres"
+    | "cyclesClassiques"
+    | "club"
+    | "poney";
+  label:
+    | "Amateur"
+    | "Pro"
+    | "Cycles Libres"
+    | "Cycles Classiques"
+    | "Club"
+    | "Poney";
+}

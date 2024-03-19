@@ -37,10 +37,6 @@ const page = async ({ params }: { params: { id: string } }) => {
     redirect("/concours");
   }
 
-  const timeTable = event.horaires
-    .split("\n\n")
-    .map((schedule) => schedule.split("\n").join("<br />"));
-
   return (
     <>
       <h1>{formatTitle(event)}</h1>

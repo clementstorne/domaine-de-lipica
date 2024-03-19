@@ -1,4 +1,4 @@
-import { Discipline } from "@/types";
+import { Discipline, Niveau } from "@/types";
 
 export const DISCIPLINES: Discipline[] = [
   { name: "CSO", code: "cso", color: "#732F7B", textColor: "#ffffff" },
@@ -61,5 +61,32 @@ export const DISCIPLINES: Discipline[] = [
     code: "tiralarc",
     color: "#3f2682",
     textColor: "#ffffff",
+  },
+];
+
+export const NIVEAUX: Niveau[] = [
+  {
+    id: "amateur",
+    label: "Amateur",
+  },
+  {
+    id: "pro",
+    label: "Pro",
+  },
+  {
+    id: "cyclesLibres",
+    label: "Cycles Libres",
+  },
+  {
+    id: "cyclesClassiques",
+    label: "Cycles Classiques",
+  },
+  {
+    id: "club",
+    label: "Club",
+  },
+  {
+    id: "poney",
+    label: "Poney",
   },
 ];

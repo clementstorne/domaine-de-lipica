@@ -37,7 +37,7 @@ const PartnerCard = ({ id, nom, logo, informations }: PartnerCardProps) => {
           )}
         >
           {logo ? (
-            <Image src={logo} alt={"Logo de " + nom} width={800} height={600} />
+            <Image src={logo} alt={"Logo de " + nom} width={600} height={600} />
           ) : (
             <></>
           )}

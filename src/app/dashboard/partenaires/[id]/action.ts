@@ -45,30 +45,26 @@ export const deleteOldLogo = async (oldLogo: string) => {
 
 export const uploadLogo = async (formData: FormData, oldLogo: string) => {
   const file = formData.get("file") as File;
-  console.log(1);
 
   if (!file) {
-    console.log(2);
     throw new Error("No file provided");
   }
 
   const filename = formatImageFileName(file);
-  console.log(3);
 
   const bytes = await file.arrayBuffer();
-  console.log(4);
   const buffer = Buffer.from(bytes);
-  console.log(5);
 
   const path = join(process.cwd(), "public/logos/" + filename);
   console.log(6);
   try {
-    await writeFile(path, buffer);
     console.log(7);
-    await deleteOldLogo(oldLogo);
+    await writeFile(path, buffer);
     console.log(8);
-  } catch (error) {
+    await deleteOldLogo(oldLogo);
     console.log(9);
+  } catch (error) {
+    console.log(10);
     console.error(error);
   }
 

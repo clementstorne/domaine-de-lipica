@@ -13,5 +13,7 @@ export const formatImageFileName = (file: File) => {
     throw new Error("Unsupported file type");
   }
 
-  return file.name.split(".")[0].split(" ").join("-") + "." + extension;
+  return (
+    file.name.toLowerCase().split(".")[0].split(" ").join("-") + "." + extension
+  );
 };

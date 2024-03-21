@@ -44,7 +44,9 @@ const PartnerForm = ({ id, nom, informations, logo }: PartnerFormProps) => {
       const newLogo = e.target.files[0];
       const formData = new FormData();
       formData.append("file", newLogo);
-      uploadLogo(formData);
+      if (logo) {
+        uploadLogo(formData, logo);
+      }
 
       const fileName = formatImageFileName(newLogo);
       form.setValue("logo", "/logos/" + fileName);

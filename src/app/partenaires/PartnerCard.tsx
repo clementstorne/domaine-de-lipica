@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { newlineToBreakTag } from "@/lib/strUtils";
+import { newlineToBreakTag } from "@/lib/string";
 import { cn } from "@/lib/utils";
 import { Partner } from "@/types";
 import Image from "next/image";

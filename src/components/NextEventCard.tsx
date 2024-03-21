@@ -1,5 +1,5 @@
 import DisciplineTag from "@/components/DisciplineTag";
-import { formatEventDates } from "@/lib/dateUtils";
+import { formatEventDates } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { DisciplineCode } from "@/types";
 

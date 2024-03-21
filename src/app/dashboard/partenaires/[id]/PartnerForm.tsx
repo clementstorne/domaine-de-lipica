@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { partnerFormSchema } from "@/lib/partnerSchemaValidation";
+import { formatImageFileName } from "@/lib/upload";
 import { Partner } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
@@ -19,7 +20,7 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { updatePartner } from "./action";
+import { updatePartner, uploadLogo } from "./action";
 
 type PartnerFormProps = Partner;
 
@@ -32,6 +33,7 @@ const PartnerForm = ({ id, nom, informations, logo }: PartnerFormProps) => {
     defaultValues: {
       nom: nom,
       informations: informations,
+      logo: logo,
     },
   });
 
@@ -40,7 +42,12 @@ const PartnerForm = ({ id, nom, informations, logo }: PartnerFormProps) => {
   const handleImageInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const newLogo = e.target.files[0];
-      form.setValue("logo", newLogo);
+      const formData = new FormData();
+      formData.append("file", newLogo);
+      uploadLogo(formData);
+
+      const fileName = formatImageFileName(newLogo);
+      form.setValue("logo", "/logos/" + fileName);
 
       const reader = new FileReader();
 

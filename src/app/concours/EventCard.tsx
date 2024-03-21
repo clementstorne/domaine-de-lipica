@@ -1,7 +1,7 @@
 import DisciplineTag from "@/components/DisciplineTag";
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader } from "@/components/ui/card";
-import { formatEventDates, isInFuture } from "@/lib/dateUtils";
+import { formatEventDates, isInFuture } from "@/lib/date";
 import { Event } from "@/types";
 import Link from "next/link";
 

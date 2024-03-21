@@ -1,7 +1,7 @@
 import PartnerLogo from "@/components/PartnerLogo";
 import { Card, CardContent } from "@/components/ui/card";
 import { getPartnersLogos, getSingleEvent } from "@/lib/data";
-import { formatSingleEventDates } from "@/lib/dateUtils";
+import { formatSingleEventDates } from "@/lib/date";
 import { cn } from "@/lib/utils";
 import { Event } from "@/types";
 import { redirect } from "next/navigation";

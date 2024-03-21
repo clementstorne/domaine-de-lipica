@@ -1,4 +1,4 @@
-import { isInFuture } from "@/lib/dateUtils";
+import { isInFuture } from "@/lib/date";
 import prisma from "@/lib/prisma";
 
 export const getStablesForNavbar = async () => {

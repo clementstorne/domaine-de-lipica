@@ -1,7 +1,7 @@
 import DisciplineTag from "@/components/DisciplineTag";
 import { Button } from "@/components/ui/button";
 import { Card, CardFooter, CardHeader } from "@/components/ui/card";
-import { formatEventDates } from "@/lib/dateUtils";
+import { formatEventDates } from "@/lib/date";
 import prisma from "@/lib/prisma";
 import { Event } from "@/types";
 import { revalidatePath } from "next/cache";

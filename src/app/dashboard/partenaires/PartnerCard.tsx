@@ -6,8 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { getLogosPaths } from "@/lib/imageLoader";
 import prisma from "@/lib/prisma";
-import { newlineToBreakTag } from "@/lib/strUtils";
+import { newlineToBreakTag } from "@/lib/string";
 import { cn } from "@/lib/utils";
 import { Partner } from "@/types";
 import { revalidatePath } from "next/cache";

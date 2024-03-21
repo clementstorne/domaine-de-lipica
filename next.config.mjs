@@ -1,8 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  publicRuntimeConfig: {
-    logosDirectory: "public/logos",
-  },
-};
+const nextConfig = {};
 
 export default nextConfig;

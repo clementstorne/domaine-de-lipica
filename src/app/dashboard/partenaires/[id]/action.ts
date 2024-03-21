@@ -4,13 +4,9 @@ import { updatePartnerSchema } from "@/lib/partnerSchemaValidation";
 import prisma from "@/lib/prisma";
 import { authenticatedAction } from "@/lib/safe-action";
 import { formatImageFileName } from "@/lib/upload";
-import fs from "fs-extra";
-import { statfs, unlink } from "fs/promises";
+import { statfs, unlink, writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
-import getConfig from "next/config";
 import { join } from "path";
-
-const { publicRuntimeConfig } = getConfig();
 
 export const updatePartner = authenticatedAction(
   updatePartnerSchema,
@@ -59,14 +55,11 @@ export const uploadLogo = async (formData: FormData, oldLogo: string) => {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  const logosDirectory = publicRuntimeConfig.logosDirectory;
-  const path = join(process.cwd(), logosDirectory, filename);
-  // const path = join(process.cwd(), "public/logos/" + filename);
+  const path = join(process.cwd(), "public/logos/" + filename);
   console.log(6);
   try {
     console.log(7);
-    await fs.writeFile(path, buffer);
-    // await writeFile(path, buffer);
+    await writeFile(path, buffer);
     console.log(8);
     await deleteOldLogo(oldLogo);
     console.log(9);

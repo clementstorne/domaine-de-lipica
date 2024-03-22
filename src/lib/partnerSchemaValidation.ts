@@ -1,3 +1,4 @@
+import { File } from "@web-std/file";
 import { z } from "zod";
 
 export const partnerFormSchema = z.object({
@@ -7,7 +8,7 @@ export const partnerFormSchema = z.object({
   informations: z.string().min(1, {
     message: "Ce champ est requis",
   }),
-  image: z.instanceof(File),
+  image: z.instanceof(File).optional(),
 });
 
 export const createPartnerSchema = z.object({

@@ -7,6 +7,7 @@ export const partnerFormSchema = z.object({
   informations: z.string().min(1, {
     message: "Ce champ est requis",
   }),
+  image: z.instanceof(File),
 });
 
 export const createPartnerSchema = z.object({

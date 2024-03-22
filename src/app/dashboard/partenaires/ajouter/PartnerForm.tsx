@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { partnerFormSchema } from "@/lib/partnerSchemaValidation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -21,20 +21,9 @@ import { createPartner } from "./action";
 
 const PartnerForm = () => {
   const [imageUrl, setImageUrl] = useState("");
-  const router = useRouter();
 
-  const schema = z.object({
-    nom: z.string().min(2, {
-      message: "Ce champ est requis",
-    }),
-    informations: z.string().min(1, {
-      message: "Ce champ est requis",
-    }),
-    image: z.instanceof(File),
-  });
-
-  const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
+  const form = useForm<z.infer<typeof partnerFormSchema>>({
+    resolver: zodResolver(partnerFormSchema),
     defaultValues: {
       nom: "",
       informations: "",
@@ -130,25 +119,14 @@ const PartnerForm = () => {
                 onChange={handleImageInput}
               />
 
-              {imageUrl ? (
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full font-bold"
-                  onClick={handleUploadButtonClick}
-                >
-                  Changer de logo
-                </Button>
-              ) : (
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full font-bold"
-                  onClick={handleUploadButtonClick}
-                >
-                  Ajouter un logo
-                </Button>
-              )}
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full font-bold"
+                onClick={handleUploadButtonClick}
+              >
+                {imageUrl ? "Changer de logo" : "Ajouter un logo"}
+              </Button>
             </FormItem>
           )}
         />

@@ -12,20 +12,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { partnerFormSchema } from "@/lib/partnerSchemaValidation";
-import { formatImageFileName } from "@/lib/upload";
 import { Partner } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { updatePartner, uploadLogo } from "./action";
+import { updatePartner } from "./action";
 
 type PartnerFormProps = Partner;
 
 const PartnerForm = ({ id, nom, informations, logo }: PartnerFormProps) => {
-  const [imageUrl, setImageUrl] = useState(logo);
   const router = useRouter();
 
   const form = useForm<z.infer<typeof partnerFormSchema>>({
@@ -33,41 +29,8 @@ const PartnerForm = ({ id, nom, informations, logo }: PartnerFormProps) => {
     defaultValues: {
       nom: nom,
       informations: informations,
-      logo: logo,
     },
   });
-
-  const hiddenFileInput = useRef<HTMLInputElement>(null);
-
-  const handleImageInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const newLogo = e.target.files[0];
-      const formData = new FormData();
-      formData.append("file", newLogo);
-      if (logo) {
-        uploadLogo(formData, logo);
-      }
-
-      const fileName = formatImageFileName(newLogo);
-      form.setValue("logo", "/logos/" + fileName);
-
-      const reader = new FileReader();
-
-      reader.onload = (event) => {
-        if (event.target && event.target.result) {
-          const imageUrl = event.target.result as string;
-          setImageUrl(imageUrl);
-        }
-      };
-
-      reader.readAsDataURL(newLogo);
-    }
-  };
-
-  const handleUploadButtonClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    hiddenFileInput.current?.click();
-  };
 
   const onSubmit = async (values: z.infer<typeof partnerFormSchema>) => {
     const data = { id, ...values };
@@ -105,50 +68,6 @@ const PartnerForm = ({ id, nom, informations, logo }: PartnerFormProps) => {
                 <Textarea {...field} />
               </FormControl>
               <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="logo"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Logo</FormLabel>
-              {imageUrl ? (
-                <Image
-                  src={imageUrl}
-                  alt={"Logo de " + nom}
-                  width={600}
-                  height={600}
-                  className="h-1/2 w-1/2 mx-auto"
-                />
-              ) : null}
-              <input
-                type="file"
-                name="image"
-                id="logo"
-                className="hidden"
-                aria-describedby="logo-label"
-                accept="image/png, image/jpg, image/jpeg, image/svg+xml, image/webp"
-                ref={hiddenFileInput}
-                onChange={handleImageInput}
-              />
-
-              {logo ? (
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full font-bold"
-                  onClick={handleUploadButtonClick}
-                >
-                  Changer de logo
-                </Button>
-              ) : (
-                <Button size="lg" className="font-bold">
-                  Ajouter un logo
-                </Button>
-              )}
             </FormItem>
           )}
         />

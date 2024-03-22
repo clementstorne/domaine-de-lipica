@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getLogosPaths } from "@/lib/imageLoader";
 import prisma from "@/lib/prisma";
 import { newlineToBreakTag } from "@/lib/string";
 import { cn } from "@/lib/utils";
@@ -14,6 +13,7 @@ import { Partner } from "@/types";
 import { revalidatePath } from "next/cache";
 import Image from "next/image";
 import Link from "next/link";
+import { deleteOldLogo } from "./action";
 
 type PartnerCardProps = Partner;
 
@@ -21,6 +21,9 @@ const PartnerCard = ({ id, nom, logo, informations }: PartnerCardProps) => {
   const deleteEvent = async () => {
     "use server";
     await prisma.partner.delete({ where: { id } });
+    if (logo) {
+      deleteOldLogo(logo);
+    }
     revalidatePath("/dashboard/partenaires");
     revalidatePath("/partenaires");
   };

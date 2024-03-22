@@ -1,6 +1,7 @@
 import { getSinglePartner } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { redirect } from "next/navigation";
+import LogoForm from "./LogoForm";
 import PartnerForm from "./PartnerForm";
 
 export const generateMetadata = async ({
@@ -36,6 +37,7 @@ const page = async ({ params }: { params: { id: string } }) => {
           "md:max-w-[800px] md:w-1/2 md:mx-8"
         )}
       >
+        <LogoForm {...partner} />
         <PartnerForm {...partner} />
       </section>
     </>

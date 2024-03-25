@@ -28,6 +28,15 @@ export interface Stable {
   informations: string;
 }
 
+interface StableImage {
+  url: string;
+  stableId: string;
+}
+
+export interface StableWithImages extends Stable {
+  images: StableImage[];
+}
+
 export interface LinkItem {
   href: string;
   label: string;

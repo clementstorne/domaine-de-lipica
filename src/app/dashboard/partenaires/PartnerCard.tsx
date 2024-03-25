@@ -18,7 +18,7 @@ import { deleteOldLogo } from "./action";
 type PartnerCardProps = Partner;
 
 const PartnerCard = ({ id, nom, logo, informations }: PartnerCardProps) => {
-  const deleteEvent = async () => {
+  const deletePartner = async () => {
     "use server";
     await prisma.partner.delete({ where: { id } });
     if (logo) {
@@ -59,7 +59,7 @@ const PartnerCard = ({ id, nom, logo, informations }: PartnerCardProps) => {
           <Button asChild className="font-bold">
             <Link href={"/dashboard/partenaires/" + id}>Modifier</Link>
           </Button>
-          <Button className="font-bold" formAction={deleteEvent}>
+          <Button className="font-bold" formAction={deletePartner}>
             Supprimer
           </Button>
         </form>

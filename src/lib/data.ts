@@ -1,6 +1,22 @@
 import { isInFuture } from "@/lib/date";
 import prisma from "@/lib/prisma";
 
+export const getStables = async () => {
+  const stables = await prisma.stable.findMany({
+    orderBy: {
+      nom: "asc",
+    },
+    select: {
+      id: true,
+      nom: true,
+      url: true,
+      informations: true,
+      images: true,
+    },
+  });
+  return stables;
+};
+
 export const getStablesForNavbar = async () => {
   const stables = await prisma.stable.findMany({
     orderBy: {

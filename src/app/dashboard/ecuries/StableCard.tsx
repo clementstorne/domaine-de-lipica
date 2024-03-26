@@ -68,7 +68,7 @@ const StableCard = ({
       <CardFooter className="flex flex-col space-y-4">
         <form className="flex space-x-4" action="">
           <Button asChild className="font-bold">
-            <Link href={"/dashboard/ecuries/" + url}>Modifier</Link>
+            <Link href={"/dashboard/ecuries/" + id}>Modifier</Link>
           </Button>
           <Button className="font-bold" formAction={delteStable}>
             Supprimer

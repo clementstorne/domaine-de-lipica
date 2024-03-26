@@ -30,7 +30,23 @@ export const getStablesForNavbar = async () => {
   return stables;
 };
 
-export const getSingleStable = async (stableUrl: string) => {
+export const getSingleStable = async (stableId: string) => {
+  const stable = await prisma.stable.findFirst({
+    where: {
+      id: stableId,
+    },
+    select: {
+      id: true,
+      nom: true,
+      url: true,
+      informations: true,
+      images: true,
+    },
+  });
+  return stable;
+};
+
+export const getSingleStableByUrl = async (stableUrl: string) => {
   const stable = await prisma.stable.findFirst({
     where: {
       url: stableUrl,

@@ -68,7 +68,7 @@ const Navbar = ({ stables }: NavbarProps) => {
   ];
 
   const stablesLinks = stables.map((stable) => {
-    return { href: stable.url, label: stable.nom };
+    return { href: "/" + stable.url, label: stable.nom };
   });
 
   const smLinks = [...links];

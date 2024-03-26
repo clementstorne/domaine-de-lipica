@@ -1,6 +1,6 @@
 import CarouselPlugin from "@/components/CarouselPlugin";
 import { CarouselItem } from "@/components/ui/carousel";
-import { getSingleStable, getStableName } from "@/lib/data";
+import { getSingleStableByUrl, getStableName } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -22,7 +22,7 @@ export const generateMetadata = async ({
 };
 
 const page = async ({ params }: { params: { stable: string } }) => {
-  const stable = await getSingleStable(params.stable);
+  const stable = await getSingleStableByUrl(params.stable);
 
   if (!stable) {
     redirect("/");

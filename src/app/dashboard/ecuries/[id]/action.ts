@@ -18,6 +18,8 @@ export const updateStable = async (stableId: string, formData: FormData) => {
   const nom = (await formData.get("nom")) as string;
   const informations = (await formData.get("informations")) as string;
   const files = (await formData.getAll("image")) as File[];
+  // console.log(files);
+  // return;
 
   if (files[0].size !== 0) {
     const MIME_TYPES: Record<string, string> = {
@@ -66,4 +68,13 @@ export const updateStable = async (stableId: string, formData: FormData) => {
   revalidatePath("/dashboard/ecuries");
   revalidatePath("/ecuries");
   redirect("/dashboard/ecuries/");
+};
+
+export const deleteSingleImage = async (image: string) => {
+  const filename = image.split("/ecuries/")[1];
+  const filePath = join(process.cwd(), "public/ecuries/", filename);
+  if (await statfs(filePath)) {
+    await unlink(filePath);
+    await prisma.images.delete({ where: { url: image } });
+  }
 };

@@ -14,11 +14,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { stableFormSchema } from "@/lib/stableSchemaValidation";
 import { StableWithImages } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { updateStable } from "./action";
+import { deleteSingleImage, updateStable } from "./action";
 
 type StableFormProps = StableWithImages;
 
@@ -73,6 +74,27 @@ const StableForm = ({
     hiddenFileInput.current?.click();
   };
 
+  const handleRemoveImage = async (
+    e: React.MouseEvent<HTMLElement>,
+    index: number,
+    image: string
+  ) => {
+    const updatedImagesList = [...imagesList];
+    updatedImagesList.splice(index, 1);
+    setimagesList(updatedImagesList);
+
+    const newImages = form.getValues("image");
+    console.log("avant", newImages);
+    if (newImages) {
+      const offset = images.length;
+      newImages.splice(index - offset, 1);
+      console.log("après", newImages);
+      form.setValue("image", newImages);
+    }
+
+    await deleteSingleImage(image);
+  };
+
   return (
     <Form {...form}>
       <form
@@ -115,14 +137,22 @@ const StableForm = ({
               <FormLabel className="block">Photos</FormLabel>
               <div className="grid grid-cols-3 gap-4 items-center">
                 {imagesList.length > 0 ? (
-                  imagesList.map((image) => (
-                    <Image
-                      key={image}
-                      src={image}
-                      alt={"Image de présentation de " + nom}
-                      width={400}
-                      height={400}
-                    />
+                  imagesList.map((image, index) => (
+                    <div className="relative" key={image}>
+                      <Image
+                        src={image}
+                        alt={"Image de présentation de " + nom}
+                        width={400}
+                        height={400}
+                      />
+                      <Button
+                        size="icon"
+                        className="absolute z-10 top-1 right-1"
+                        onClick={(e) => handleRemoveImage(e, index, image)}
+                      >
+                        <Trash2 />
+                      </Button>
+                    </div>
                   ))
                 ) : (
                   <></>
@@ -154,7 +184,7 @@ const StableForm = ({
 
         <div className="w-full !mt-14 flex flex-col space-y-4">
           <Button size="lg" type="submit" className="font-bold">
-            Modifier le partenaire
+            Modifier l&apos;écurie
           </Button>
         </div>
       </form>

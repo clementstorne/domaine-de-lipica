@@ -45,10 +45,11 @@ const StableCard = ({
       <CardContent
         className={cn(
           "flex flex-col space-y-4 items-center",
-          "md:flex-row md:space-x-4 md:space-y-0"
+          "md:grid md:grid-cols-3 md:gap-4"
         )}
       >
         <p
+          className="md:col-span-2 text-left"
           dangerouslySetInnerHTML={{
             __html: newlineToBreakTag(informations),
           }}

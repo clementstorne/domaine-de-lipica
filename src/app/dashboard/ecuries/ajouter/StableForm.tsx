@@ -12,38 +12,24 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { stableFormSchema } from "@/lib/stableSchemaValidation";
-import { StableWithImages } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { deleteSingleImage, updateStable } from "./action";
+import { createStable, deleteSingleImage } from "./action";
 
-type StableFormProps = StableWithImages;
-
-const StableForm = ({
-  id,
-  nom,
-  informations,
-  url,
-  images,
-}: StableFormProps) => {
-  const updateStableWithId = updateStable.bind(null, id);
-
-  const [imagesList, setImagesList] = useState(
-    images.map((image, index) => ({
-      id: index,
-      url: image.url,
-    }))
+const StableForm = () => {
+  const [imagesList, setImagesList] = useState<{ id: number; url: string }[]>(
+    []
   );
 
   const form = useForm<z.infer<typeof stableFormSchema>>({
     resolver: zodResolver(stableFormSchema),
     defaultValues: {
-      nom: nom,
-      informations: informations,
+      nom: "",
+      informations: "",
       image: undefined,
     },
   });
@@ -101,7 +87,7 @@ const StableForm = ({
   return (
     <Form {...form}>
       <form
-        action={updateStableWithId}
+        action={createStable}
         className="w-full p-8 space-y-8 flex flex-col items-center"
       >
         <FormField
@@ -144,7 +130,9 @@ const StableForm = ({
                     <div className="relative" key={image.id}>
                       <Image
                         src={image.url}
-                        alt={"Image de présentation de " + nom}
+                        alt={
+                          "Image de présentation de " + form.getValues("nom")
+                        }
                         width={400}
                         height={400}
                       />
@@ -189,7 +177,7 @@ const StableForm = ({
 
         <div className="w-full !mt-14 flex flex-col space-y-4">
           <Button size="lg" type="submit" className="font-bold">
-            Modifier l&apos;écurie
+            Ajouter l&apos;écurie
           </Button>
         </div>
       </form>

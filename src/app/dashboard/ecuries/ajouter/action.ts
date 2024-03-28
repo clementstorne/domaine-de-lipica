@@ -1,25 +1,24 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { stringToUrl } from "@/lib/string";
 import { statfs, unlink, writeFile } from "fs/promises";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { join } from "path";
 
-export const deleteOldLogo = async (oldLogo: string) => {
-  const filename = oldLogo.split("/logos/")[1];
-  const filePath = join(process.cwd(), "public/logos/", filename);
-  if (await statfs(filePath)) {
-    await unlink(filePath);
-  }
-};
-
-export const updateStable = async (stableId: string, formData: FormData) => {
+export const createStable = async (formData: FormData) => {
   const nom = (await formData.get("nom")) as string;
   const informations = (await formData.get("informations")) as string;
   const files = (await formData.getAll("image")) as File[];
-  console.log(files);
-  return;
+
+  const stable = await prisma.stable.create({
+    data: {
+      nom: nom,
+      informations: informations,
+      url: stringToUrl(nom),
+    },
+  });
 
   if (files[0].size !== 0) {
     const MIME_TYPES: Record<string, string> = {
@@ -47,7 +46,7 @@ export const updateStable = async (stableId: string, formData: FormData) => {
       await writeFile(path, buffer);
 
       await prisma.stable.update({
-        where: { id: stableId },
+        where: { id: stable.id },
         data: {
           images: {
             create: { url: "/ecuries/" + fileName },
@@ -56,14 +55,6 @@ export const updateStable = async (stableId: string, formData: FormData) => {
       });
     });
   }
-
-  await prisma.stable.update({
-    where: { id: stableId },
-    data: {
-      nom: nom,
-      informations: informations,
-    },
-  });
 
   revalidatePath("/dashboard/ecuries");
   revalidatePath("/ecuries");

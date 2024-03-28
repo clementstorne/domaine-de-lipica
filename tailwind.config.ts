@@ -114,9 +114,8 @@ const config = {
         "blue-gradient":
           "linear-gradient(180deg,rgba(0, 75, 121, 1) 0%,rgba(0, 48, 81, 1) 100%)",
       },
-      borderRadius: {
-        5: "5px",
-        10: "10px",
+      flexGrow: {
+        2: "2",
       },
       aspectRatio: {
         "4/3": "4 / 3",

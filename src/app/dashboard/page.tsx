@@ -47,7 +47,7 @@ const page = () => {
       label: "Gérer les écuries",
     },
     {
-      href: "/dashboard/écuries/ajouter",
+      href: "/dashboard/ecuries/ajouter",
       label: "Ajouter une écurie",
     },
   ];

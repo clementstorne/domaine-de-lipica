@@ -1,4 +1,4 @@
-import { getSingleStable } from "@/lib/data";
+import { getSingleStable } from "@/lib/stableData";
 import { cn } from "@/lib/utils";
 import { redirect } from "next/navigation";
 import StableForm from "./StableForm";

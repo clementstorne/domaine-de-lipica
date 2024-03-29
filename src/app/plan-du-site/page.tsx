@@ -1,5 +1,5 @@
 import NavbarLink from "@/components/NavbarLink";
-import { getStablesForNavbar } from "@/lib/data";
+import { getStablesForNavbar } from "@/lib/stableData";
 import { cn } from "@/lib/utils";
 import { LinkItem } from "@/types";
 import { Metadata } from "next";

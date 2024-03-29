@@ -1,4 +1,4 @@
-import { getSinglePartner } from "@/lib/data";
+import { getSinglePartner } from "@/lib/partnerData";
 import { cn } from "@/lib/utils";
 import { redirect } from "next/navigation";
 import PartnerForm from "./PartnerForm";

@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { Toaster } from "@/components/ui/toaster";
-import { getStablesForNavbar } from "@/lib/data";
+import { getStablesForNavbar } from "@/lib/stableData";
 import { cn } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";

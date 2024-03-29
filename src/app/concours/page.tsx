@@ -1,5 +1,6 @@
 import PartnerLogo from "@/components/PartnerLogo";
-import { getFutureEvents, getPartnersLogos, getPastEvents } from "@/lib/data";
+import { getFutureEvents, getPastEvents } from "@/lib/eventData";
+import { getPartnersLogos } from "@/lib/partnerData";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 import EventCard from "./EventCard";

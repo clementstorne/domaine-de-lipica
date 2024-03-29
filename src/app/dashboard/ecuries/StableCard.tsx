@@ -28,7 +28,6 @@ const StableCard = ({
 
   const delteStable = async () => {
     "use server";
-    console.log("delete");
     await prisma.stable.delete({ where: { id } });
     if (imagesList.length > 0) {
       deleteImages(imagesList);

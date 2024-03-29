@@ -1,6 +1,6 @@
 import CarouselPlugin from "@/components/CarouselPlugin";
 import { CarouselItem } from "@/components/ui/carousel";
-import { getSingleStableByUrl, getStableName } from "@/lib/data";
+import { getSingleStableByUrl, getStableName } from "@/lib/stableData";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { redirect } from "next/navigation";

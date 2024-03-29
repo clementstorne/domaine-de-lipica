@@ -1,4 +1,4 @@
-import { getNextEvents } from "@/lib/data";
+import { getNextEvents } from "@/lib/eventData";
 import { cn } from "@/lib/utils";
 import { Event } from "@/types";
 import Link from "next/link";

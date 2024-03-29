@@ -1,6 +1,6 @@
 import CarouselPlugin from "@/components/CarouselPlugin";
 import { CarouselItem } from "@/components/ui/carousel";
-import { getImagesForCarousel } from "@/lib/data";
+import { getImagesForCarousel } from "@/lib/carouselData";
 import { cn } from "@/lib/utils";
 import plan from "@public/plan-domaine-lipica.svg";
 import { Metadata } from "next";

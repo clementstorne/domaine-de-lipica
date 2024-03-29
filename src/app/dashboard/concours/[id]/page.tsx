@@ -1,5 +1,5 @@
-import { getSingleEvent } from "@/lib/data";
 import { formatSingleEventDates } from "@/lib/date";
+import { getSingleEvent } from "@/lib/eventData";
 import { cn } from "@/lib/utils";
 import { Event } from "@/types";
 import { redirect } from "next/navigation";

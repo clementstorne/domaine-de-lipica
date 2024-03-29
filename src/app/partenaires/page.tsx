@@ -1,4 +1,4 @@
-import { getPartners } from "@/lib/data";
+import { getPartners } from "@/lib/partnerData";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 import PartnerCard from "./PartnerCard";

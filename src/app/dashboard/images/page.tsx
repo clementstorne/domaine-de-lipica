@@ -1,18 +1,18 @@
-import { getPartners } from "@/lib/partnerData";
+import { getImagesForCarousel } from "@/lib/carouselData";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
-import PartnerCard from "./PartnerCard";
+import ImageCard from "./ImageCard";
 
 export const metadata: Metadata = {
-  title: "Gérer les partenaires",
+  title: "Gérer les écuries",
 };
 
 const page = async () => {
-  const partners = await getPartners();
+  const images = await getImagesForCarousel();
 
   return (
     <>
-      <h1>Gérer les partenaires</h1>
+      <h1>Gérer les images du carousel</h1>
 
       <section
         className={cn(
@@ -24,9 +24,9 @@ const page = async () => {
       <section
         className={cn("max-w-[600px] mx-4 space-y-4", "md:max-w-max md:mx-8")}
       >
-        <div className="flex flex-wrap justify-center items gap-4">
-          {partners.map((partner) => (
-            <PartnerCard key={partner.id} {...partner} />
+        <div className="flex flex-wrap justify-center justify-items-stretch items-stretch gap-4">
+          {images.map((image) => (
+            <ImageCard key={image.id} {...image} />
           ))}
         </div>
       </section>

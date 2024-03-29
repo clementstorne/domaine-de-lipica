@@ -1,4 +1,4 @@
-import { getStables } from "@/lib/data";
+import { getStables } from "@/lib/stableData";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 import StableCard from "./StableCard";

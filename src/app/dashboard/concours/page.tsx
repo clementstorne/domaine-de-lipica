@@ -1,4 +1,4 @@
-import { getFutureEvents, getPastEvents } from "@/lib/data";
+import { getFutureEvents, getPastEvents } from "@/lib/eventData";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
 import EventCard from "./EventCard";

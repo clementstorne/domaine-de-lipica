@@ -18,8 +18,6 @@ export const updateStable = async (stableId: string, formData: FormData) => {
   const nom = (await formData.get("nom")) as string;
   const informations = (await formData.get("informations")) as string;
   const files = (await formData.getAll("image")) as File[];
-  console.log(files);
-  return;
 
   if (files[0].size !== 0) {
     const MIME_TYPES: Record<string, string> = {

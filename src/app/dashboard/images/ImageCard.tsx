@@ -25,7 +25,7 @@ const ImageCard = ({ id, url, alt, title }: ImageCardProps) => {
   };
 
   return (
-    <Card className="w-80 text-center">
+    <Card className="w-80 text-center flex flex-col justify-between">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
       </CardHeader>

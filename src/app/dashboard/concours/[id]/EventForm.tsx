@@ -203,7 +203,7 @@ const EventForm = ({
 
         <div className="w-full !mt-14 flex flex-col space-y-4">
           <Button size="lg" type="submit" className="font-bold">
-            Modifier le concours
+            Enregistrer les modifications
           </Button>
         </div>
       </form>

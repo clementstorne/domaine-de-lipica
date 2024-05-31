@@ -49,7 +49,7 @@ const EventCard = ({
             className="font-bold"
           >
             {lienWinJump ? (
-              <Link href={"/concours/" + id}>
+              <Link href={lienWinJump}>
                 {isInFuture(debut) ? "Live" : "Résultats"}
               </Link>
             ) : (

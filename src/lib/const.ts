@@ -74,12 +74,8 @@ export const NIVEAUX: Niveau[] = [
     label: "Pro",
   },
   {
-    id: "cyclesLibres",
-    label: "Cycles Libres",
-  },
-  {
-    id: "cyclesClassiques",
-    label: "Cycles Classiques",
+    id: "enseignants",
+    label: "Enseignants",
   },
   {
     id: "club",
@@ -88,5 +84,21 @@ export const NIVEAUX: Niveau[] = [
   {
     id: "poney",
     label: "Poney",
+  },
+  {
+    id: "avenir",
+    label: "Avenir",
+  },
+  {
+    id: "cyclesLibres",
+    label: "Cycles Libres",
+  },
+  {
+    id: "cyclesClassiques",
+    label: "Cycles Classiques",
+  },
+  {
+    id: "cyclesClassiquesPoneys",
+    label: "Cycles Classiques Poneys",
   },
 ];

@@ -102,15 +102,21 @@ export interface Niveau {
   id:
     | "amateur"
     | "pro"
+    | "enseignants"
     | "cyclesLibres"
     | "cyclesClassiques"
     | "club"
-    | "poney";
+    | "poney"
+    | "cyclesClassiquesPoneys"
+    | "avenir";
   label:
     | "Amateur"
     | "Pro"
+    | "Enseignants"
     | "Cycles Libres"
     | "Cycles Classiques"
     | "Club"
-    | "Poney";
+    | "Poney"
+    | "Cycles Classiques Poneys"
+    | "Avenir";
 }

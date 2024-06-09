@@ -76,6 +76,7 @@ export const getSingleEvent = async (eventId: string) => {
       discipline: true,
       niveau: true,
       horaires: true,
+      lienWinJump: true,
     },
   });
 

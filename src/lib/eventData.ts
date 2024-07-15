@@ -1,8 +1,17 @@
-import { isInFuture } from "@/lib/date";
+import { dateToStringDate } from "@/lib/date";
 import prisma from "@/lib/prisma";
 
 export const getNextEvents = async () => {
-  const events = await prisma.event.findMany({
+  const todayDate = new Date();
+  const today = dateToStringDate(todayDate);
+
+  return await prisma.event.findMany({
+    take: 3,
+    where: {
+      debut: {
+        gte: today,
+      },
+    },
     select: {
       debut: true,
       fin: true,
@@ -15,13 +24,18 @@ export const getNextEvents = async () => {
       },
     ],
   });
-
-  const futureEvents = events.filter((event) => isInFuture(event.debut));
-  return futureEvents.slice(0, 3);
 };
 
 export const getFutureEvents = async () => {
-  const events = await prisma.event.findMany({
+  const todayDate = new Date();
+  const today = dateToStringDate(todayDate);
+
+  return await prisma.event.findMany({
+    where: {
+      fin: {
+        gte: today,
+      },
+    },
     select: {
       id: true,
       debut: true,
@@ -37,13 +51,18 @@ export const getFutureEvents = async () => {
       },
     ],
   });
-
-  const futureEvents = events.filter((event) => isInFuture(event.debut));
-  return futureEvents;
 };
 
 export const getPastEvents = async () => {
-  const events = await prisma.event.findMany({
+  const todayDate = new Date();
+  const today = dateToStringDate(todayDate);
+
+  return await prisma.event.findMany({
+    where: {
+      fin: {
+        lt: today,
+      },
+    },
     select: {
       id: true,
       debut: true,
@@ -59,9 +78,6 @@ export const getPastEvents = async () => {
       },
     ],
   });
-
-  const pastEvents = events.filter((event) => !isInFuture(event.debut));
-  return pastEvents;
 };
 
 export const getSingleEvent = async (eventId: string) => {

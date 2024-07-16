@@ -1,7 +1,8 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { writeFile } from "fs/promises";
+// import { writeFile } from "fs/promises";
+import { v2 as cloudinary } from "cloudinary";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { join } from "path";
@@ -33,9 +34,33 @@ export const createPartner = async (formData: FormData) => {
 
     const path = join(process.cwd(), "public/logos/" + fileName);
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    await writeFile(path, buffer);
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = new Uint8Array(arrayBuffer);
+    const result = await new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          {
+            upload_preset: "lipica",
+            display_name: fileName,
+          },
+          function (error, result) {
+            if (error) {
+              reject(error);
+              return;
+            }
+            resolve(result);
+          }
+        )
+        .end(buffer);
+    });
+
+    console.log(result);
+
+    const uploadedFileName = result.url;
+    // console.log("Nom du fichier uploadé :", uploadedFileName);
+    // const bytes = await file.arrayBuffer();
+    // const buffer = Buffer.from(bytes);
+    // await writeFile(path, buffer);
 
     await prisma.partner.create({
       data: {

@@ -1,8 +1,8 @@
+import PartnerLogo from "@/components/PartnerLogo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { newlineToBreakTag } from "@/lib/string";
 import { cn } from "@/lib/utils";
 import { Partner } from "@/types";
-import Image from "next/image";
 
 type PartnerCardProps = Omit<Partner, "id">;
 
@@ -19,11 +19,7 @@ const PartnerCard = ({ nom, logo, informations }: PartnerCardProps) => {
             !logo && "bg-gray-400"
           )}
         >
-          {logo ? (
-            <Image src={logo} alt={"Logo de " + nom} width={800} height={600} />
-          ) : (
-            <></>
-          )}
+          {logo ? <PartnerLogo nom={nom} logo={logo} size={800} /> : <></>}
         </div>
       </CardHeader>
       <CardContent>

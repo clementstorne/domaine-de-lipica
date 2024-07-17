@@ -1,17 +1,22 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { statfs, unlink, writeFile } from "fs/promises";
+import { v2 as cloudinary } from "cloudinary";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { join } from "path";
 
 export const deleteOldLogo = async (oldLogo: string) => {
-  const filename = oldLogo.split("/logos/")[1];
-  const filePath = join(process.cwd(), "public/logos/", filename);
-  if (await statfs(filePath)) {
-    await unlink(filePath);
-  }
+  // const publicId = oldLogo.split("upload/")[1].split("/")[1].split(".")[0];
+
+  await new Promise((resolve, reject) => {
+    cloudinary.uploader.destroy(oldLogo, function (error, result) {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(result);
+    });
+  });
 };
 
 export const updatePartner = async (partnerId: string, formData: FormData) => {
@@ -29,30 +34,27 @@ export const updatePartner = async (partnerId: string, formData: FormData) => {
       throw new Error("Partner not found");
     }
 
-    const MIME_TYPES: Record<string, string> = {
-      "image/jpg": "jpg",
-      "image/jpeg": "jpg",
-      "image/png": "png",
-      "image/svg+xml": "svg",
-      "image/webp": "webp",
-    };
+    const fileName = file.name.toLowerCase().split(".")[0].split(" ").join("-");
 
-    const extension = MIME_TYPES[file.type];
-
-    if (!extension) {
-      throw new Error("Unsupported file type");
-    }
-
-    const fileName =
-      file.name.toLowerCase().split(".")[0].split(" ").join("-") +
-      "." +
-      extension;
-
-    const path = join(process.cwd(), "public/logos/" + fileName);
-
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    await writeFile(path, buffer);
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = new Uint8Array(arrayBuffer);
+    const uploadedFile = (await new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          {
+            upload_preset: "lipica",
+            display_name: fileName,
+          },
+          function (error, result) {
+            if (error) {
+              reject(error);
+              return;
+            }
+            resolve(result);
+          }
+        )
+        .end(buffer);
+    })) as any;
 
     if (partner.logo) {
       await deleteOldLogo(partner.logo);
@@ -63,7 +65,7 @@ export const updatePartner = async (partnerId: string, formData: FormData) => {
       data: {
         nom: nom,
         informations: informations,
-        logo: "/logos/" + fileName,
+        logo: uploadedFile.public_id,
       },
     });
 

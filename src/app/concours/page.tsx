@@ -1,4 +1,4 @@
-import PartnerLogo from "@/components/PartnerLogo";
+import PartnerLogoForBanner from "@/components/PartnerLogoForBanner";
 import { getFutureEvents, getPastEvents } from "@/lib/eventData";
 import { getPartnersLogos } from "@/lib/partnerData";
 import { cn } from "@/lib/utils";
@@ -26,7 +26,7 @@ const page = async () => {
       >
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
           {partners.map((partner) => (
-            <PartnerLogo
+            <PartnerLogoForBanner
               key={partner.id}
               nom={partner.nom}
               logo={partner.logo}

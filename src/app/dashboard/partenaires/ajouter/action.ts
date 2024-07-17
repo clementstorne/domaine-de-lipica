@@ -5,7 +5,6 @@ import prisma from "@/lib/prisma";
 import { v2 as cloudinary } from "cloudinary";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { join } from "path";
 
 export const createPartner = async (formData: FormData) => {
   const nom = (await formData.get("nom")) as string;
@@ -13,30 +12,11 @@ export const createPartner = async (formData: FormData) => {
   const file = (await formData.get("image")) as File;
 
   if (file) {
-    const MIME_TYPES: Record<string, string> = {
-      "image/jpg": "jpg",
-      "image/jpeg": "jpg",
-      "image/png": "png",
-      "image/svg+xml": "svg",
-      "image/webp": "webp",
-    };
-
-    const extension = MIME_TYPES[file.type];
-
-    if (!extension) {
-      throw new Error("Unsupported file type");
-    }
-
-    const fileName =
-      file.name.toLowerCase().split(".")[0].split(" ").join("-") +
-      "." +
-      extension;
-
-    const path = join(process.cwd(), "public/logos/" + fileName);
+    const fileName = file.name.toLowerCase().split(".")[0].split(" ").join("-");
 
     const arrayBuffer = await file.arrayBuffer();
     const buffer = new Uint8Array(arrayBuffer);
-    const result = await new Promise((resolve, reject) => {
+    const uploadedFile = (await new Promise((resolve, reject) => {
       cloudinary.uploader
         .upload_stream(
           {
@@ -52,21 +32,13 @@ export const createPartner = async (formData: FormData) => {
           }
         )
         .end(buffer);
-    });
-
-    console.log(result);
-
-    const uploadedFileName = result.url;
-    // console.log("Nom du fichier uploadé :", uploadedFileName);
-    // const bytes = await file.arrayBuffer();
-    // const buffer = Buffer.from(bytes);
-    // await writeFile(path, buffer);
+    })) as any;
 
     await prisma.partner.create({
       data: {
         nom: nom,
         informations: informations,
-        logo: "/logos/" + fileName,
+        logo: uploadedFile.public_id,
       },
     });
     revalidatePath("/dashboard/partenaires");

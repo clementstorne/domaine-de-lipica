@@ -1,25 +1,17 @@
-import { cn } from "@/lib/utils";
+"use client";
+
 import { Partner } from "@/types";
-import Image from "next/image";
+import { CldImage } from "next-cloudinary";
 
-type PartnerLogoProps = Omit<Partner, "id" | "informations">;
+type PartnerLogoProps = Omit<Partner, "id" | "informations"> & {
+  size?: number;
+};
 
-const PartnerLogo = ({ logo, nom }: PartnerLogoProps) => {
-  return (
-    <div
-      className={cn(
-        "flex h-14 w-14 items-center justify-center",
-        "md:h-20 md:w-20",
-        logo && "bg-white",
-        !logo && "bg-gray-400"
-      )}
-    >
-      {logo ? (
-        <Image src={logo} alt={"Logo de " + nom} width={800} height={600} />
-      ) : (
-        <></>
-      )}
-    </div>
+const PartnerLogo = ({ logo, nom, size = 600 }: PartnerLogoProps) => {
+  return logo ? (
+    <CldImage width={size} height={size} src={logo} alt={"Logo de " + nom} />
+  ) : (
+    <></>
   );
 };
 

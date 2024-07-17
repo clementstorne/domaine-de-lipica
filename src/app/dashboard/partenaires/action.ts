@@ -1,12 +1,17 @@
 "use server";
 
-import { statfs, unlink } from "fs/promises";
-import { join } from "path";
+import { v2 as cloudinary } from "cloudinary";
 
 export const deleteOldLogo = async (oldLogo: string) => {
-  const filename = oldLogo.split("/logos/")[1];
-  const filePath = join(process.cwd(), "public/logos/", filename);
-  if (await statfs(filePath)) {
-    await unlink(filePath);
-  }
+  // const publicId = oldLogo.split("upload/")[1].split("/")[1].split(".")[0];
+
+  await new Promise((resolve, reject) => {
+    cloudinary.uploader.destroy(oldLogo, function (error, result) {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(result);
+    });
+  });
 };

@@ -1,6 +1,7 @@
 import NavbarLink from "@/components/NavbarLink";
 import { cn } from "@/lib/utils";
 import { LinkItem } from "@/types";
+import logoDev from "@public/clement-storne-dev.png";
 import logo from "@public/logo-domaine-lipica.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -58,18 +59,16 @@ const Footer = () => {
           "text-blue-900 uppercase text-center text-[8px] leading-3"
         )}
       >
-        <span className="block m-0">Designed by </span>
         <Link
           href="https://clementstorne.dev/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[10px] font-medium md:text-md-sm"
+          className="text-[10px] font-medium flex flex-col items-center space-y-1"
         >
-          Clément <br />
-          Storne
+          <span>Réalisé par </span>
+          <Image src={logoDev} alt="Clément Storne" className="w-8 h-8" />
+          <span>© 2024</span>
         </Link>
-
-        <span className="block m-0 font-light normal-case">© 2024</span>
       </div>
     </footer>
   );

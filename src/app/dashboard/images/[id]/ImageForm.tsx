@@ -1,5 +1,6 @@
 "use client";
 
+import CloudinaryImage from "@/components/CloudinaryImage";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -25,7 +26,7 @@ type ImageFormProps = CarouselImage;
 const ImageForm = ({ id, title, alt, url }: ImageFormProps) => {
   const updatePartnerWithId = updateImage.bind(null, id);
 
-  const [imageUrl, setImageUrl] = useState(url);
+  const [imageUrl, setImageUrl] = useState<string>();
 
   const form = useForm<z.infer<typeof imageFormSchema>>({
     resolver: zodResolver(imageFormSchema),
@@ -74,17 +75,24 @@ const ImageForm = ({ id, title, alt, url }: ImageFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="block">Photo</FormLabel>
-              {imageUrl ? (
-                <Image
-                  src={imageUrl}
-                  alt={"Logo"}
-                  width={600}
-                  height={600}
-                  className="h-full w-full mx-auto"
-                />
-              ) : (
-                <></>
-              )}
+              {url ? (
+                imageUrl ? (
+                  <Image
+                    src={imageUrl}
+                    alt="Photo du carousel"
+                    width={600}
+                    height={600}
+                    className="h-full w-full mx-auto"
+                  />
+                ) : (
+                  <CloudinaryImage
+                    id={url}
+                    alt="Photo du carousel"
+                    size={600}
+                    className="h-full w-full mx-auto"
+                  />
+                )
+              ) : null}
               <input
                 type="file"
                 name="image"
@@ -102,7 +110,7 @@ const ImageForm = ({ id, title, alt, url }: ImageFormProps) => {
                 className="w-full font-bold"
                 onClick={handleUploadButtonClick}
               >
-                {imageUrl ? "Changer de photo" : "Ajouter une photo"}
+                {url ? "Changer de photo" : "Ajouter une photo"}
               </Button>
             </FormItem>
           )}

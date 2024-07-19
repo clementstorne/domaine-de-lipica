@@ -1,3 +1,4 @@
+import CloudinaryImage from "@/components/CloudinaryImage";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -6,20 +7,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { deleteImage } from "@/lib/actions/cloudinary/deleteImage";
 import prisma from "@/lib/prisma";
 import { CarouselImage } from "@/types";
 import { revalidatePath } from "next/cache";
-import Image from "next/image";
 import Link from "next/link";
-import { deleteImageFile } from "./action";
 
 type ImageCardProps = CarouselImage;
 
 const ImageCard = ({ id, url, alt, title }: ImageCardProps) => {
-  const deleteImage = async () => {
+  const deleteCarouselImage = async () => {
     "use server";
     await prisma.carousel.delete({ where: { id } });
-    deleteImageFile(url);
+    deleteImage(url);
     revalidatePath("/dashboard/ecuries");
     revalidatePath("/ecuries");
   };
@@ -30,7 +30,7 @@ const ImageCard = ({ id, url, alt, title }: ImageCardProps) => {
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <Image key={id} src={url} width={400} height={400} alt={alt} />
+        <CloudinaryImage id={url} alt={alt} size={400} />
         <p>{alt}</p>
       </CardContent>
       <CardFooter className="flex flex-col space-y-4">
@@ -38,7 +38,7 @@ const ImageCard = ({ id, url, alt, title }: ImageCardProps) => {
           <Button asChild className="font-bold">
             <Link href={"/dashboard/images/" + id}>Modifier</Link>
           </Button>
-          <Button className="font-bold" formAction={deleteImage}>
+          <Button className="font-bold" formAction={deleteCarouselImage}>
             Supprimer
           </Button>
         </form>

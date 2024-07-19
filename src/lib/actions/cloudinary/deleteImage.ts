@@ -2,11 +2,9 @@
 
 import { v2 as cloudinary } from "cloudinary";
 
-export const deleteOldLogo = async (oldLogo: string) => {
-  // const publicId = oldLogo.split("upload/")[1].split("/")[1].split(".")[0];
-
+export const deleteImage = async (imageId: string) => {
   await new Promise((resolve, reject) => {
-    cloudinary.uploader.destroy(oldLogo, function (error, result) {
+    cloudinary.uploader.destroy(imageId, function (error, result) {
       if (error) {
         reject(error);
         return;

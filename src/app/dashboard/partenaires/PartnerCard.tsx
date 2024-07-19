@@ -1,4 +1,4 @@
-import PartnerLogo from "@/components/PartnerLogo";
+import CloudinaryImage from "@/components/CloudinaryImage";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,13 +7,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { deleteImage } from "@/lib/actions/cloudinary/deleteImage";
 import prisma from "@/lib/prisma";
 import { newlineToBreakTag } from "@/lib/string";
 import { cn } from "@/lib/utils";
 import { Partner } from "@/types";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
-import { deleteOldLogo } from "./action";
 
 type PartnerCardProps = Partner;
 
@@ -22,7 +22,7 @@ const PartnerCard = ({ id, nom, logo, informations }: PartnerCardProps) => {
     "use server";
     await prisma.partner.delete({ where: { id } });
     if (logo) {
-      deleteOldLogo(logo);
+      deleteImage(logo);
     }
     revalidatePath("/dashboard/partenaires");
     revalidatePath("/partenaires");
@@ -40,7 +40,9 @@ const PartnerCard = ({ id, nom, logo, informations }: PartnerCardProps) => {
             !logo && "bg-gray-400"
           )}
         >
-          {logo ? <PartnerLogo nom={nom} logo={logo} size={800} /> : <></>}
+          {logo ? (
+            <CloudinaryImage id={logo} alt={`Logo de ${nom}`} size={800} />
+          ) : null}
         </div>
       </CardHeader>
       <CardContent>

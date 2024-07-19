@@ -1,4 +1,4 @@
-import PartnerLogo from "@/components/PartnerLogo";
+import PartnersBanner from "@/components/PartnersBanner";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatSingleEventDates } from "@/lib/date";
 import { getSingleEvent } from "@/lib/eventData";
@@ -49,22 +49,7 @@ const page = async ({ params }: { params: { id: string } }) => {
     <>
       <h1>{formatTitle(event)}</h1>
 
-      <section
-        className={cn(
-          "max-w-[600px] mx-4 flex flex-wrap items-stretch justify-center gap-4",
-          "md:max-w-max md:mx-8"
-        )}
-      >
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
-          {partners.map((partner) => (
-            <PartnerLogo
-              key={partner.id}
-              nom={partner.nom}
-              logo={partner.logo}
-            />
-          ))}
-        </div>
-      </section>
+      <PartnersBanner />
 
       <Card
         className={cn(

@@ -1,4 +1,4 @@
-import PartnerLogo from "@/components/PartnerLogo";
+import CloudinaryImage from "@/components/CloudinaryImage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { newlineToBreakTag } from "@/lib/string";
 import { cn } from "@/lib/utils";
@@ -19,7 +19,11 @@ const PartnerCard = ({ nom, logo, informations }: PartnerCardProps) => {
             !logo && "bg-gray-400"
           )}
         >
-          {logo ? <PartnerLogo nom={nom} logo={logo} size={800} /> : <></>}
+          {logo ? (
+            <CloudinaryImage id={logo} alt={`Logo de ${nom}`} size={800} />
+          ) : (
+            <></>
+          )}
         </div>
       </CardHeader>
       <CardContent>

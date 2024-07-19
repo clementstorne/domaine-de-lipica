@@ -1,4 +1,4 @@
-import PartnerLogoForBanner from "@/components/PartnerLogoForBanner";
+import PartnersBanner from "@/components/PartnersBanner";
 import { getFutureEvents, getPastEvents } from "@/lib/eventData";
 import { getPartnersLogos } from "@/lib/partnerData";
 import { cn } from "@/lib/utils";
@@ -18,22 +18,7 @@ const page = async () => {
     <>
       <h1>Concours</h1>
 
-      <section
-        className={cn(
-          "max-w-[600px] mx-4 flex flex-wrap items-stretch justify-center gap-4",
-          "md:max-w-max md:mx-8"
-        )}
-      >
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
-          {partners.map((partner) => (
-            <PartnerLogoForBanner
-              key={partner.id}
-              nom={partner.nom}
-              logo={partner.logo}
-            />
-          ))}
-        </div>
-      </section>
+      <PartnersBanner />
 
       {futureEvents.length !== 0 ? (
         <section

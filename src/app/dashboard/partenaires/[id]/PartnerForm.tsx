@@ -1,5 +1,6 @@
 "use client";
 
+import CloudinaryImage from "@/components/CloudinaryImage";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -25,7 +26,7 @@ type PartnerFormProps = Partner;
 const PartnerForm = ({ id, nom, informations, logo }: PartnerFormProps) => {
   const updatePartnerWithId = updatePartner.bind(null, id);
 
-  const [imageUrl, setImageUrl] = useState(logo);
+  const [imageUrl, setImageUrl] = useState<string>();
 
   const form = useForm<z.infer<typeof partnerFormSchema>>({
     resolver: zodResolver(partnerFormSchema),
@@ -100,19 +101,25 @@ const PartnerForm = ({ id, nom, informations, logo }: PartnerFormProps) => {
           control={form.control}
           name="image"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel className="block">Logo</FormLabel>
-              {imageUrl ? (
-                <Image
-                  src={imageUrl}
-                  alt={"Logo"}
-                  width={600}
-                  height={600}
-                  className="h-1/2 w-1/2 mx-auto"
-                />
-              ) : (
-                <></>
-              )}
+            <FormItem className="flex flex-col items-center">
+              <FormLabel className="w-full">Logo</FormLabel>
+              {logo ? (
+                imageUrl ? (
+                  <Image
+                    src={imageUrl}
+                    alt={"Logo"}
+                    width={600}
+                    height={600}
+                    className="h-1/2 w-1/2 mx-auto"
+                  />
+                ) : (
+                  <CloudinaryImage
+                    id={logo}
+                    alt={`Logo de ${nom}`}
+                    size={400}
+                  />
+                )
+              ) : null}
               <input
                 type="file"
                 name="image"
@@ -130,7 +137,7 @@ const PartnerForm = ({ id, nom, informations, logo }: PartnerFormProps) => {
                 className="w-full font-bold"
                 onClick={handleUploadButtonClick}
               >
-                {imageUrl ? "Changer de logo" : "Ajouter un logo"}
+                {logo ? "Changer de logo" : "Ajouter un logo"}
               </Button>
             </FormItem>
           )}

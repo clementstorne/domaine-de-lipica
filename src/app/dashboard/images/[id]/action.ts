@@ -1,18 +1,10 @@
 "use server";
 
+import { deleteImage } from "@/lib/actions/cloudinary/deleteImage";
 import prisma from "@/lib/prisma";
-import { statfs, unlink, writeFile } from "fs/promises";
+import { v2 as cloudinary } from "cloudinary";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { join } from "path";
-
-export const deleteOldImage = async (oldImage: string) => {
-  const filename = oldImage.split("/carousel/")[1];
-  const filePath = join(process.cwd(), "public/carousel/", filename);
-  if (await statfs(filePath)) {
-    await unlink(filePath);
-  }
-};
 
 export const updateImage = async (imageId: string, formData: FormData) => {
   const title = (await formData.get("title")) as string;
@@ -29,33 +21,30 @@ export const updateImage = async (imageId: string, formData: FormData) => {
       throw new Error("Image not found");
     }
 
-    const MIME_TYPES: Record<string, string> = {
-      "image/jpg": "jpg",
-      "image/jpeg": "jpg",
-      "image/png": "png",
-      "image/svg+xml": "svg",
-      "image/webp": "webp",
-    };
+    const fileName = "carousel-" + Date.now();
 
-    const extension = MIME_TYPES[file.type];
-
-    if (!extension) {
-      throw new Error("Unsupported file type");
-    }
-
-    const fileName =
-      file.name.toLowerCase().split(".")[0].split(" ").join("-") +
-      "." +
-      extension;
-
-    const path = join(process.cwd(), "public/carousel/" + fileName);
-
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    await writeFile(path, buffer);
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = new Uint8Array(arrayBuffer);
+    const uploadedFile = (await new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          {
+            upload_preset: "lipica",
+            display_name: fileName,
+          },
+          function (error, result) {
+            if (error) {
+              reject(error);
+              return;
+            }
+            resolve(result);
+          }
+        )
+        .end(buffer);
+    })) as any;
 
     if (image.url) {
-      await deleteOldImage(image.url);
+      await deleteImage(image.url);
     }
 
     await prisma.carousel.update({
@@ -63,7 +52,7 @@ export const updateImage = async (imageId: string, formData: FormData) => {
       data: {
         title: title,
         alt: alt,
-        url: "/carousel/" + fileName,
+        url: uploadedFile.public_id,
       },
     });
 
